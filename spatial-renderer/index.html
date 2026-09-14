@@ -65,6 +65,12 @@
   .status li[data-done] span{
     border-color:rgba(107,60,224,.4); color:var(--key); background:rgba(107,60,224,.07);
   }
+  /* 네 가지는 네 칸에. 공용 .tiles 는 3열이라 넷을 넣으면 마지막 하나가
+     혼자 다음 줄로 내려가 "세 개 + 하나"로 읽힌다. 브레이크포인트는
+     ysg.css 의 1000px / 640px 를 그대로 따라가 리듬이 어긋나지 않게 한다. */
+  #parts .tiles{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:1000px){ #parts .tiles{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:640px){ #parts .tiles{grid-template-columns:1fr} }
   @media (max-width:640px){
     .product-photo{min-height:auto; aspect-ratio:1}
     .status li{grid-template-columns:1fr; gap:8px}
@@ -111,9 +117,10 @@
         <h1 class="display" data-en='Every sound in a game,<br><span class="grad">exactly where it belongs</span>'>게임 속 모든 소리를<br><span class="grad">있어야 할 자리에</span></h1>
       </div>
       <p class="hero__sub" data-en="You should not have to learn HRTF to ship 3D audio. Drop it onto a Wwise project and direction, distance, near-field, directivity, reflections and diffraction are handled for you - sound sits outside the head on plain headphones.">
-3D 오디오를 쓰려고 HRTF를 공부할 필요는 없습니다. Wwise 프로젝트에 얹으면
-        방향과 거리, 근접장, 지향성, 반사와 회절까지 알아서 계산해
-        헤드폰만으로 소리가 머리 밖에 자리잡습니다.
+3D 오디오를 제대로 쓰기 위해 HRTF까지 공부하실 필요는 없습니다.
+        Wwise 프로젝트에 얹어 두시면 방향과 거리, 근접장과 지향성, 반사와 회절까지
+        알아서 계산합니다. 특별한 장비 없이 늘 쓰시던 헤드폰만으로
+        소리가 머리 밖에 자리를 잡습니다.
       </p>
 
       <div class="pitch">
@@ -122,9 +129,10 @@
         </figure>
         <div class="pitch__copy">
           <p data-en="Per-sound behaviour is authored where designers already work - on the sound itself - and travels with the audio object as metadata. The renderer reads it on the bus and applies it per object, so a whole game is never tied to one global setting.">
-            사운드별 동작은 디자이너가 이미 작업하는 자리, 즉 사운드 자체에 설정하고
-            오디오 오브젝트에 메타데이터로 실려 흐릅니다. 렌더러는 버스에서 이를 받아
-            오브젝트마다 적용하므로 게임 전체가 하나의 전역 설정에 묶이지 않습니다.
+            사운드마다 다르게 동작해야 하는 부분은 디자이너가 이미 작업하고 계시는 자리,
+            그러니까 사운드 자체에 설정하시면 됩니다. 그 설정이 오디오 오브젝트에 메타데이터로
+            실려 함께 흐르고, 렌더러가 버스에서 그걸 받아 오브젝트마다 적용합니다.
+            덕분에 게임 전체가 하나의 전역 설정에 묶이지 않습니다.
           </p>
 
           <div class="plats">
@@ -139,7 +147,7 @@
             <span class="plat"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 0a12 12 0 1012 12A12 12 0 0012 0zm0 23.52A11.52 11.52 0 1123.52 12 11.52 11.52 0 0112 23.52zm7.13-9.791c-.206.997-1.126 3.557-4.06 4.942l-1.179-1.325-1.988 2a7.338 7.338 0 01-5.804-2.978 2.859 2.859 0 00.65.123c.326.006.678-.114.678-.66v-5.394a.89.89 0 00-1.116-.89c-.92.212-1.656 2.509-1.656 2.509a7.304 7.304 0 012.528-5.597 7.408 7.408 0 013.73-1.721c-1.006.573-1.57 1.507-1.57 2.29 0 1.262.76 1.109.984.923v7.28a1.157 1.157 0 00.148.256 1.075 1.075 0 00.88.445c.76 0 1.747-.868 1.747-.868V9.172c0-.6-.452-1.324-.905-1.572 0 0 .838-.149 1.484.346a5.537 5.537 0 01.387-.425c1.508-1.48 2.929-1.902 4.112-2.112 0 0-2.151 1.69-2.151 3.96 0 1.687.043 5.801.043 5.801.799.771 1.986-.342 3.059-1.441Z"/></svg><span data-en="Unreal Engine">Unreal Engine</span></span>
           </div>
 
-          <p class="devnote" data-en="<b>No download yet.</b> Not packaged for release."><b>아직 배포 전입니다.</b> 패키징이 끝나면 이 자리에 내려받기가 생깁니다.</p>
+          <p class="devnote" data-en="<b>No download yet.</b> Not packaged for release."><b>아직 배포 전입니다.</b> 패키징이 끝나면 이 자리에 내려받기 버튼이 생길 예정입니다.</p>
 
           <div class="btnrow">
             <a class="btn btn--primary" href="#status" data-en="Development status">개발 현황 보기</a>
@@ -158,55 +166,55 @@
         <span class="eyebrow" data-en="Key features">주요 기능</span>
         <h2 class="h2" data-en="Everything it does, at a glance">한눈에 보는 기능</h2>
         <p class="keys__lead" data-en="Nine things the renderer does. The binaural core, the spatial stages and the authoring panel are opened up below.">
-          이 렌더러가 하는 일 아홉 가지입니다. 바이노럴 코어와 공간 처리, 저작 패널은
-          아래에서 더 자세히 풀어 두었습니다.
+          이 렌더러가 하는 일을 아홉 가지로 추렸습니다. 바이노럴 코어와 공간 처리,
+          저작 패널은 아래에서 하나씩 더 자세히 풀어 두었으니 천천히 보셔도 됩니다.
         </p>
       </div>
       <div class="keys__grid">
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="7"/><path d="M9 20a11 11 0 0 1 22 0"/><path d="M9 20v5a2.5 2.5 0 0 0 5 0v-5M31 20v5a2.5 2.5 0 0 1-5 0v-5"/></svg>
           <h3 data-en="HRTF binaural">HRTF 바이노럴</h3>
-          <p data-en="Measured head-related impulse responses interpolated per direction, updated while the listener moves.">실측 머리 전달 임펄스 응답을 방향마다 보간하고, 청취자가 움직이는 동안 계속 갱신합니다.</p>
+          <p data-en="Measured head-related impulse responses interpolated per direction, updated while the listener moves.">실제로 측정된 머리 전달 임펄스 응답을 방향마다 보간해 씁니다. 청취자가 움직이는 동안에도 계속 갱신되고요.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 20h6"/><path d="M12 12v16"/><path d="M28 8v24"/><path d="M28 20h6"/><path d="M15 20h10"/><path d="M15 24h10" opacity=".5"/></svg>
           <h3 data-en="Per-ear delay">귀별 지연</h3>
-          <p data-en="Arrival time difference is explicit rather than buried in the filter, so the image holds when a source crosses the front.">도달 시간차를 필터 안에 묻지 않고 귀별 지연으로 명시해, 음원이 정면을 가로질러도 상이 흔들리지 않습니다.</p>
+          <p data-en="Arrival time difference is explicit rather than buried in the filter, so the image holds when a source crosses the front.">양 귀에 소리가 닿는 시간차를 필터 안에 묻어 두지 않고 따로 다룹니다. 그래서 음원이 정면을 가로질러도 상이 흔들리지 않습니다.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="5"/><circle cx="20" cy="20" r="11" opacity=".55"/><circle cx="20" cy="20" r="16" opacity=".3"/><path d="M20 4v4M20 32v4M4 20h4M32 20h4"/></svg>
           <h3 data-en="Externalisation">외재화</h3>
-          <p data-en="An adjustable stage pushes the image out of the head, so sources that would collapse to the centre stand outside it.">양과 성격을 조절할 수 있는 단계가 상을 머리 밖으로 밀어내, 그대로 두면 머리 한가운데 붙는 음원을 바깥에 세웁니다.</p>
+          <p data-en="An adjustable stage pushes the image out of the head, so sources that would collapse to the centre stand outside it.">그냥 두면 머리 한가운데에 달라붙는 음원을 바깥으로 밀어내 주는 단계입니다. 양과 성격을 원하시는 만큼 조절하실 수 있습니다.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 31 20 9l13 22"/><path d="M13 31h14" opacity=".5"/><path d="M20 9v22" opacity=".35"/><circle cx="20" cy="9" r="2"/></svg>
           <h3 data-en="Early reflections">초기 반사</h3>
-          <p data-en="Reflection paths come from game geometry, take the colour of the material they hit, and get culled before they cost anything if they will not be heard.">반사 경로를 게임 지오메트리에서 받아 부딪힌 재질대로 색을 입히고, 들리지 않을 경로는 비용을 치르기 전에 걸러 냅니다.</p>
+          <p data-en="Reflection paths come from game geometry, take the colour of the material they hit, and get culled before they cost anything if they will not be heard.">반사 경로를 게임 지오메트리에서 그대로 받아 와서, 부딪힌 재질에 맞는 색을 입혀 줍니다. 어차피 들리지 않을 경로는 계산 비용을 치르기 전에 미리 걸러 냅니다.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="14" cy="20" r="6"/><path d="M22 14c3 2 5 4 5 6s-2 4-5 6"/><path d="M27 10c4 3 7 6 7 10s-3 7-7 10" opacity=".5"/></svg>
           <h3 data-en="Near-field">근접장</h3>
-          <p data-en="Inside a metre the difference between the ears widens sharply and the near ear gains low end. Near-field processing makes that happen instead of just raising volume.">1m 안쪽에서는 양 귀의 차이가 급격히 벌어지고 가까운 쪽 귀에 저역이 실립니다. 볼륨만 올리는 대신 그 변화를 만들어 냅니다.</p>
+          <p data-en="Inside a metre the difference between the ears widens sharply and the near ear gains low end. Near-field processing makes that happen instead of just raising volume.">1m 안쪽으로 들어오면 양 귀의 차이가 급격히 벌어지고 가까운 쪽 귀에 저역이 실립니다. 볼륨만 올리는 대신 그 변화를 실제로 만들어 냅니다.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M14 20a6 6 0 0 1 12 0"/><path d="M14 20a6 6 0 0 0 12 0" opacity=".35"/><path d="M20 20 32 9M20 20l12 11" opacity=".55"/><circle cx="20" cy="20" r="2.4"/></svg>
           <h3 data-en="Directivity">지향성</h3>
-          <p data-en="A turned source changes level and colour, not position. Directivity applies both by angle and leaves the direction of arrival where the source is.">돌아선 음원은 위치가 아니라 크기와 음색이 변합니다. 각도에 따른 레벨과 색을 적용하되 도달 방향은 그 자리에 그대로 둡니다.</p>
+          <p data-en="A turned source changes level and colour, not position. Directivity applies both by angle and leaves the direction of arrival where the source is.">음원이 등을 돌리면 위치가 아니라 크기와 음색이 달라집니다. 각도에 따라 레벨과 색을 적용하면서도 소리가 오는 방향은 그 자리에 그대로 둡니다.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M22 6v28"/><path d="M22 6H10v28h12" opacity=".35"/><path d="M22 14c-5 2-8 4-8 6s3 4 8 6" opacity=".7"/><path d="M28 20h6"/></svg>
           <h3 data-en="Occlusion &amp; diffraction">차폐와 회절</h3>
-          <p data-en="A blocked direct path does not stop sound. It arrives around the corner, darker, from the corner. Treated as a question of direction and colour, not a volume cut.">직선 경로가 막혀도 소리는 도착합니다. 모서리를 돌아, 더 어둡게, 모서리 쪽에서 옵니다. 단순한 볼륨 감소가 아니라 방향과 음색의 문제로 다룹니다.</p>
+          <p data-en="A blocked direct path does not stop sound. It arrives around the corner, darker, from the corner. Treated as a question of direction and colour, not a volume cut.">직선 경로가 막혀도 소리는 도착합니다. 모서리를 돌아서, 조금 더 어둡게, 그 모서리 쪽에서 들려오죠. 단순히 볼륨을 깎는 대신 방향과 음색의 문제로 다룹니다.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="10" width="28" height="20" rx="3"/><path d="M6 24h28" opacity=".45"/><circle cx="13" cy="17" r="2"/><circle cx="20" cy="17" r="2"/><circle cx="27" cy="17" r="2"/></svg>
           <h3 data-en="Every layout">모든 레이아웃</h3>
-          <p data-en="Binaural is the default path. The same renderer also handles 2.0, 4.0, 5.1, 7.1, 7.1.4, ambisonic orders 1 to 5 and extended layouts such as Auro.">바이노럴이 기본 경로입니다. 같은 렌더러가 2.0·4.0·5.1·7.1·7.1.4, 앰비소닉 1~5차, Auro 같은 확장 레이아웃도 함께 다룹니다.</p>
+          <p data-en="Binaural is the default path. The same renderer also handles 2.0, 4.0, 5.1, 7.1, 7.1.4, ambisonic orders 1 to 5 and extended layouts such as Auro.">바이노럴이 기본 경로이지만 거기서 끝나지 않습니다. 같은 렌더러가 2.0·4.0·5.1·7.1·7.1.4와 앰비소닉 1~5차, Auro 같은 확장 레이아웃까지 함께 다룹니다.</p>
         </div>
         <div class="key rise">
           <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 30h28" opacity=".45"/><path d="M10 30V19M17 30v-8M24 30v-15M31 30v-6"/><circle cx="10" cy="19" r="1.8"/><circle cx="24" cy="15" r="1.8"/></svg>
           <h3 data-en="Built for many objects">많은 오브젝트를 위한 설계</h3>
-          <p data-en="Heavy work is shared rather than repeated per object: a shared filter basis, a frequency-domain path for dense scenes, and an early exit for anything out of audible range.">무거운 계산을 오브젝트마다 반복하지 않고 나눠 씁니다. 공유 필터 기저, 밀집 장면용 주파수 영역 경로, 가청 범위 밖 조기 제외.</p>
+          <p data-en="Heavy work is shared rather than repeated per object: a shared filter basis, a frequency-domain path for dense scenes, and an early exit for anything out of audible range.">무거운 계산을 오브젝트마다 되풀이하지 않고 나눠 씁니다. 필터 기저를 공유하고, 오브젝트가 몰리는 장면에서는 주파수 영역 경로로 넘어가며, 가청 범위를 벗어난 것은 일찍 제외합니다.</p>
         </div>
       </div>
     </div>
@@ -222,55 +230,57 @@
         <span class="eyebrow" data-en="What you hear">들리는 변화</span>
         <h2 class="h2" data-en='Not a longer feature list.<br><span class="grad">Things you could not hear before</span>'>기능이 하나 더 늘어나는 게 아니라<br><span class="grad">전에 없던 것이 들립니다</span></h2>
         <p class="lead" data-en="Everything below is described as a listener hears it, on ordinary headphones. How each one is produced is opened up further down the page.">
-          아래는 전부 평범한 헤드폰을 쓴 청취자가 듣는 대로 적었습니다.
-          그것을 어떻게 만들어 내는지는 페이지 아래에서 다룹니다.
+          아래 내용은 전부 평범한 헤드폰을 쓴 청취자가 실제로 듣는 대로 적어 봤습니다.
+          이걸 어떻게 만들어 내는지가 궁금하시면 페이지 아래쪽에서 하나씩 다룹니다.
         </p>
       </div>
       <div class="tiles">
         <div class="tile rise">
           <h3 data-en="Behind you, and you know it">뒤에서 나는 소리가 뒤에서 납니다</h3>
           <p data-en="A footstep that walks around you keeps going when it passes behind - it does not fold into the front or jump from one side to the other. Front and back stop being the same place.">
-            주변을 도는 발소리가 등 뒤를 지날 때 그대로 이어집니다.
-            앞으로 접히지도, 좌우로 튀지도 않습니다. 앞과 뒤가 같은 자리가 아니게 됩니다.
+            주변을 도는 발소리가 등 뒤를 지날 때 끊기지 않고 그대로 이어집니다.
+            갑자기 앞으로 접히거나 좌우로 튀지 않습니다. 앞과 뒤가 더 이상 같은 자리로
+            들리지 않으니까요.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="Above and below, not just around">위아래로도 움직입니다</h3>
           <p data-en="A bird crossing overhead, a drone climbing, a voice from the floor below - height reads as height instead of collapsing onto the horizontal ring where most panning lives.">
-            머리 위를 가로지르는 새, 올라가는 드론, 아래층에서 올라오는 목소리.
-            높이가 높이로 들립니다. 대부분의 패닝이 갇혀 있는 수평 고리로 눌리지 않습니다.
+            머리 위를 가로지르는 새, 점점 올라가는 드론, 아래층에서 올라오는 목소리처럼
+            높이가 높이 그대로 들립니다. 대부분의 패닝이 갇혀 있는 수평 고리 위로
+            눌려 버리지 않습니다.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="Through the wall, from the doorway">벽 뒤의 소리가 문틈에서 들립니다</h3>
           <p data-en="A conversation in the next room is not just quieter and duller. It arrives from the edge it bends around, so you can hear where the opening is - and the moment the wall clears, it snaps back to the talker.">
-            옆방의 대화가 그냥 작고 둔해지는 게 아닙니다.
-            소리가 돌아 나오는 모서리 쪽에서 들려서 <b>어디가 트여 있는지</b>가 들립니다.
-            벽이 걷히는 순간 다시 말하는 사람 쪽으로 돌아옵니다.
+            옆방의 대화가 그냥 작고 둔해지기만 하는 게 아닙니다.
+            소리가 돌아 나오는 모서리 쪽에서 들리기 때문에 <b>어디가 트여 있는지</b>까지
+            함께 들립니다. 그러다 벽이 걷히는 순간, 다시 말하는 사람 쪽으로 돌아옵니다.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="Close enough to feel">귀 옆까지 다가옵니다</h3>
           <p data-en="Inside arm&#39;s reach a whisper stops sounding like a quiet voice across the room and starts sounding close: weight on the near ear, the far ear falling away, the kind of proximity a volume fader cannot fake.">
-            팔 길이 안으로 들어오면, 속삭임이 &lsquo;멀리서 조용히 말하는 소리&rsquo;가 아니라
-            가까운 소리가 됩니다. 가까운 쪽 귀에 무게가 실리고 먼 쪽이 빠집니다.
-            볼륨 페이더로는 흉내 낼 수 없는 종류의 거리감입니다.
+            팔 길이 안쪽으로 들어오면 속삭임이 &lsquo;멀리서 조용히 말하는 소리&rsquo;가 아니라
+            정말 가까운 소리가 됩니다. 가까운 쪽 귀에 무게가 실리고 먼 쪽은 빠지죠.
+            볼륨 페이더로는 흉내 내기 어려운 종류의 거리감입니다.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="You can hear which way it faces">어느 쪽을 보고 있는지 들립니다</h3>
           <p data-en="A speaker turning away goes darker and smaller while staying exactly where it is. A shout aimed at you and the same shout aimed away are different sounds from the same position.">
-            돌아서는 확성기가 자리를 지킨 채 어두워지고 작아집니다.
-            나를 향해 지르는 외침과 반대쪽을 향해 지르는 외침이,
-            같은 자리에서 나는 서로 다른 소리가 됩니다.
+            돌아서는 확성기가 자리는 그대로 지킨 채 어두워지고 작아집니다.
+            나를 향해 지르는 외침과 반대쪽을 향해 지르는 외침이
+            같은 자리에서 나는 서로 다른 소리가 되는 셈입니다.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="The room answers back">방이 대답합니다</h3>
           <p data-en="A corridor, a stairwell and an open yard stop sounding like three reverb presets. The first reflections come off the surfaces that are actually there, so the size and hardness of the space arrive before any tail does.">
-            복도와 계단실과 트인 마당이 서로 다른 잔향 프리셋 세 개로 들리지 않게 됩니다.
+            복도와 계단실과 트인 마당이 그저 잔향 프리셋 세 개로 들리지 않게 됩니다.
             초기 반사가 실제로 그 자리에 있는 면에서 돌아오기 때문에,
-            잔향 꼬리가 오기 전에 공간의 크기와 단단함이 먼저 도착합니다.
+            잔향 꼬리가 도착하기도 전에 공간의 크기와 단단함이 먼저 전해집니다.
           </p>
         </div>
       </div>
@@ -284,25 +294,26 @@
         <span class="eyebrow" data-en="What it is">어떤 렌더러인가</span>
         <h2 class="h2" data-en="One renderer, metadata flowing with it">메타데이터가 함께 흐르는 하나의 렌더러</h2>
         <p class="lead" data-en="Object buses get the object renderer; ordinary buses get a channel renderer that turns fixed beds - stereo, 5.1, 7.1.4 - into binaural. Both live in the same pipeline.">
-          오디오 오브젝트 버스에는 오브젝트 렌더러가, 일반 버스에는 스테레오·5.1·7.1.4 같은
-          고정 베드를 바이노럴로 바꾸는 채널 렌더러가 놓입니다. 둘이 같은 파이프라인 안에 있습니다.
+          오디오 오브젝트 버스에는 오브젝트 렌더러를, 일반 버스에는 채널 렌더러를 놓으시면 됩니다.
+          채널 렌더러는 스테레오·5.1·7.1.4 같은 고정 베드를 바이노럴로 바꿔 줍니다.
+          둘은 서로 다른 제품이 아니라 같은 파이프라인 안에 함께 있습니다.
         </p>
       </div>
       <div class="rules">
         <div class="rule rise">
           <span class="num">01</span>
-          <h3 data-en="Set on the sound, not the game">게임이 아니라 사운드에 설정</h3>
-          <p data-en="Each metadata plug-in attaches to its sound. A close whisper and a distant siren behave differently without touching a global preset.">각 메타데이터 플러그인은 해당 사운드에 붙습니다. 가까운 속삭임과 멀리 있는 사이렌이 전역 프리셋을 건드리지 않고 서로 다르게 동작합니다.</p>
+          <h3 data-en="Set on the sound, not the game">게임이 아니라 사운드에 설정합니다</h3>
+          <p data-en="Each metadata plug-in attaches to its sound. A close whisper and a distant siren behave differently without touching a global preset.">메타데이터 플러그인은 각각 해당 사운드에 붙습니다. 그래서 가까운 속삭임과 멀리 있는 사이렌이 전역 프리셋을 건드리지 않고도 서로 다르게 동작할 수 있습니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">02</span>
-          <h3 data-en="Objects and channel beds">오브젝트와 채널 베드</h3>
-          <p data-en="Object buses and fixed beds are handled by two renderers that share the same core, so a project can mix both.">오브젝트 버스와 고정 베드를 같은 코어를 공유하는 두 렌더러가 나눠 처리합니다. 한 프로젝트에서 둘을 섞어 쓸 수 있습니다.</p>
+          <h3 data-en="Objects and channel beds">오브젝트와 채널 베드를 함께 씁니다</h3>
+          <p data-en="Object buses and fixed beds are handled by two renderers that share the same core, so a project can mix both.">오브젝트 버스와 고정 베드를 두 렌더러가 나눠 처리하는데, 둘은 같은 코어를 공유합니다. 그래서 한 프로젝트 안에서 섞어 쓰셔도 됩니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">03</span>
-          <h3 data-en="Predictable without metadata">메타데이터가 없어도 예측 가능</h3>
-          <p data-en="Sounds without metadata run on the renderer's own settings. Adding the plug-in to a project does not quietly change an existing mix.">메타데이터가 없는 사운드는 렌더러 자체 설정으로 동작합니다. 플러그인을 넣는 것만으로 기존 믹스가 조용히 달라지지 않습니다.</p>
+          <h3 data-en="Predictable without metadata">메타데이터가 없어도 예측할 수 있습니다</h3>
+          <p data-en="Sounds without metadata run on the renderer's own settings. Adding the plug-in to a project does not quietly change an existing mix.">메타데이터를 붙이지 않은 사운드는 렌더러 자체 설정으로 동작합니다. 플러그인을 넣었다는 이유만으로 기존 믹스가 조용히 달라지는 일은 없습니다.</p>
         </div>
       </div>
     </div>
@@ -317,44 +328,48 @@
         <span class="eyebrow" data-en="What you author">설정하는 것</span>
         <h2 class="h2" data-en="Four things you put on a sound">사운드에 붙이는 네 가지</h2>
         <p class="lead" data-en="The renderer sits on the bus and is set once. What changes from sound to sound is authored as metadata, in the Wwise property editor, on the sound itself. Four metadata plug-ins cover it.">
-          렌더러는 버스에 놓고 한 번 설정합니다. 사운드마다 달라지는 것은 Wwise 속성 편집기에서
-          사운드 자체에 메타데이터로 붙입니다. 그 메타데이터가 네 가지입니다.
+렌더러 자체는 버스에 올려 두고 한 번만 설정하시면 됩니다. 사운드마다 달라져야 하는 값은
+          Wwise 속성 편집기에서 사운드 자체에 메타데이터로 붙이시면 되고요.
+          그 메타데이터가 아래 네 가지입니다.
         </p>
       </div>
       <div class="tiles">
         <div class="tile rise">
           <h3 data-en="Near-field">Near-field</h3>
           <p data-en="Where the near-field begins, and how much level and low end the near ear gains inside it. A whisper at the ear and a voice across the room can use the same event and behave differently.">
-            근접장이 어디서부터 시작하는지, 그 안에서 가까운 쪽 귀에 레벨과 저역을 얼마나 실을지.
-            귀에 대고 하는 속삭임과 방 건너편의 목소리가 같은 이벤트를 쓰면서 다르게 동작합니다.
+근접장이 어디서부터 시작할지, 그리고 그 안으로 들어왔을 때 가까운 쪽 귀에
+            레벨과 저역을 얼마나 실을지 정합니다. 귀에 대고 하는 속삭임과 방 건너편의 목소리가
+            같은 이벤트를 쓰면서도 다르게 동작할 수 있습니다.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="Directivity">Directivity</h3>
           <p data-en="Which way the source faces, and what happens off axis: the inner angle that stays full, the outer angle where it bottoms out, and how much level and high end are lost between them.">
-            음원이 어느 쪽을 향하는지, 그리고 축에서 벗어났을 때 무엇이 달라지는지.
-            그대로인 안쪽 각도, 바닥에 닿는 바깥쪽 각도, 그 사이에서 잃는 레벨과 고역.
+음원이 어느 쪽을 향하고 있는지, 그리고 그 축에서 벗어났을 때 무엇이 달라질지 정합니다.
+            소리가 그대로 유지되는 안쪽 각도와 가장 많이 깎이는 바깥쪽 각도를 두고,
+            그 사이에서 레벨과 고역이 얼마나 줄어들지 조절하시면 됩니다.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="Stereo-Width">Stereo-Width</h3>
           <p data-en="How wide a stereo source stands in the scene. At zero it folds toward mono at its own position; opening it separates the two sides without moving the source.">
-            스테레오 음원이 장면에서 얼마나 넓게 서는지. 0이면 제자리에서 모노 쪽으로 접히고,
-            넓힐수록 음원을 옮기지 않은 채 좌우가 벌어집니다.
+스테레오 음원이 장면에서 얼마나 넓게 설지 정합니다. 0에 두면 제자리에서 모노 쪽으로
+            접히고, 값을 올릴수록 음원을 옮기지 않은 채 좌우만 벌어집니다.
           </p>
         </div>
         <div class="tile rise">
           <h3 data-en="LFE Gain">LFE Gain</h3>
           <p data-en="How much of this sound is sent to the LFE channel, on outputs that have one. It is a send level, not a way to add a subwoofer to headphones.">
-            이 사운드를 LFE 채널로 얼마나 보낼지. LFE가 있는 출력에만 적용됩니다.
-            헤드폰에 서브우퍼를 더하는 기능이 아니라 전송 레벨입니다.
+이 사운드를 LFE 채널로 얼마나 보낼지 정합니다. LFE가 있는 출력에서만 적용되고요.
+            헤드폰에 서브우퍼를 더해 주는 기능은 아니고, 어디까지나 전송 레벨입니다.
           </p>
         </div>
       </div>
       <p class="note rise" data-en="<b>A sound with no metadata is not a special case.</b> It runs on the renderer&#39;s own values, so adding the plug-in to a project does not silently change a mix that already works. Where several of the same kind arrive on one object, the last one wins.">
-        <b>메타데이터가 없는 사운드는 예외 처리 대상이 아닙니다.</b> 렌더러 자체 값으로 동작하므로,
-        플러그인을 프로젝트에 넣는 것만으로 이미 완성된 믹스가 조용히 달라지지 않습니다.
-        한 오브젝트에 같은 종류가 여러 개 도착하면 마지막 것이 이깁니다.
+<b>메타데이터를 붙이지 않은 사운드도 따로 신경 쓰실 필요가 없습니다.</b>
+        렌더러 자체 값으로 동작하기 때문에, 플러그인을 프로젝트에 넣었다는 이유만으로
+        이미 완성해 두신 믹스가 조용히 달라지는 일은 없습니다.
+        참고로 한 오브젝트에 같은 종류가 여러 개 도착하면 마지막에 온 것이 적용됩니다.
       </p>
     </div>
   </section>
@@ -364,11 +379,12 @@
     <div class="wrap">
       <div class="rise">
         <span class="eyebrow" data-en="Featured">대표 기능</span>
-        <h2 class="h2" data-en='Two ears hear<br><span class="grad">two different sounds</span>'>두 귀는<br><span class="grad">서로 다른 소리를 듣는다</span></h2>
+        <h2 class="h2" data-en='Two ears hear<br><span class="grad">two different sounds</span>'>두 귀는<br><span class="grad">서로 다른 소리를 듣습니다</span></h2>
         <p class="lead" data-en="A sound from the right reaches the right ear first and louder, while the head shades the far ear's high end. The renderer interpolates measured impulse responses per direction to reproduce both the timing and the band-by-band level difference, and keeps updating as the listener moves.">
-          오른쪽에서 온 소리는 오른쪽 귀에 먼저, 더 크게 닿고 반대쪽 귀에서는 머리가 고역을 가립니다.
-          렌더러는 실측 임펄스 응답을 방향마다 보간해 도달 시간차와 대역별 레벨차를 그대로 만들어 내며,
-          청취자가 움직이는 동안 계속 갱신합니다.
+오른쪽에서 온 소리는 오른쪽 귀에 먼저, 그리고 조금 더 크게 닿습니다.
+          반대쪽 귀에서는 머리가 가로막아 고역이 깎이고요. 렌더러는 실제로 측정된 임펄스 응답을
+          방향마다 보간해서 이 도달 시간차와 대역별 레벨차를 그대로 만들어 냅니다.
+          청취자가 움직이는 동안에도 계속 따라가며 갱신합니다.
         </p>
       </div>
 
@@ -399,31 +415,31 @@
         <div>
           <div class="stat__n">35.4 dB</div>
           <p data-en="Left-to-right level swing the renderer produces across a full horizontal sweep. A binaural path that collapses this is what makes sources sit inside the head instead of beside it.">
-            수평 한 바퀴를 도는 동안 렌더러가 만들어 내는 좌우 레벨 차이의 폭입니다.
-            이 값이 무너진 바이노럴 경로가 소리를 머리 옆이 아니라 머리 속에 앉힙니다.
+수평으로 한 바퀴 도는 동안 렌더러가 만들어 내는 좌우 레벨 차이의 폭입니다.
+            이 값이 무너지면 소리가 머리 옆이 아니라 머리 속에 앉아 버립니다.
           </p>
         </div>
         <div>
           <div class="stat__n">±0.01 dB</div>
           <p data-en="Octave-band error against the measured HRTF set above 250 Hz. The direction it puts a sound in is the direction the measurement says, not an approximation of it.">
-            250 Hz 위에서 실측 HRTF 세트 대비 옥타브 밴드 오차입니다.
-            소리를 놓는 방향이 측정값이 말하는 그 방향이지, 그것의 근사가 아닙니다.
+250 Hz 위에서 실측 HRTF 세트와 비교했을 때의 옥타브 밴드 오차입니다.
+            소리를 놓는 방향이 측정값이 말하는 바로 그 방향이라는 뜻이고, 비슷하게 흉내 낸 값이 아닙니다.
           </p>
         </div>
         <div>
           <div class="stat__n">624 Hz</div>
           <p data-en="Where the decoder switches from matching phase to matching magnitude - the spatial aliasing limit of a head 8.75 cm across. Below it the ears get true arrival time; above it, the level and colour that actually carry direction up there.">
-            디코더가 위상을 맞추다 크기를 맞추는 쪽으로 넘어가는 지점입니다.
-            반지름 8.75 cm 머리의 공간 에일리어싱 한계이고, 아래에서는 실제 도달 시간을,
-            위에서는 그 대역에서 실제로 방향을 나르는 레벨과 음색을 맞춥니다.
+디코더가 위상을 맞추다가 크기를 맞추는 쪽으로 넘어가는 지점입니다.
+            반지름 8.75 cm 머리가 위상을 분간할 수 있는 한계선이라, 이 아래에서는 실제 도달 시간을
+            맞추고 위에서는 그 대역에서 실제로 방향을 실어 나르는 레벨과 음색을 맞춥니다.
           </p>
         </div>
         <div>
           <div class="stat__n">9 ms</div>
           <p data-en="Time constant the apparent direction glides on, reaching 10-90% in about 20 ms. Fast enough that motion is not lagged, slow enough that a source jumping to a new diffraction edge does not click.">
-            겉보기 방향이 미끄러지는 시상수입니다. 10–90%까지 약 20 ms.
-            움직임이 늦게 따라오지 않을 만큼 빠르고, 회절 모서리가 바뀌며
-            음원이 순간이동해도 딸깍거리지 않을 만큼 느립니다.
+겉보기 방향이 미끄러지듯 옮겨 가는 시상수입니다. 10–90%까지 약 20 ms 걸립니다.
+            움직임이 늦게 따라오지 않을 만큼은 빠르고, 회절 모서리가 바뀌면서 음원이
+            순간이동하더라도 딸깍거리지 않을 만큼은 느린 지점입니다.
           </p>
         </div>
       </div>
@@ -431,31 +447,31 @@
       <div class="tiles">
         <div class="tile rise">
           <h3 data-en="Direction interpolation">방향 보간 필터</h3>
-          <p data-en="Measured impulse responses are interpolated between the nearest measured directions, so passing between them does not step.">실측 임펄스 응답을 가장 가까운 측정 방향들 사이에서 보간해, 그 사이를 지나갈 때 계단처럼 끊기지 않습니다.</p>
+          <p data-en="Measured impulse responses are interpolated between the nearest measured directions, so passing between them does not step.">실측 임펄스 응답을 가장 가까운 측정 방향들 사이에서 보간합니다. 그래서 음원이 그 사이를 지나갈 때 계단처럼 툭툭 끊기지 않습니다.</p>
         </div>
         <div class="tile rise">
-          <h3 data-en="Delay handled separately">지연은 따로 처리</h3>
-          <p data-en="Arrival time difference is an explicit per-ear delay rather than something buried in the filter.">도달 시간차를 필터 안에 묻어 두지 않고 귀별 지연으로 명시합니다.</p>
+          <h3 data-en="Delay handled separately">지연은 따로 다룹니다</h3>
+          <p data-en="Arrival time difference is an explicit per-ear delay rather than something buried in the filter.">도달 시간차를 필터 안에 묻어 두지 않고 귀마다 따로 지연으로 다룹니다.</p>
         </div>
         <div class="tile rise">
-          <h3 data-en="Out of the head">머리 밖으로</h3>
-          <p data-en="The externaliser's amount and character are adjustable, so the image can be pushed as far out as the scene needs.">외재화의 양과 성격을 조절할 수 있어, 장면이 요구하는 만큼 상을 밖으로 밀어냅니다.</p>
+          <h3 data-en="Out of the head">소리를 머리 밖으로 꺼냅니다</h3>
+          <p data-en="The externaliser's amount and character are adjustable, so the image can be pushed as far out as the scene needs.">외재화의 양과 성격을 조절하실 수 있어서, 장면이 필요로 하는 만큼 상을 바깥으로 밀어내실 수 있습니다.</p>
         </div>
         <div class="tile tile--wide rise">
-          <h3 data-en="A measured set is where it starts, not where it ends">실측 세트는 출발점이지 도착점이 아니다</h3>
+          <h3 data-en="A measured set is where it starts, not where it ends">실측 세트는 출발점이지 도착점이 아닙니다</h3>
           <p data-en="The MIT KEMAR measurements are the foundation, and dropping them in unchanged is not the same as making them sound right. What ships is time-aligned with an interaural decorrelation baked into its phase, then corrected by measurement in every direction it is used: interaural level over 24 azimuths and 7 bands, the common tonal colour over the same grid, elevation over 8 more. The ambisonic decoders are not raw responses through virtual speakers either - they are a least-squares fit, matching phase below the point a head can still resolve it and magnitude above.">
-            MIT KEMAR 실측이 토대입니다. 다만 그 데이터를 그대로 얹는 것과
-            제대로 들리게 만드는 것은 다른 일입니다. 실제로 탑재되는 것은 시간 정렬을 거치고
-            양 귀 사이 상관을 위상에 배이크한 뒤, 쓰이는 모든 방향에서 측정으로 보정한 결과입니다.
-            양 귀 레벨차는 24개 방위 × 7개 대역, 공통 음색은 같은 격자로,
-            고도는 8단으로 따로 잡았습니다. 앰비소닉 디코더도 원시 응답을 가상 스피커에
-            흘리는 방식이 아니라 최소자승으로 설계했습니다. 머리가 위상을 분간할 수 있는
-            지점까지는 위상을, 그 위로는 크기를 맞춥니다.
+MIT KEMAR 실측이 토대인 건 맞습니다. 다만 그 데이터를 그대로 얹는 것과
+            실제로 제대로 들리게 만드는 것은 조금 다른 일이더군요. 그래서 탑재되는 데이터는
+            시간 정렬을 거치고 양 귀 사이 상관을 위상에 배이크한 다음, 쓰이는 모든 방향에서
+            측정으로 한 번 더 보정한 결과입니다. 양 귀 레벨차는 24개 방위 × 7개 대역,
+            공통 음색은 같은 격자로, 고도는 8단으로 따로 잡았습니다.
+            앰비소닉 디코더도 원시 응답을 가상 스피커에 흘리는 방식이 아니라 최소자승으로 설계했고요.
+            머리가 위상을 분간할 수 있는 지점까지는 위상을, 그 위로는 크기를 맞춥니다.
           </p>
         </div>
         <div class="tile rise">
-          <h3 data-en="Shared basis">공유 필터 기저</h3>
-          <p data-en="Rather than a full convolution per object, rendering runs on a shared set of directional filters.">오브젝트마다 완전한 컨볼루션을 따로 들고 가는 대신, 공유된 방향 필터 집합 위에서 렌더링합니다.</p>
+          <h3 data-en="Shared basis">필터 기저를 함께 씁니다</h3>
+          <p data-en="Rather than a full convolution per object, rendering runs on a shared set of directional filters.">오브젝트마다 완전한 컨볼루션을 따로 돌리는 대신, 공유된 방향 필터 집합 위에서 렌더링합니다.</p>
         </div>
       </div>
     </div>
@@ -469,41 +485,41 @@
     <div class="wrap">
       <div class="rise">
         <span class="eyebrow" data-en="Spatial processing">공간 처리</span>
-        <h2 class="h2" data-en='Direction is where it starts,<br><span class="grad">not where it ends</span>'>방향은 시작일 뿐<br><span class="grad">끝이 아니다</span></h2>
+        <h2 class="h2" data-en='Direction is where it starts,<br><span class="grad">not where it ends</span>'>방향을 맞추는 건<br><span class="grad">시작일 뿐입니다</span></h2>
         <p class="lead" data-en="Getting the direction right places a sound. What makes it belong to a place is everything that happens on the way: how close it is, which way it faces, what it has to travel around, and what it bounces off first.">
-          방향이 맞으면 소리의 자리가 정해집니다. 그 소리가 그 장소의 것이 되게 하는 것은
-          오는 길에 벌어지는 일들입니다. 얼마나 가까운지, 어디를 향하는지,
-          무엇을 돌아와야 하는지, 그리고 무엇에 먼저 부딪혔는지.
+방향이 맞으면 일단 소리의 자리가 정해집니다. 하지만 그 소리가 &lsquo;그 장소의 소리&rsquo;가 되는 건
+          오는 길에 벌어지는 일들 덕분입니다. 얼마나 가까운지, 어디를 향하고 있는지,
+          무엇을 돌아서 와야 했는지, 그리고 오는 길에 무엇에 먼저 부딪혔는지 같은 것들이요.
         </p>
       </div>
       <div class="tiles">
         <div class="tile rise">
-          <h3 data-en="Inside a metre, level is not the story">1m 안쪽에서는 크기가 요점이 아니다</h3>
+          <h3 data-en="Inside a metre, level is not the story">1m 안쪽에서는 크기가 요점이 아닙니다</h3>
           <p data-en="Close up, the two ears stop agreeing: the difference between them widens sharply and the near ear picks up low end. Raising the volume of a distant-sounding source does not produce that, which is why proximity is its own stage rather than a curve.">
-            가까이 오면 두 귀의 이야기가 갈라집니다. 좌우 차이가 급격히 벌어지고 가까운 쪽 귀에
-            저역이 실립니다. 멀리 있는 소리의 볼륨을 올리는 것으로는 그 상태가 만들어지지 않아서,
-            근접장을 커브가 아니라 별도의 단계로 둡니다.
+소리가 가까이 오면 두 귀가 서로 다른 이야기를 하기 시작합니다. 좌우 차이가 급격히 벌어지고
+            가까운 쪽 귀에 저역이 실리죠. 멀리 있는 소리의 볼륨만 올려서는 이 상태가 만들어지지 않기 때문에,
+            근접장을 감쇠 커브가 아니라 별도의 단계로 두었습니다.
           </p>
         </div>
         <div class="tile rise">
-          <h3 data-en="A turned source moves in colour, not in place">돌아선 음원은 자리가 아니라 음색이 움직인다</h3>
+          <h3 data-en="A turned source moves in colour, not in place">돌아선 음원은 자리가 아니라 음색이 움직입니다</h3>
           <p data-en="A speaker facing away is quieter and duller, but it is still over there. Directivity applies level and high-frequency loss by angle and leaves the direction of arrival alone - and it applies to the reflections the source throws as well as to the direct path.">
-            등을 돌린 확성기는 작고 어두워지지만 여전히 그 자리에 있습니다.
-            각도에 따라 레벨과 고역 손실을 적용하되 도달 방향은 건드리지 않습니다.
-            직접음뿐 아니라 그 음원이 만들어 내는 반사음에도 같이 적용됩니다.
+등을 돌린 확성기는 작고 어두워지긴 하지만 여전히 그 자리에 있습니다.
+            그래서 각도에 따라 레벨과 고역 손실만 적용하고 도달 방향은 건드리지 않습니다.
+            직접음뿐 아니라 그 음원이 만들어 내는 반사음에도 똑같이 적용되고요.
           </p>
         </div>
         <div class="tile rise">
-          <h3 data-en="Blocked is not silent">막힌 것은 사라진 것이 아니다</h3>
+          <h3 data-en="Blocked is not silent">막혔다고 사라지는 건 아닙니다</h3>
           <p data-en="When geometry cuts the straight line, sound still arrives - bent around the edge, darker, and from the edge rather than from the source. Treating that as a volume cut is what makes occlusion sound like a fader instead of a wall.">
-            지오메트리가 직선 경로를 끊어도 소리는 도착합니다. 모서리를 돌아, 더 어둡게,
-            음원이 아니라 모서리 쪽에서 옵니다. 이것을 볼륨 감소로 처리하면
-            차폐가 벽이 아니라 페이더처럼 들립니다.
+지오메트리가 직선 경로를 끊더라도 소리는 결국 도착합니다. 모서리를 돌아서,
+            조금 더 어둡게, 음원이 아니라 모서리 쪽에서 오죠. 이걸 단순한 볼륨 감소로 처리해 버리면
+            차폐가 벽이 아니라 페이더처럼 들리게 됩니다.
           </p>
         </div>
         <div class="tile tile--wide rise">
-          <h3 data-en="The room arrives before the reverb">잔향보다 먼저 도착하는 것은 방이다</h3>
-          <p data-en="What tells you a space is narrow, hard or open is not the reverb tail but the first few reflections off nearby surfaces. Those paths come from game geometry and are coloured by the material they hit.">공간이 좁은지, 단단한지, 트인 곳인지를 알려주는 것은 잔향 꼬리가 아니라 주변 면에서 가장 먼저 돌아오는 몇 개의 초기 반사음입니다. 그 경로를 게임 지오메트리에서 받아 부딪힌 재질대로 색을 입힙니다.</p>
+          <h3 data-en="The room arrives before the reverb">잔향보다 방이 먼저 도착합니다</h3>
+          <p data-en="What tells you a space is narrow, hard or open is not the reverb tail but the first few reflections off nearby surfaces. Those paths come from game geometry and are coloured by the material they hit.">공간이 좁은지 단단한지 트인 곳인지를 알려 주는 건 잔향 꼬리가 아닙니다. 주변 면에서 가장 먼저 돌아오는 몇 개의 초기 반사음이죠. 그 경로를 게임 지오메트리에서 그대로 받아 와서, 부딪힌 재질에 맞는 색을 입혀 줍니다.</p>
           <figure class="shot loaded animshot" style="--demo-h:290px">
             <div class="animshot__stage" aria-hidden="true">
               <div class="animshot__top">
@@ -538,46 +554,48 @@
     <div class="wrap">
       <div class="rise">
         <span class="eyebrow" data-en="Authoring panel">저작 패널</span>
-        <h2 class="h2" data-en="It tells you what it is actually doing">지금 실제로 무엇을 하고 있는지 말해 준다</h2>
+        <h2 class="h2" data-en="It tells you what it is actually doing">지금 무엇을 하고 있는지 알려 줍니다</h2>
         <p class="lead" data-en="Spatial audio fails quietly. A metadata plug-in that never arrived, a bed that is not being spatialised, a state pool that ran out mid-scene - none of it makes a noise, and by the time it is noticed the mix has been built on top of it. The panel is built around that problem.">
-          공간 음향은 조용히 실패합니다. 도착하지 않은 메타데이터, 공간화되지 않고 있는 베드,
-          장면 도중 고갈된 상태 풀 — 어느 것도 소리를 내지 않고, 알아차렸을 때는 이미
-          그 위에 믹스가 쌓여 있습니다. 패널은 그 문제를 중심으로 만들었습니다.
+공간 음향은 조용히 실패하는 편입니다. 도착하지 않은 메타데이터, 공간화되지 않고 있는 베드,
+          장면 도중 바닥난 상태 풀 — 어느 것도 소리를 내지 않습니다. 그래서 알아차렸을 때는
+          이미 그 위에 믹스가 한참 쌓여 있곤 하죠. 이 패널은 바로 그 문제를 염두에 두고 만들었습니다.
         </p>
       </div>
       <div class="tiles">
         <div class="tile rise">
-          <h3 data-en="A live read-out, not a settings page">설정 화면이 아니라 계기판</h3>
+          <h3 data-en="A live read-out, not a settings page">설정 화면이라기보다 계기판에 가깝습니다</h3>
           <p data-en="While the game runs it shows what the renderer received and what it did with it: objects active and at peak, how much of the state pool is in use, how many directions are being resolved, processing time against its budget, integrated loudness, and the output format and sample rate it actually resolved to.">
-            게임이 도는 동안 렌더러가 무엇을 받아 무엇을 했는지 보여줍니다.
-            활성·피크 오브젝트 수, 상태 풀 사용량, 해석 중인 방향 수,
-            예산 대비 처리 시간, 통합 라우드니스, 그리고 실제로 해석된 출력 포맷과 샘플레이트.
+게임이 도는 동안 렌더러가 무엇을 받아서 무엇을 했는지 그대로 보여 드립니다.
+            활성·피크 오브젝트 수, 상태 풀 사용량, 해석 중인 방향 수, 예산 대비 처리 시간,
+            통합 라우드니스, 그리고 실제로 해석된 출력 포맷과 샘플레이트까지 확인하실 수 있습니다.
           </p>
         </div>
         <div class="tile rise">
-          <h3 data-en="Nine checks that run themselves">스스로 도는 아홉 개의 검사</h3>
+          <h3 data-en="Nine checks that run themselves">아홉 개의 검사가 알아서 돕니다</h3>
           <p data-en="State pool exhaustion, the real-time budget, an output format that had to fall back, a missing LFE channel, listener pose, near-field falling back to renderer values, a plain bed arriving where it should not, more than one ambisonic bed in a pass, and a world scale that does not match the distances coming in.">
-            상태 풀 고갈, 실시간 예산, 되돌려진 출력 포맷, 없는 LFE 채널, 리스너 자세,
-            렌더러 값으로 떨어진 근접장, 오면 안 되는 곳에 온 일반 베드,
-            한 패스에 둘 이상인 앰비소닉 베드, 들어오는 거리와 맞지 않는 월드 스케일.
+상태 풀이 바닥나지는 않았는지, 실시간 예산을 넘기지는 않는지, 출력 포맷이 되돌려지지는 않았는지,
+            LFE 채널이 없지는 않은지, 리스너 자세는 정상인지, 근접장이 렌더러 값으로 떨어지지는 않았는지,
+            일반 베드가 오면 안 되는 곳에 오지는 않았는지, 앰비소닉 베드가 한 패스에 둘 이상 있지는 않은지,
+            월드 스케일이 들어오는 거리와 맞는지를 확인합니다.
           </p>
         </div>
         <div class="tile tile--wide rise">
-          <h3 data-en="&#39;Fine&#39; and &#39;could not tell&#39; are different answers">‘문제 없음’과 ‘확인할 수 없었음’은 다른 답이다</h3>
+          <h3 data-en="&#39;Fine&#39; and &#39;could not tell&#39; are different answers">‘문제 없음’과 ‘확인할 수 없었음’은 다른 답입니다</h3>
           <p data-en="Every check reports one of four states, and the two that are usually collapsed into one are kept apart. Passing means the condition was examined and met. No data means the runtime was not there to be asked. Merging them is the quietest lie a diagnostic panel can tell, so this one does not: a check that could not see anything says so, and never counts as a pass.">
-            모든 검사는 네 가지 상태 중 하나로 답합니다. 그리고 보통 하나로 합쳐지는 두 가지를
-            갈라 둡니다. <b>통과</b>는 조건을 확인했고 만족했다는 뜻입니다.
-            <b>확인 불가</b>는 물어볼 런타임이 없었다는 뜻입니다.
-            이 둘을 합치는 것이 진단 패널이 저지를 수 있는 가장 조용한 거짓말이라,
-            여기서는 합치지 않습니다. 아무것도 보지 못한 검사는 그렇다고 말하고, 통과로 세지 않습니다.
+모든 검사는 네 가지 상태 중 하나로 답합니다. 그중에서도 보통 하나로 뭉뚱그려지는 두 가지를
+            일부러 갈라 두었습니다. <b>통과</b>는 조건을 확인했고 실제로 만족했다는 뜻이고,
+            <b>확인 불가</b>는 물어볼 런타임이 없어서 알 수 없었다는 뜻입니다.
+            이 둘을 하나로 합치는 것이야말로 진단 패널이 할 수 있는 가장 조용한 거짓말이라고 생각해서,
+            여기서는 합치지 않았습니다. 아무것도 보지 못한 검사는 그렇다고 솔직히 말하고,
+            통과로는 세지 않습니다.
           </p>
         </div>
         <div class="tile rise">
-          <h3 data-en="Both renderers, one panel">두 렌더러, 같은 패널</h3>
+          <h3 data-en="Both renderers, one panel">두 렌더러가 같은 패널을 씁니다</h3>
           <p data-en="The object renderer and the channel renderer share the panel, in Korean or English, reflowing from three columns to one as it narrows and following the display&#39;s DPI. Values are dragged, typed or nudged, and every edit is undoable.">
-            오브젝트 렌더러와 채널 렌더러가 같은 패널을 씁니다. 한국어와 영어,
-            폭에 따라 3열에서 1열까지 접히고, 디스플레이 DPI를 따릅니다.
-            값은 드래그·입력·미세 조절로 바꾸며 모든 편집은 되돌릴 수 있습니다.
+오브젝트 렌더러와 채널 렌더러가 같은 패널을 함께 씁니다. 한국어와 영어를 지원하고,
+            창 폭에 따라 3열에서 1열까지 알아서 접히며, 디스플레이 DPI도 따라갑니다.
+            값은 드래그하거나 직접 입력하거나 미세 조절로 바꾸실 수 있고, 모든 편집은 되돌릴 수 있습니다.
           </p>
         </div>
       </div>
@@ -615,9 +633,9 @@
         <span class="eyebrow" data-en="Development status">개발 현황</span>
         <h2 class="h2" data-en="Building and measuring, not shipped yet">만들고 재는 중, 아직 배포 전</h2>
         <p class="lead" data-en="It runs in a Wwise sandbox project and a dedicated Unreal testbed, and every change is checked by listening and by measurement. It is not packaged for release, so there is no download on this page.">
-          현재 Wwise 샌드박스 프로젝트와 전용 Unreal 테스트베드에서 동작하며, 모든 변경은
-          청취와 측정으로 확인하고 있습니다. 아직 배포용으로 패키징하지 않았기 때문에
-          이 페이지에는 내려받기가 없습니다.
+지금은 Wwise 샌드박스 프로젝트와 전용 Unreal 테스트베드에서 동작하고 있습니다.
+          모든 변경은 직접 들어 보고 측정해서 확인하고 있고요. 아직 배포용으로 패키징하지 않아서
+          이 페이지에는 내려받기가 없는 점 양해 부탁드립니다.
         </p>
       </div>
       <ul class="status">
