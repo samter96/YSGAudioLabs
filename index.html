@@ -181,9 +181,29 @@
   .tool--featured .tool__name{font-size:clamp(23px,2.7vw,34px)}
   .tool__body{min-width:0}
   .tool__body p{
-    margin:10px 0 0; font-size:14.5px; color:var(--ink-2);
-    line-height:1.68; max-width:52ch; word-break:keep-all;
+    margin:9px 0 0; font-size:13.8px; color:var(--ink-2);
+    line-height:1.6; max-width:52ch; word-break:keep-all;
   }
+  .tool-points{
+    display:grid; grid-template-columns:repeat(3,minmax(74px,1fr));
+    gap:8px; margin-top:13px; max-width:440px;
+  }
+  .tool-point{
+    min-width:0; min-height:70px; padding:8px 8px;
+    border:1px solid color-mix(in srgb, var(--key) 22%, rgba(255,255,255,.64));
+    border-radius:13px; background:rgba(255,255,255,.58);
+    box-shadow:0 10px 24px -20px color-mix(in srgb, var(--key) 60%, transparent);
+    backdrop-filter:blur(8px) saturate(130%);
+  }
+  .tool-point svg{
+    width:28px; height:28px; color:var(--key); stroke:currentColor;
+    fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;
+  }
+  .tool-point span{
+    display:block; margin-top:5px; font-size:11.5px; font-weight:800;
+    line-height:1.35; color:var(--ink); letter-spacing:-.02em; word-break:keep-all;
+  }
+  .tool--featured .tool-points{max-width:520px}
   .tool__foot{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:18px}
   /* 상태칩 — 사진 위에서 --ink-3 는 3.73:1 밖에 안 나온다.
      알약에 흰 배경을 깔아 제 바닥을 만들면 4.63:1 (2026-09-14 실측). */
@@ -293,6 +313,7 @@
     .tool{grid-template-columns:1fr}
     .tool--featured{grid-template-columns:1fr}
     .build-strip{grid-template-columns:1fr}
+    .tool-points{grid-template-columns:repeat(3,minmax(0,1fr))}
     .tool .pkg{max-width:200px}
     .tool__badge{max-width:220px}
     /* 1열이 되면 글자가 이미지 **아래**로 내려간다. 실측: 글자 블록이
@@ -390,9 +411,9 @@
       <div class="story-grid">
         <div class="story-copy rise">
           <span class="eyebrow" data-en="Why it exists">왜 만들었나</span>
-          <h2 class="h2" data-en="Small tools for the moments that slow game sound work down">게임 사운드 작업이 멈추는 지점을 작게 쪼갰습니다</h2>
-          <p data-en="A sound designer does not only create sounds. They search through libraries, audition spatial intent, check routing, catch phase problems, and verify Wwise settings before a build goes out. YSG Audio Tools is a set of focused utilities for those repeated checks.">
-            사운드 디자이너의 일은 소리를 만드는 것에서 끝나지 않습니다. 라이브러리를 뒤지고, 공간 의도를 확인하고, 라우팅과 위상을 점검하고, 빌드 전에 Wwise 설정까지 확인해야 합니다. YSG Audio Tools는 그 반복되는 검수 지점을 작게 나눈 실무형 도구 모음입니다.
+          <h2 class="h2" data-en="Tools I wanted beside me while doing game sound work">게임 사운드 작업 중 옆에 있었으면 했던 툴들입니다</h2>
+          <p data-en="When you are making game sound, the work keeps jumping between library search, auditioning, Wwise checks, routing mistakes and small verification passes before a build. YSG Audio Tools is my attempt to keep those chores close to the actual sound work, instead of letting them break the flow.">
+            게임 사운드를 만들다 보면 소리만 만지는 시간이 생각보다 길지 않습니다. 라이브러리를 찾고, 들어 보고, Wwise 설정을 확인하고, 라우팅이나 위상 문제를 다시 훑는 일이 계속 끼어듭니다. YSG Audio Tools는 그런 잡무가 작업 흐름을 끊지 않도록, 실제 사운드 작업 바로 옆에 붙여 두려고 만든 도구들입니다.
           </p>
         </div>
         <div class="practice-list">
@@ -485,6 +506,11 @@
           <span class="tool__eyebrow">HRTF · REFLECTIONS · AMBISONIC</span>
           <h2 class="tool__name">YSGSpatialRenderer</h2>
           <p data-en="Wwise audio objects rendered binaurally through HRTFs, with near-field, directivity, early reflections and diffraction in one pipeline.">Wwise 오디오 오브젝트를 머리 전달 함수로 바이노럴 렌더링하고, 근접장·지향성·초기 반사·회절까지 한 파이프라인에서 처리합니다.</p>
+          <div class="tool-points" aria-label="YSGSpatialRenderer 주요 지원 기능">
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 18c3-9 17-9 20 0"/><path d="M8 18c3 9 17 9 20 0"/><circle cx="18" cy="18" r="4"/><path d="M4 18h5M27 18h5"/></svg><span data-en="Binaural preview">바이노럴 프리뷰</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 26V10l11-5 11 5v16l-11 5z"/><path d="M18 5v26M7 10l11 6 11-6"/><path d="M11 24c4-3 10-3 14 0"/></svg><span data-en="Per-object metadata">오브젝트별 메타데이터</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M9 27c5-2 13-2 18 0"/><path d="M11 22c4-2 10-2 14 0"/><path d="M13 17c3-2 7-2 10 0"/><path d="M8 10h20M8 10l4 4M28 10l-4 4"/></svg><span data-en="Reflection check">반사 검수</span></div>
+          </div>
           <div class="tool__foot">
             <span class="tool__status" data-en="in development">개발 중</span>
             <div class="btnrow"><a class="btn btn--primary" href="spatial-renderer/" data-en="View page">페이지 보기</a><a class="btn" href="https://github.com/samter96/YSGAudioTools" target="_blank" rel="noreferrer" data-en="Repository">저장소</a></div>
@@ -503,6 +529,11 @@
           <span class="tool__eyebrow">SEARCH · AUDITION · EXPORT</span>
           <h2 class="tool__name">SoundField</h2>
           <p data-en="Sweep millions of files at typing speed, then hear anything from 5.1 to higher-order Ambisonics binaurally where you found it.">수백만 파일을 타이핑 속도로 훑고, 5.1부터 고차 Ambisonics까지 찾은 자리에서 그대로 바이노럴로 듣습니다.</p>
+          <div class="tool-points" aria-label="SoundField 주요 지원 기능">
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="15" cy="15" r="8"/><path d="M21 21l8 8"/><path d="M9 15h12M15 9v12"/></svg><span data-en="Fast search">빠른 검색</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 22c3-8 5 8 8 0s5 8 8 0 3 3 6 0"/><path d="M7 14c3-6 5 6 8 0s5 6 8 0 3 2 6 0"/></svg><span data-en="Audition in place">그 자리에서 오디션</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M9 8h13l5 5v15H9z"/><path d="M22 8v6h6"/><path d="M13 24h10M18 16v8M14 20h8"/></svg><span data-en="Region export">구간 익스포트</span></div>
+          </div>
           <div class="tool__foot">
             <span class="tool__status" data-en="v2.1.0">v2.1.0</span>
             <div class="btnrow"><a class="btn btn--primary" href="soundfield/" data-en="View page">페이지 보기</a><a class="btn" href="https://github.com/samter96/SoundField/releases/download/v2.1.0/SoundField_Installer_v2.1.0.exe" data-en="Download">내려받기</a></div>
@@ -521,6 +552,11 @@
           <span class="tool__eyebrow">STEREO · WAVEFORM · PHASE</span>
           <h2 class="tool__name">Stereo Auditor</h2>
           <p data-en="Drop one file to get a channel verdict, with per-region stereo strength and sustained phase risk over a high-resolution L/R waveform.">파일 하나를 드롭하면 채널 관계를 판정하고, 고해상도 L/R 웨이브폼 위에 구간별 스테레오 강도와 지속 위상 위험을 표시합니다.</p>
+          <div class="tool-points" aria-label="Stereo Auditor 주요 지원 기능">
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 11h20v14H8z"/><path d="M13 18c2-6 4 6 6 0s4 6 6 0"/></svg><span data-en="L/R waveform">L/R 파형</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="14" cy="18" r="7"/><circle cx="22" cy="18" r="7"/><path d="M18 11v14"/></svg><span data-en="Stereo strength">스테레오 강도</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 25c4-12 8 12 12 0s7 5 10-2"/><path d="M24 9l6 6M30 9l-6 6"/></svg><span data-en="Phase risk">위상 위험</span></div>
+          </div>
           <div class="tool__foot">
             <span class="tool__status" data-en="v1.0.0 · early build">v1.0.0 · 얼리 빌드</span>
             <div class="btnrow"><a class="btn btn--primary" href="stereo-auditor/" data-en="View page">페이지 보기</a><a class="btn" href="https://github.com/samter96/YSGAudioTools" target="_blank" rel="noreferrer" data-en="Repository">저장소</a></div>
@@ -539,6 +575,11 @@
           <span class="tool__eyebrow">WAAPI · ROUTING · HEATMAP</span>
           <h2 class="tool__name">Bus Routing Auditor</h2>
           <p data-en="Scans every Sound object, works out the expected bus from name and Work Unit, and connects violations, signal flow and the heatmap in one pass.">프로젝트 전체 Sound 오브젝트를 스캔해 이름과 Work Unit 기준으로 예상 버스를 판정하고, 위반·Signal Flow·Heatmap을 한 흐름으로 잇습니다.</p>
+          <div class="tool-points" aria-label="Bus Routing Auditor 주요 지원 기능">
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 9h7v6H8zM21 9h7v6h-7zM8 22h7v6H8zM21 22h7v6h-7z"/><path d="M15 12h6M15 25h6M18 15v7"/></svg><span data-en="Bus tree scan">버스 트리 스캔</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 18h7l4-7 4 14 4-7h3"/><circle cx="22" cy="25" r="3"/></svg><span data-en="Signal flow">시그널 플로우</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 8h20v20H8z"/><path d="M8 15h20M8 22h20M15 8v20M22 8v20"/><circle cx="22" cy="15" r="2"/><circle cx="15" cy="22" r="2"/></svg><span data-en="Heatmap">히트맵</span></div>
+          </div>
           <div class="tool__foot">
             <span class="tool__status" data-en="v2.0.0">v2.0.0</span>
             <div class="btnrow"><a class="btn btn--primary" href="bus-routing-auditor/" data-en="View page">페이지 보기</a><a class="btn" href="https://github.com/samter96/Wwise-Bus-Routing-Auditor/archive/refs/heads/master.zip" data-en="Download">내려받기</a></div>
@@ -557,6 +598,11 @@
           <span class="tool__eyebrow">WAAPI · 3D / 2D · ATTENUATION</span>
           <h2 class="tool__name">Attenuation Auditor</h2>
           <p data-en="Walks the Actor-Mixer Hierarchy and pulls out both mistakes at once - 3D with no attenuation, and 2D with attenuation attached.">Actor-Mixer Hierarchy를 훑어 3D인데 감쇠가 없는 오브젝트와 2D인데 감쇠가 걸린 오브젝트를 한 번에 뽑아냅니다.</p>
+          <div class="tool-points" aria-label="Attenuation Auditor 주요 지원 기능">
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="18" cy="18" r="8"/><circle cx="18" cy="18" r="13"/><path d="M18 5v4M18 27v4M5 18h4M27 18h4"/></svg><span data-en="3D attenuation">3D 감쇠</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 25h22"/><path d="M9 22c5-12 13-12 18 0"/><path d="M12 22h12"/><circle cx="18" cy="22" r="2"/></svg><span data-en="2D mismatch">2D 불일치</span></div>
+            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M9 8h18v20H9z"/><path d="M13 14h10M13 19h7M13 24h12"/><path d="M25 13l4 4M29 13l-4 4"/></svg><span data-en="Violation list">위반 목록</span></div>
+          </div>
           <div class="tool__foot">
             <span class="tool__status" data-en="v1.4.0">v1.4.0</span>
             <div class="btnrow"><a class="btn btn--primary" href="attenuation-auditor/" data-en="View page">페이지 보기</a><a class="btn" href="https://github.com/samter96/Wwise-Attenuation-Auditor/archive/refs/heads/main.zip" data-en="Download">내려받기</a></div>
