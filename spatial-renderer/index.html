@@ -65,6 +65,30 @@
   .status li[data-done] span{
     border-color:rgba(107,60,224,.4); color:var(--key); background:rgba(107,60,224,.07);
   }
+  /* ── 줄바꿈 ──────────────────────────────────────────────────
+     한글은 기본값이면 브라우저가 음절 사이 어디서든 끊는다. 그래서 "반사와
+     회절까 / 지 알아서" 처럼 어절 한가운데가 갈라졌다. keep-all 이 그것을
+     막고 띄어쓰기에서만 끊게 한다.
+
+     다만 keep-all 만 주면 이번에는 끊을 곳이 없는 긴 영문 토큰(제품명·URL)이
+     줄을 넘쳐 가로 스크롤을 만든다. break-word 는 그때만 열리는 안전판이다.
+
+     pretty 는 마지막 줄에 단어 하나만 남는 고아 줄을 줄인다 — 히어로 본문이
+     "잡습니다." 한 마디로 끝나던 것이 정확히 그 경우다. 제목은 ysg.css 가
+     이미 balance 를 주고 있으므로 여기서는 끊김만 손본다.
+
+     ⚠ ysg.css 가 아니라 이 페이지에 두는 이유: 공용 시트는 지금 다른 작업이
+     올라가 있는 중이다. 같은 규칙이 다른 제품 페이지에도 필요하니, 그 작업이
+     정리되면 공용으로 올리는 편이 맞다. */
+  /* 클래스를 열거하지 않고 지면 전체에 건다. 처음에는 본문 클래스만 골랐다가
+     .devnote 와 .pitch__copy 를 빠뜨려 "전입니 / 다", "메타데 / 이터로" 가
+     그대로 남았다. 빠뜨릴 수 있는 목록은 빠뜨린다. */
+  body{ word-break:keep-all; overflow-wrap:break-word }
+  p, li, figcaption{ text-wrap:pretty }
+  /* 히어로 본문은 가운데 정렬이라 폭이 조금만 어긋나도 마지막 줄이 한 마디로
+     남는다. 본문 기본 52ch 보다 넓게 잡아 줄이 고르게 차게 한다. */
+  .hero__sub{ max-width:60ch }
+
   /* 네 가지는 네 칸에. 공용 .tiles 는 3열이라 넷을 넣으면 마지막 하나가
      혼자 다음 줄로 내려가 "세 개 + 하나"로 읽힌다. 브레이크포인트는
      ysg.css 의 1000px / 640px 를 그대로 따라가 리듬이 어긋나지 않게 한다. */
@@ -659,7 +683,7 @@ MIT KEMAR 실측이 토대인 건 맞습니다. 다만 그 데이터를 그대�
           <b>03</b>
           <div>
             <h3 data-en="Channel renderer">채널 렌더러</h3>
-            <p data-en="Binaural for fixed beds; layout support expanding">고정 베드 바이노럴 처리, 레이아웃 지원 확장 중</p>
+            <p data-en="Binaural for fixed beds; layout support expanding">고정 베드를 바이노럴로 바꾸고, 레이아웃 지원을 넓히는 중입니다</p>
           </div>
           <span data-en="in progress">진행 중</span>
         </li>
