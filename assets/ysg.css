@@ -96,11 +96,6 @@
     --r: 14px;
     --shadow: 0 1px 2px rgba(27,34,51,.04), 0 12px 32px -12px rgba(27,34,51,.12);
   }
-  @property --prism-angle{
-    syntax:"<angle>";
-    inherits:false;
-    initial-value:0deg;
-  }
 
   /* ── 다크 테마 (제품별 개성) ────────────────────────────────────
      여기 값은 **기본값**(페이지가 따로 안 정하면 쓰는 값 — SpatialRenderer
@@ -297,18 +292,22 @@
   }
   .btn::before{
     content:""; position:absolute; inset:0; z-index:1; border-radius:inherit; padding:2px;
-    background:conic-gradient(from var(--prism-angle),
-      color-mix(in srgb, var(--key) 80%, #fff),
-      color-mix(in srgb, var(--key-grad) 82%, #fff),
-      #fff,
-      color-mix(in srgb, var(--key-2) 82%, #fff),
-      color-mix(in srgb, var(--key) 80%, #fff));
+    background:
+      linear-gradient(115deg,
+        color-mix(in srgb, var(--key) 72%, transparent) 0%,
+        color-mix(in srgb, var(--key-grad) 86%, #fff) 18%,
+        rgba(255,255,255,.96) 33%,
+        color-mix(in srgb, var(--key-2) 82%, #fff) 49%,
+        color-mix(in srgb, var(--key) 78%, transparent) 66%,
+        rgba(255,255,255,.82) 82%,
+        color-mix(in srgb, var(--key-grad) 82%, transparent) 100%);
+    background-size:260% 260%;
     -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite:xor;
     mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask-composite:exclude;
     pointer-events:none;
-    opacity:0; transition:opacity .18s; animation:prismRing 2.8s linear infinite paused;
+    opacity:0; transition:opacity .18s; animation:prismRing 2.6s linear infinite paused;
   }
   .btn:hover{
     border-color:transparent; transform:translateY(-1px);
@@ -379,7 +378,10 @@
     0%{transform:translate3d(0,0,0) scale(1)}
     100%{transform:translate3d(3vw,-2vw,0) scale(1.12)}
   }
-  @keyframes prismRing{to{--prism-angle:360deg}}
+  @keyframes prismRing{
+    0%{background-position:0% 50%}
+    100%{background-position:200% 50%}
+  }
   .hero .wrap{position:relative; z-index:1}
   /* ⚠ 히어로에는 등장 효과를 걸지 않는다. 첫 화면을 JS 에 맡기면 스크립트가
      안 뛰는 환경에서 페이지가 **빈 화면**으로 열린다 (실제로 당했다).
