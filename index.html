@@ -48,6 +48,39 @@
     box-shadow:var(--shadow); overflow:hidden;
     transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s;
   }
+  /* 카드 배경 = 그 제품 사진의 배경을 흐리게 깐 것. 사진마다 배경이 달라서
+     카드마다 분위기가 달라진다 (--product-bg 는 카드 인라인에서 준다).
+
+     카드 **전체**가 사진이다 — 흰색으로 끝나는 구간을 두지 않는다
+     (사용자 지시 2026-09-14: "카드의 모든 여백을 다 사진 배경으로 채워").
+
+     ⚠ 글자 칸 베일을 .86 아래로 내리지 말 것. 사진의 검은 부분은 흰 베일로만
+       들어올릴 수 있고(밝기 필터는 검정을 못 올린다), 검정 위 본문(--ink-2)이
+       4.5:1 을 넘으려면 베일이 .86 은 되어야 한다.
+       실측(글자 칸 최악 셀 기준, 5개 카드): .78 → 4.35~4.62 / .82 → 4.80~5.03
+       / .86 → 5.27~5.46.
+     ⚠ 이 베일 위에서는 원래 키컬러·--ink-3 이 그대로는 못 버틴다 (눈썹 3.37~4.62,
+       상태칩 3.73~3.86). 그래서 아래에서 눈썹은 키컬러를 어둡게 섞고, 상태칩은
+       흰 알약 배경을 준다 — 색을 바꾸는 대신 사진을 덮지 않기 위한 선택이다. */
+  .tool::before{
+    content:""; position:absolute; inset:-34px; z-index:0; pointer-events:none;
+    background:var(--product-bg) center / cover no-repeat;
+    filter:blur(18px) saturate(1.25) brightness(1.18);
+    opacity:1; transform:scale(1.06);
+  }
+  .tool::after{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(circle at 18% 40%, color-mix(in srgb, var(--key) 16%, transparent), transparent 42%),
+      linear-gradient(90deg,
+        rgba(255,255,255,.34) 0%,
+        rgba(255,255,255,.42) 16%,
+        rgba(255,255,255,.62) 28%,
+        rgba(255,255,255,.84) 37%,
+        rgba(255,255,255,.86) 44%,
+        rgba(255,255,255,.86) 100%);
+  }
+  .tool > *{position:relative; z-index:1}
   .tool:hover{transform:translateY(-3px);
     box-shadow:0 2px 4px rgba(27,34,51,.05), 0 24px 46px -18px rgba(27,34,51,.24)}
   /* 카드 상단 띠 — 이 카드가 어느 제품인지 색으로 먼저 말한다 */
@@ -58,9 +91,12 @@
   .tool--featured{
     grid-template-columns:minmax(280px, 380px) minmax(440px, 620px);
   }
+  /* 눈썹 — 사진 베일 위라서 키컬러 원색은 3.37~4.62:1 로 모자란다.
+     72% 만 남기고 어둡게 섞으면 5.20~6.62:1 (2026-09-14 실측). */
   .tool__eyebrow{
     display:block; font-size:11px; font-weight:700; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--key);
+    text-transform:uppercase;
+    color:color-mix(in srgb, var(--key) 72%, #0d1117);
   }
   .tool__name{
     font-size:clamp(19px,2.1vw,26px); font-weight:800; letter-spacing:-.03em;
@@ -73,10 +109,13 @@
     line-height:1.75; max-width:56ch; word-break:keep-all;
   }
   .tool__foot{display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:22px}
+  /* 상태칩 — 사진 위에서 --ink-3 는 3.73:1 밖에 안 나온다.
+     알약에 흰 배경을 깔아 제 바닥을 만들면 4.63:1 (2026-09-14 실측). */
   .tool__status{
     font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
     padding:5px 12px; border-radius:999px; white-space:nowrap;
     border:1px solid var(--line-2); color:var(--ink-3);
+    background:rgba(255,255,255,.7);
   }
   .tool .btnrow{margin-top:0}
   .tool .btn{height:42px; padding:0 20px; font-size:14px}
@@ -103,6 +142,19 @@
     .tool--featured{grid-template-columns:1fr}
     .tool .pkg{max-width:200px}
     .tool__badge{max-width:220px}
+    /* 1열이 되면 글자가 이미지 **아래**로 내려온다 (실측: 세로 53% 지점부터).
+       가로 램프는 맞지 않으니 세로로 바꾼다 — 여기서도 흰색으로 끝내지 않는다. */
+    .tool::after{
+      background:
+        radial-gradient(circle at 50% 22%, color-mix(in srgb, var(--key) 16%, transparent), transparent 46%),
+        linear-gradient(180deg,
+          rgba(255,255,255,.34) 0%,
+          rgba(255,255,255,.42) 22%,
+          rgba(255,255,255,.64) 38%,
+          rgba(255,255,255,.84) 48%,
+          rgba(255,255,255,.86) 54%,
+          rgba(255,255,255,.86) 100%);
+    }
   }
 </style>
 </head>
@@ -187,7 +239,7 @@
         <h2 class="h2" data-en="What each tool does">각 툴이 하는 일</h2>
       </div>
       <div class="tools">
-      <article class="tool tool--featured rise" style="--key:#6b3ce0; --key-2:#a83ad0; --key-grad:#8b34c8;
+      <article class="tool tool--featured rise" style="--product-bg:url('spatial-renderer/assets/v2/product-box.png'); --key:#6b3ce0; --key-2:#a83ad0; --key-grad:#8b34c8;
                --pkg-0:#0a0718; --pkg-1:#3a1c96; --pkg-2:#6b3ce0; --pkg-3:#a83ad0;
                --pkg-4:#5b6cf0; --pkg-5:#d63a8e; --pkg-6:#8f6cff; --pkg-7:#ff9ad0;
                --lock-1:#b6c6ff; --lock-2:#d5c2ff; --lock-3:#ffb8ea">
@@ -205,7 +257,7 @@
           </div>
         </div>
       </article>
-      <article class="tool rise" style="--key:#2c6be0; --key-2:#0b7a89; --key-grad:#0d8798;
+      <article class="tool rise" style="--product-bg:url('soundfield/assets/v2/product-disk.png'); --key:#2c6be0; --key-2:#0b7a89; --key-grad:#0d8798;
                --pkg-0:#060a16; --pkg-1:#1d2b96; --pkg-2:#2c6be0; --pkg-3:#7a3ce0;
                --pkg-4:#12b5c9; --pkg-5:#c9457f; --pkg-6:#34e0e8; --pkg-7:#ffb454;
                --lock-1:#7ee8f5; --lock-2:#a9c4ff; --lock-3:#cbaaff">
@@ -223,7 +275,7 @@
           </div>
         </div>
       </article>
-      <article class="tool rise" style="--key:#0c8290; --key-2:#238054; --key-grad:#14806f;
+      <article class="tool rise" style="--product-bg:url('stereo-auditor/assets/v2/product-box.png'); --key:#0c8290; --key-2:#238054; --key-grad:#14806f;
                --pkg-0:#05131a; --pkg-1:#0a5a72; --pkg-2:#0c8290; --pkg-3:#1f8f6a;
                --pkg-4:#2f7fb8; --pkg-5:#6d9b2f; --pkg-6:#3ecfd8; --pkg-7:#a7d84e;
                --lock-1:#9ef0f4; --lock-2:#b6f0c8; --lock-3:#d6f2a8">
@@ -241,7 +293,7 @@
           </div>
         </div>
       </article>
-      <article class="tool rise" style="--key:#167a51; --key-2:#537419; --key-grad:#2f7a34;
+      <article class="tool rise" style="--product-bg:url('bus-routing-auditor/assets/v2/product-box.png'); --key:#167a51; --key-2:#537419; --key-grad:#2f7a34;
                --pkg-0:#061410; --pkg-1:#0e5238; --pkg-2:#167a51; --pkg-3:#537419;
                --pkg-4:#12806c; --pkg-5:#8a9a1c; --pkg-6:#3ecf94; --pkg-7:#cfd94e;
                --lock-1:#a8f0cc; --lock-2:#9ef0e2; --lock-3:#e0f0a8">
@@ -259,7 +311,7 @@
           </div>
         </div>
       </article>
-      <article class="tool rise" style="--key:#a85a17; --key-2:#a02e29; --key-grad:#a4441d;
+      <article class="tool rise" style="--product-bg:url('attenuation-auditor/assets/v2/product-box.png'); --key:#a85a17; --key-2:#a02e29; --key-grad:#a4441d;
                --pkg-0:#160905; --pkg-1:#6e2f10; --pkg-2:#a85a17; --pkg-3:#a02e29;
                --pkg-4:#c98a1e; --pkg-5:#8a1f3c; --pkg-6:#e8b455; --pkg-7:#ff8a6b;
                --lock-1:#ffd9a3; --lock-2:#ffb0a0; --lock-3:#ffe7c2">

@@ -145,6 +145,34 @@
     font-weight:400; -webkit-font-smoothing:antialiased;
     font-feature-settings:"tnum" 0;
   }
+  body.product-atmosphere{
+    isolation:isolate;
+  }
+  body.product-atmosphere > *{
+    position:relative; z-index:1;
+  }
+  body.product-atmosphere::before{
+    content:""; position:fixed; inset:-54px; z-index:0; pointer-events:none;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--paper) 20%, transparent), var(--paper) 92%),
+      var(--product-bg) center top / cover no-repeat;
+    filter:blur(18px) saturate(1.24) contrast(1.08);
+    opacity:var(--product-bg-opacity, .34);
+    transform:scale(1.07);
+  }
+  body.product-atmosphere::after{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--paper) 46%, transparent) 0%, var(--paper) 76%);
+  }
+  body.theme-dark.product-atmosphere::before{
+    filter:blur(16px) saturate(1.28) contrast(1.1);
+    opacity:var(--product-bg-opacity, .42);
+  }
+  body.theme-dark.product-atmosphere::after{
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--paper) 22%, transparent) 0%, var(--paper) 76%);
+  }
   img,svg{max-width:100%; display:block}
   a{color:inherit}
   h1,h2,h3{margin:0; text-wrap:balance}
@@ -279,6 +307,31 @@
 
   /* ── 히어로 ─────────────────────────────────────────────────── */
   .hero{position:relative; overflow:hidden; padding-top:clamp(56px, 7vw, 96px)}
+  body.product-atmosphere .hero::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--paper) 78%, transparent) 0%, color-mix(in srgb, var(--paper) 42%, transparent) 44%, color-mix(in srgb, var(--paper) 84%, transparent) 100%),
+      linear-gradient(180deg, color-mix(in srgb, var(--paper) 22%, transparent), var(--paper) 92%),
+      var(--product-bg) center / cover no-repeat;
+    filter:blur(8px) saturate(1.28) contrast(1.06);
+    opacity:var(--product-hero-bg-opacity, .62);
+    transform:scale(1.03);
+  }
+  body.theme-dark.product-atmosphere .hero::before{
+    opacity:var(--product-hero-bg-opacity, .72);
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--paper) 68%, transparent) 0%, color-mix(in srgb, var(--paper) 28%, transparent) 46%, color-mix(in srgb, var(--paper) 74%, transparent) 100%),
+      linear-gradient(180deg, color-mix(in srgb, var(--paper) 18%, transparent), var(--paper) 92%),
+      var(--product-bg) center / cover no-repeat;
+  }
+  /* 히어로에 사진이 깔리면 --ink-3(가장 흐린 글자색)이 4.5:1 을 못 넘는다.
+     실측(2026-09-14, 각 페이지 실제 배치에서 합성 휘도를 계산):
+       눈썹 — SoundField 2.75 · Bus Routing 3.69 · Stereo 4.49 (전부 미달/경계)
+       plat--soon(macOS 개발 중) — 4.13 미달
+     눈썹은 --ink-2 로 바꿔도 3.90 이라 모자라서 --ink 까지 올린다.
+     ⚠ 사진 농도를 낮춰서 해결하지 말 것 — 그러면 여백에 사진을 깐 의미가 없다. */
+  body.product-atmosphere .hero .eyebrow{ color:var(--ink) }
+  body.product-atmosphere .hero .plat--soon{ color:var(--ink-2) }
   /* 은은한 배경 번짐. 움직임 ① — 정보가 아니라 분위기다.
      ⚠ 느리게(24초) · 흐리게(90px) 유지할 것. 빠르거나 진해지면 글자를 방해한다. */
   .aura{position:absolute; inset:-20% -10% auto -10%; height:120%; pointer-events:none; z-index:0}
