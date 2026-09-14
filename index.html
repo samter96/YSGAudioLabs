@@ -186,21 +186,19 @@
   }
   .tool-points{
     display:grid; grid-template-columns:repeat(3,minmax(74px,1fr));
-    gap:8px; margin-top:13px; max-width:440px;
+    gap:14px; margin-top:15px; max-width:460px;
   }
   .tool-point{
-    min-width:0; min-height:70px; padding:8px 8px;
-    border:1px solid color-mix(in srgb, var(--key) 22%, rgba(255,255,255,.64));
-    border-radius:13px; background:rgba(255,255,255,.58);
-    box-shadow:0 10px 24px -20px color-mix(in srgb, var(--key) 60%, transparent);
-    backdrop-filter:blur(8px) saturate(130%);
+    min-width:0; min-height:70px; padding:0;
+    background:transparent; border:0; box-shadow:none;
   }
   .tool-point svg{
-    width:28px; height:28px; color:var(--key); stroke:currentColor;
-    fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;
+    width:42px; height:42px; color:var(--key); stroke:currentColor;
+    fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
+    filter:drop-shadow(0 10px 16px color-mix(in srgb, var(--key) 24%, transparent));
   }
   .tool-point span{
-    display:block; margin-top:5px; font-size:11.5px; font-weight:800;
+    display:block; margin-top:7px; font-size:11.5px; font-weight:800;
     line-height:1.35; color:var(--ink); letter-spacing:-.02em; word-break:keep-all;
   }
   .tool--featured .tool-points{max-width:520px}
@@ -507,9 +505,9 @@
           <h2 class="tool__name">YSGSpatialRenderer</h2>
           <p data-en="Wwise audio objects rendered binaurally through HRTFs, with near-field, directivity, early reflections and diffraction in one pipeline.">Wwise 오디오 오브젝트를 머리 전달 함수로 바이노럴 렌더링하고, 근접장·지향성·초기 반사·회절까지 한 파이프라인에서 처리합니다.</p>
           <div class="tool-points" aria-label="YSGSpatialRenderer 주요 지원 기능">
-            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 18c3-9 17-9 20 0"/><path d="M8 18c3 9 17 9 20 0"/><circle cx="18" cy="18" r="4"/><path d="M4 18h5M27 18h5"/></svg><span data-en="Binaural preview">바이노럴 프리뷰</span></div>
-            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 26V10l11-5 11 5v16l-11 5z"/><path d="M18 5v26M7 10l11 6 11-6"/><path d="M11 24c4-3 10-3 14 0"/></svg><span data-en="Per-object metadata">오브젝트별 메타데이터</span></div>
-            <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M9 27c5-2 13-2 18 0"/><path d="M11 22c4-2 10-2 14 0"/><path d="M13 17c3-2 7-2 10 0"/><path d="M8 10h20M8 10l4 4M28 10l-4 4"/></svg><span data-en="Reflection check">반사 검수</span></div>
+            <div class="tool-point"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 17c4.2 0 7 3.2 7 7.6 0 4.6-2.8 8.4-7 8.4s-7-3.8-7-8.4c0-4.4 2.8-7.6 7-7.6z"/><path d="M17 25c-4-1.6-7.5-1.1-10.5 1.5"/><path d="M31 25c4-1.6 7.5-1.1 10.5 1.5"/><path d="M12 16c5-5 19-5 24 0"/><path d="M12 35c5 5 19 5 24 0"/><circle cx="24" cy="8" r="1.9" fill="currentColor" stroke="none"/><circle cx="39" cy="16" r="1.9" fill="currentColor" stroke="none"/><circle cx="40" cy="34" r="1.9" fill="currentColor" stroke="none"/><circle cx="9" cy="27" r="1.9" fill="currentColor" stroke="none"/></svg><span data-en="Front/back/elevation">앞뒤·상하 위치감</span></div>
+            <div class="tool-point"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 14c4.8 0 8 3.7 8 8.8 0 5.5-3.2 10.2-8 10.2s-8-4.7-8-10.2c0-5.1 3.2-8.8 8-8.8z"/><path d="M14 24c-4.2 0-7.4-2-9-5.4"/><path d="M34 24c4.2 0 7.4-2 9-5.4"/><path d="M13 30c-3.4.2-5.9 1.6-7.6 4.2"/><path d="M35 30c3.4.2 5.9 1.6 7.6 4.2"/><path d="M18 11c3.4-4.2 8.6-4.2 12 0"/><path d="M20 37c2.5 1.4 5.5 1.4 8 0"/></svg><span data-en="HRTF cues">HRTF 단서</span></div>
+            <div class="tool-point"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="4"/><path d="M24 7v5M24 36v5M7 24h5M36 24h5"/><path d="M12 12c8-6 16-6 24 0"/><path d="M12 36c8 6 16 6 24 0"/><path d="M9 31c8-4 22-4 30 0"/><path d="M9 17c8 4 22 4 30 0"/><circle cx="35" cy="13" r="1.7" fill="currentColor" stroke="none"/><circle cx="14" cy="34" r="1.7" fill="currentColor" stroke="none"/></svg><span data-en="Distance/reflection">거리·반사감</span></div>
           </div>
           <div class="tool__foot">
             <span class="tool__status" data-en="in development">개발 중</span>
