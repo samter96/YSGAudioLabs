@@ -108,20 +108,19 @@
     if(!dlg.__ysgDialogReady){
       dlg.__ysgDialogReady = true;
       dlg.addEventListener('click', function(e){
-        if(e.target === dlg){ dlg.close(); }
+        if(e.target === dlg){ dlg.hidden = true; }
       });
       dlg.querySelectorAll('[data-dialog-close]').forEach(function(close){
-        close.addEventListener('click', function(){ dlg.close(); btn.focus({preventScroll:true}); });
+        close.addEventListener('click', function(){ dlg.hidden = true; btn.focus({preventScroll:true}); });
+      });
+      dlg.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){ dlg.hidden = true; btn.focus({preventScroll:true}); }
       });
     }
-    if(!dlg.open){
+    if(dlg.hidden){
       var sx = window.scrollX;
       var sy = window.scrollY;
-      if(typeof dlg.showModal === 'function'){
-        dlg.showModal();
-      }else{
-        dlg.setAttribute('open', '');
-      }
+      dlg.hidden = false;
       var close = dlg.querySelector('[data-dialog-close]');
       if(close){ close.focus({preventScroll:true}); }
       window.scrollTo(sx, sy);

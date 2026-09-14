@@ -303,18 +303,23 @@
   }
   .developer-topbtn:hover,
   .developer-topbtn:focus-visible{color:var(--ink); background:var(--tint-2)}
-  .developer-dialog{
-    width:min(780px, calc(100vw - 34px)); max-height:calc(100vh - 72px);
-    padding:0; border:0; background:transparent; overflow:visible;
-  }
-  .developer-dialog::backdrop{
-    background:rgba(20,24,43,.34);
+  body.hub-page > .developer-dialog{
+    position:fixed; inset:0; z-index:120; margin:0;
+    width:100vw; max-width:none; height:100vh; max-height:none;
+    padding:17px; border:0; background:rgba(20,24,43,.34);
     backdrop-filter:blur(10px) saturate(125%);
+    overflow:auto; place-items:center;
+  }
+  body.hub-page > .developer-dialog[hidden]{display:none}
+  body.hub-page > .developer-dialog:not([hidden]){display:grid}
+  body.hub-page > .developer-dialog::backdrop{
+    background:transparent;
   }
   .developer-card{
     position:relative;
     display:grid; grid-template-columns:minmax(220px, 310px) minmax(0,1fr);
     gap:clamp(26px,4vw,58px); align-items:center;
+    width:min(780px, 100%); max-height:calc(100vh - 34px); overflow:auto;
     padding:clamp(22px,3.2vw,38px);
     border:1px solid rgba(155,161,226,.42); border-radius:var(--r);
     background:
@@ -369,14 +374,15 @@
     font-size:13px; font-weight:800;
   }
   .developer-mail{
-    display:inline-flex; align-items:center; min-height:36px; margin-top:16px; padding:0 14px;
-    border-radius:999px; border:1px solid rgba(155,161,226,.52);
-    background:rgba(255,255,255,.72); color:var(--ink);
-    font-size:13.5px; font-weight:800; text-decoration:none;
-    box-shadow:0 12px 28px -22px rgba(27,34,51,.38);
+    display:inline-flex; align-items:center; gap:9px; margin-top:16px;
+    color:var(--ink-2); font-size:14px; font-weight:700; text-decoration:none;
   }
   .developer-mail:hover,
-  .developer-mail:focus-visible{border-color:var(--line-2); color:color-mix(in srgb, var(--key) 72%, #111827)}
+  .developer-mail:focus-visible{color:color-mix(in srgb, var(--key) 72%, #111827)}
+  .developer-mail svg{
+    width:17px; height:17px; flex:0 0 17px; color:var(--key);
+    stroke:currentColor; fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;
+  }
   @media (max-width:1000px){
     .story-grid{grid-template-columns:1fr}
     .build-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -391,7 +397,6 @@
     .tool--featured{grid-column:span 1}
     .developer-card{grid-template-columns:1fr}
     .developer-photo{max-width:280px}
-    .developer-dialog{max-height:calc(100vh - 34px); overflow:auto}
     .developer-topbtn{padding-inline:10px; font-size:13px}
   }
   @media (max-width:560px){
@@ -439,7 +444,7 @@
   </div>
 </header>
 
-<dialog id="developer-dialog" class="developer-dialog" aria-labelledby="developer-dialog-title">
+<div id="developer-dialog" class="developer-dialog" role="dialog" aria-modal="true" aria-labelledby="developer-dialog-title" hidden>
   <article class="developer-card">
     <button class="developer-close" type="button" data-dialog-close aria-label="닫기">×</button>
     <figure class="developer-photo">
@@ -459,10 +464,13 @@
         <span data-en="Recording studio workflow">레코딩 스튜디오 워크플로우</span>
         <span data-en="Wwise pipeline tools">Wwise 파이프라인 도구</span>
       </div>
-      <a class="developer-mail" href="mailto:samter96@naver.com">samter96@naver.com</a>
+      <a class="developer-mail" href="mailto:samter96@naver.com" aria-label="이메일 samter96@naver.com">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        <span>samter96@naver.com</span>
+      </a>
     </div>
   </article>
-</dialog>
+</div>
 
   <!-- 박스 렌더용 필터·그라디언트를 **한 벌만** 정의한다.
       ⚠ 카드마다 정의하면 같은 id 가 여러 개가 되어 첫 번째만 적용된다. -->
