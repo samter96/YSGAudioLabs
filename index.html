@@ -41,21 +41,21 @@
   body.hub-page::before{
     content:""; position:fixed; inset:-2vw; z-index:0; pointer-events:none;
     background:
-      linear-gradient(180deg, rgba(247,247,252,.3), rgba(247,247,252,.44) 44%, rgba(247,247,252,.62)),
+      linear-gradient(180deg, rgba(247,247,252,.18), rgba(247,247,252,.3) 44%, rgba(247,247,252,.48)),
       url("assets/hub-fixed-audio-lab-bg.png") center / cover no-repeat;
-    filter:saturate(1.08) contrast(1.06);
+    filter:saturate(1.1) contrast(1.08);
     transform:scale(1.02);
   }
   body.hub-page::after{
     content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
     background:
       radial-gradient(circle at 16% 18%, rgba(58,69,194,.12), transparent 34%),
-      linear-gradient(90deg, rgba(247,247,252,.48), rgba(247,247,252,.12) 48%, rgba(247,247,252,.5));
+      linear-gradient(90deg, rgba(247,247,252,.32), rgba(247,247,252,.06) 48%, rgba(247,247,252,.36));
   }
   body.hub-page > *{position:relative; z-index:1}
   body.hub-page .topbar{
     background:
-      linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.56), rgba(255,255,255,.82)),
+      linear-gradient(90deg, rgba(255,255,255,.72), rgba(255,255,255,.48), rgba(255,255,255,.76)),
       url("assets/hub-topbar-audio-lab.png") center / cover no-repeat;
     backdrop-filter:blur(8px) saturate(145%);
   }
@@ -68,16 +68,16 @@
   body.hub-page .hero::before{
     content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
     background:
-      radial-gradient(circle at 50% 38%, rgba(255,255,255,.82), rgba(255,255,255,.5) 30%, rgba(255,255,255,.12) 54%, transparent 74%),
-      linear-gradient(90deg, rgba(247,247,252,.58), rgba(247,247,252,.2) 44%, rgba(247,247,252,.56)),
-      linear-gradient(180deg, rgba(247,247,252,.24), rgba(247,247,252,.68) 88%),
+      radial-gradient(circle at 50% 38%, rgba(255,255,255,.72), rgba(255,255,255,.38) 30%, rgba(255,255,255,.06) 54%, transparent 74%),
+      linear-gradient(90deg, rgba(247,247,252,.42), rgba(247,247,252,.12) 44%, rgba(247,247,252,.42)),
+      linear-gradient(180deg, rgba(247,247,252,.14), rgba(247,247,252,.52) 88%),
       url("assets/hub-hero-audio-lab.png") center / cover no-repeat;
     filter:saturate(1.04) contrast(1.04);
     transform:scale(1.01);
   }
   body.hub-page .hero::after{
     content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:linear-gradient(180deg, rgba(247,247,252,.08), rgba(247,247,252,.68) 94%);
+    background:linear-gradient(180deg, rgba(247,247,252,.04), rgba(247,247,252,.52) 94%);
   }
   body.hub-page .hero .wrap{position:relative; z-index:1}
   body.hub-page .hero .aura{display:none}
@@ -91,7 +91,7 @@
     box-shadow:0 10px 26px -20px rgba(27,34,51,.34);
   }
   body.hub-page .band{
-    background:rgba(247,247,252,.48);
+    background:rgba(247,247,252,.36);
     backdrop-filter:blur(2px) saturate(118%);
   }
 
@@ -128,8 +128,8 @@
     background:
       radial-gradient(circle at 16% 38%, color-mix(in srgb, var(--key) 20%, transparent), transparent 44%),
       var(--product-bg) center / cover no-repeat;
-    filter:blur(18px) saturate(1.25) brightness(1.18);
-    opacity:1; transform:scale(1.06);
+    filter:blur(14px) saturate(1.22) brightness(1.12);
+    opacity:1; transform:scale(1.045);
   }
   /* 옅게 덮는 곳은 **글자·버튼이 실제로 놓인 사각형뿐**이다. 실측(카드 대비):
      글자 블록은 x 41.2~88.6% · y 16.9~84.1% 안에 들어온다.
