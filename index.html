@@ -34,6 +34,65 @@
   /* 폰트 경로가 한 단계 얕다 (허브는 루트에 있다) — @font-face 는 스타일시트
      기준이라 그대로 동작한다. 여기서 다시 선언하지 말 것. */
 
+  body.hub-page{
+    background:#f1f2f7;
+    isolation:isolate;
+  }
+  body.hub-page::before{
+    content:""; position:fixed; inset:-2vw; z-index:0; pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(247,247,252,.42), rgba(247,247,252,.62) 44%, rgba(247,247,252,.74)),
+      url("assets/hub-fixed-studio-bg.png") center / cover no-repeat;
+    filter:saturate(1.04) contrast(1.02);
+    transform:scale(1.02);
+  }
+  body.hub-page::after{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(circle at 16% 18%, rgba(58,69,194,.12), transparent 34%),
+      linear-gradient(90deg, rgba(247,247,252,.64), rgba(247,247,252,.22) 48%, rgba(247,247,252,.68));
+  }
+  body.hub-page > *{position:relative; z-index:1}
+  body.hub-page .topbar{
+    background:rgba(255,255,255,.68);
+    backdrop-filter:blur(18px) saturate(150%);
+  }
+  body.hub-page .hero{
+    min-height:clamp(560px, 68vh, 760px);
+    display:flex; align-items:center;
+    padding-block:clamp(96px, 10vw, 150px);
+    border-bottom:1px solid rgba(155,161,226,.36);
+  }
+  body.hub-page .hero::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(255,255,255,.88), rgba(255,255,255,.58) 30%, rgba(255,255,255,.2) 52%, transparent 72%),
+      linear-gradient(90deg, rgba(247,247,252,.72), rgba(247,247,252,.32) 44%, rgba(247,247,252,.74)),
+      linear-gradient(180deg, rgba(247,247,252,.42), rgba(247,247,252,.82) 88%),
+      url("assets/hub-hero-studio.png") center / cover no-repeat;
+    filter:saturate(.96) contrast(1.02);
+    transform:scale(1.01);
+  }
+  body.hub-page .hero::after{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(247,247,252,.18), rgba(247,247,252,.84) 94%);
+  }
+  body.hub-page .hero .wrap{position:relative; z-index:1}
+  body.hub-page .hero .aura{display:none}
+  body.hub-page .hero__sub{
+    color:#555f74;
+    text-shadow:0 1px 12px rgba(255,255,255,.7);
+  }
+  body.hub-page .hero .chip{
+    background:rgba(255,255,255,.74);
+    backdrop-filter:blur(10px) saturate(150%);
+    box-shadow:0 10px 26px -20px rgba(27,34,51,.34);
+  }
+  body.hub-page .band{
+    background:rgba(247,247,252,.58);
+    backdrop-filter:blur(4px) saturate(120%);
+  }
+
   .tools{
     display:grid; grid-template-columns:1fr; gap:24px;
     margin-top:clamp(40px,5vw,64px);
@@ -171,7 +230,7 @@
   }
 </style>
 </head>
-<body>
+<body class="hub-page">
 
 <header class="topbar">
   <div class="topbar__in">
