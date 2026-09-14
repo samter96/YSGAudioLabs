@@ -368,6 +368,15 @@
     background:rgba(255,255,255,.66); color:var(--ink-2);
     font-size:13px; font-weight:800;
   }
+  .developer-mail{
+    display:inline-flex; align-items:center; min-height:36px; margin-top:16px; padding:0 14px;
+    border-radius:999px; border:1px solid rgba(155,161,226,.52);
+    background:rgba(255,255,255,.72); color:var(--ink);
+    font-size:13.5px; font-weight:800; text-decoration:none;
+    box-shadow:0 12px 28px -22px rgba(27,34,51,.38);
+  }
+  .developer-mail:hover,
+  .developer-mail:focus-visible{border-color:var(--line-2); color:color-mix(in srgb, var(--key) 72%, #111827)}
   @media (max-width:1000px){
     .story-grid{grid-template-columns:1fr}
     .build-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -450,6 +459,7 @@
         <span data-en="Recording studio workflow">레코딩 스튜디오 워크플로우</span>
         <span data-en="Wwise pipeline tools">Wwise 파이프라인 도구</span>
       </div>
+      <a class="developer-mail" href="mailto:samter96@naver.com">samter96@naver.com</a>
     </div>
   </article>
 </dialog>

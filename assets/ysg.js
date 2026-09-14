@@ -115,6 +115,8 @@
       });
     }
     if(!dlg.open){
+      var sx = window.scrollX;
+      var sy = window.scrollY;
       if(typeof dlg.showModal === 'function'){
         dlg.showModal();
       }else{
@@ -122,6 +124,7 @@
       }
       var close = dlg.querySelector('[data-dialog-close]');
       if(close){ close.focus({preventScroll:true}); }
+      window.scrollTo(sx, sy);
     }
   });
 
