@@ -96,15 +96,14 @@
   }
 
   .tools{
-    display:grid; grid-template-columns:1fr; gap:24px;
-    margin-top:clamp(40px,5vw,64px);
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px;
+    margin-top:clamp(34px,4vw,54px);
   }
   .tool{
     position:relative; display:grid;
-    grid-template-columns:minmax(240px, 360px) minmax(420px, 640px);
-    gap:clamp(34px,4.6vw,72px);
-    align-items:center; padding:clamp(20px,2.4vw,30px);
-    justify-content:center;
+    grid-template-columns:minmax(118px, 178px) minmax(0,1fr);
+    gap:clamp(18px,2.4vw,30px);
+    align-items:center; padding:clamp(18px,2.2vw,26px);
     background:#fff; border:1px solid var(--line); border-radius:var(--r);
     box-shadow:var(--shadow); overflow:hidden;
     transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s;
@@ -165,7 +164,8 @@
     background:linear-gradient(90deg, var(--key), var(--key-2));
   }
   .tool--featured{
-    grid-template-columns:minmax(280px, 380px) minmax(440px, 620px);
+    grid-column:span 2;
+    grid-template-columns:minmax(220px, 320px) minmax(0,1fr);
   }
   /* 눈썹 — 사진 베일 위라서 키컬러 원색은 3.37~4.62:1 로 모자란다.
      72% 만 남기고 어둡게 섞으면 5.20~6.62:1 (2026-09-14 실측). */
@@ -175,16 +175,16 @@
     color:color-mix(in srgb, var(--key) 72%, #0d1117);
   }
   .tool__name{
-    font-size:clamp(19px,2.1vw,26px); font-weight:800; letter-spacing:-.03em;
+    font-size:clamp(18px,1.8vw,24px); font-weight:800; letter-spacing:-.03em;
     margin-top:8px;
   }
-  .tool--featured .tool__name{font-size:clamp(24px,3vw,36px)}
+  .tool--featured .tool__name{font-size:clamp(23px,2.7vw,34px)}
   .tool__body{min-width:0}
   .tool__body p{
-    margin:12px 0 0; font-size:15.5px; color:var(--ink-2);
-    line-height:1.75; max-width:56ch; word-break:keep-all;
+    margin:10px 0 0; font-size:14.5px; color:var(--ink-2);
+    line-height:1.68; max-width:52ch; word-break:keep-all;
   }
-  .tool__foot{display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:22px}
+  .tool__foot{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:18px}
   /* 상태칩 — 사진 위에서 --ink-3 는 3.73:1 밖에 안 나온다.
      알약에 흰 배경을 깔아 제 바닥을 만들면 4.63:1 (2026-09-14 실측). */
   .tool__status{
@@ -194,10 +194,10 @@
     background:rgba(255,255,255,.7);
   }
   .tool .btnrow{margin-top:0}
-  .tool .btn{height:42px; padding:0 20px; font-size:14px}
+  .tool .btn{height:40px; padding:0 18px; font-size:13.5px}
   .tool__badge{
     position:relative; display:block; align-self:center;
-    width:min(236px,100%); aspect-ratio:1; border-radius:22px;
+    width:min(178px,100%); aspect-ratio:1; border-radius:20px;
     overflow:hidden; background:#080b12; border:1px solid rgba(255,255,255,.18);
     box-shadow:0 24px 48px -24px rgba(27,34,51,.34), 0 0 0 1px rgba(20,28,45,.08);
   }
@@ -207,15 +207,92 @@
     mix-blend-mode:screen; opacity:.35;
   }
   .tool__badge img{display:block; width:100%; height:100%; object-fit:cover}
-  .tool--featured .tool__badge{width:100%; justify-self:end}
+  .tool--featured .tool__badge{width:min(270px,100%); justify-self:end}
+  .story-grid{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(24px,4vw,54px);
+    align-items:start; margin-top:clamp(34px,4vw,56px);
+  }
+  .story-copy{
+    position:relative; padding:clamp(24px,3vw,38px);
+    border:1px solid rgba(155,161,226,.42); border-radius:var(--r);
+    background:rgba(255,255,255,.68); backdrop-filter:blur(10px) saturate(140%);
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .story-copy::before{
+    content:""; position:absolute; inset:-40px -20px auto auto; width:190px; height:190px;
+    border-radius:50%; background:radial-gradient(circle, rgba(58,69,194,.2), transparent 68%);
+    pointer-events:none;
+  }
+  .story-copy h2{position:relative; margin-top:14px}
+  .story-copy p{
+    position:relative; margin:18px 0 0; color:var(--ink-2);
+    font-size:16px; line-height:1.78; word-break:keep-all;
+  }
+  .practice-list{display:grid; gap:14px}
+  .practice-card{
+    position:relative; padding:20px 22px 20px 58px; min-height:118px;
+    border:1px solid rgba(155,161,226,.42); border-radius:var(--r);
+    background:rgba(255,255,255,.72); backdrop-filter:blur(10px) saturate(140%);
+    box-shadow:0 14px 32px -24px rgba(27,34,51,.32);
+  }
+  .practice-card b{
+    position:absolute; left:18px; top:20px; width:28px; height:28px; border-radius:50%;
+    display:grid; place-items:center; color:#fff; font-size:12px; font-weight:800;
+    background:linear-gradient(135deg, var(--key), var(--key-grad));
+  }
+  .practice-card h3{font-size:17px; line-height:1.35; letter-spacing:-.02em}
+  .practice-card p{
+    margin:8px 0 0; color:var(--ink-2); font-size:14.5px; line-height:1.64;
+    word-break:keep-all;
+  }
+  .build-strip{
+    display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px;
+    margin-top:clamp(34px,4vw,56px); overflow:hidden; border-radius:var(--r);
+    border:1px solid rgba(155,161,226,.44); background:rgba(155,161,226,.44);
+    box-shadow:var(--shadow);
+  }
+  .build-step{
+    min-height:210px; padding:24px 22px; background:rgba(255,255,255,.72);
+    backdrop-filter:blur(10px) saturate(140%);
+  }
+  .build-step span{
+    display:inline-flex; align-items:center; height:27px; padding:0 10px;
+    border-radius:999px; font-size:11px; font-weight:800; letter-spacing:.12em;
+    color:color-mix(in srgb, var(--key) 76%, #111827);
+    background:rgba(255,255,255,.72); border:1px solid rgba(155,161,226,.48);
+  }
+  .build-step h3{margin-top:22px; font-size:18px; letter-spacing:-.02em}
+  .build-step p{
+    margin:10px 0 0; color:var(--ink-2); font-size:14.5px; line-height:1.68;
+    word-break:keep-all;
+  }
+  .tool-summary{
+    display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
+    margin-top:clamp(28px,3vw,40px);
+  }
+  .summary-card{
+    padding:20px 22px; border-radius:var(--r);
+    border:1px solid rgba(155,161,226,.38); background:rgba(255,255,255,.66);
+    backdrop-filter:blur(8px) saturate(130%);
+  }
+  .summary-card strong{display:block; font-size:22px; line-height:1; letter-spacing:-.03em}
+  .summary-card span{display:block; margin-top:9px; color:var(--ink-2); font-size:14px; line-height:1.55}
   @media (max-width:1000px){
-    .tool,
-    .tool--featured{grid-template-columns:minmax(220px, 320px) minmax(0,1fr); justify-content:start}
+    .story-grid{grid-template-columns:1fr}
+    .build-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .tool-summary{grid-template-columns:1fr}
+    .tool{grid-template-columns:minmax(132px, 190px) minmax(0,1fr)}
+    .tool--featured{grid-template-columns:minmax(180px, 240px) minmax(0,1fr)}
     .tool__body p{max-width:48ch}
+  }
+  @media (max-width:860px){
+    .tools{grid-template-columns:1fr}
+    .tool--featured{grid-column:span 1}
   }
   @media (max-width:560px){
     .tool{grid-template-columns:1fr}
     .tool--featured{grid-template-columns:1fr}
+    .build-strip{grid-template-columns:1fr}
     .tool .pkg{max-width:200px}
     .tool__badge{max-width:220px}
     /* 1열이 되면 글자가 이미지 **아래**로 내려간다. 실측: 글자 블록이
@@ -244,6 +321,8 @@
       <span class="brand__name">YSG Audio Tools</span>
     </a>
     <nav class="navlinks" aria-label="페이지 섹션">
+      <a href="#practice" data-en="Practice">실무</a>
+      <a href="#build" data-en="Build">구현</a>
       <a href="#tools" data-en="Tools">툴</a>
     </nav>
     <button class="langswitch" type="button" aria-label="언어 전환" aria-pressed="false"><span class="ko">KO</span><span class="en">EN</span></button>
@@ -306,11 +385,92 @@
     </div>
   </section>
 
+  <section id="practice">
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="story-copy rise">
+          <span class="eyebrow" data-en="Why it exists">왜 만들었나</span>
+          <h2 class="h2" data-en="Small tools for the moments that slow game sound work down">게임 사운드 작업이 멈추는 지점을 작게 쪼갰습니다</h2>
+          <p data-en="A sound designer does not only create sounds. They search through libraries, audition spatial intent, check routing, catch phase problems, and verify Wwise settings before a build goes out. YSG Audio Tools is a set of focused utilities for those repeated checks.">
+            사운드 디자이너의 일은 소리를 만드는 것에서 끝나지 않습니다. 라이브러리를 뒤지고, 공간 의도를 확인하고, 라우팅과 위상을 점검하고, 빌드 전에 Wwise 설정까지 확인해야 합니다. YSG Audio Tools는 그 반복되는 검수 지점을 작게 나눈 실무형 도구 모음입니다.
+          </p>
+        </div>
+        <div class="practice-list">
+          <article class="practice-card rise">
+            <b>01</b>
+            <h3 data-en="Find the right sound without leaving the flow">흐름을 끊지 않고 소리를 찾기</h3>
+            <p data-en="SoundField is built around fast search, immediate audition, and the export moments that follow selection.">
+              SoundField는 빠른 검색, 즉시 오디션, 선택 이후의 익스포트까지 한 흐름으로 이어지도록 만들었습니다.
+            </p>
+          </article>
+          <article class="practice-card rise">
+            <b>02</b>
+            <h3 data-en="Hear spatial decisions before they become bugs">공간 설정을 버그가 되기 전에 듣기</h3>
+            <p data-en="SpatialRenderer keeps binaural preview, HRTF context, and reflection checks close to the Wwise authoring workflow.">
+              SpatialRenderer는 바이노럴 프리뷰, HRTF 맥락, 반사 검수를 Wwise 작업 흐름 가까이에 둡니다.
+            </p>
+          </article>
+          <article class="practice-card rise">
+            <b>03</b>
+            <h3 data-en="Audit quiet setup mistakes at project scale">조용히 숨어 있는 설정 실수를 프로젝트 단위로 검수하기</h3>
+            <p data-en="The auditor tools scan for routing, attenuation, stereo and phase problems that are easy to miss by manual inspection.">
+              오디터 계열은 손으로 훑기 어려운 라우팅, 감쇠, 스테레오/위상 문제를 한 번에 드러내는 쪽에 집중했습니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="build" class="band">
+    <div class="wrap">
+      <div class="rise">
+        <span class="eyebrow" data-en="How it is built">어떻게 만들었나</span>
+        <h2 class="h2" data-en="Standalone, local-first tools that sit beside Wwise">Wwise 옆에서 바로 쓰는 로컬 우선 standalone 툴</h2>
+      </div>
+      <div class="build-strip">
+        <article class="build-step rise">
+          <span>LOCAL</span>
+          <h3 data-en="Local processing first">로컬 처리 우선</h3>
+          <p data-en="Large sound libraries and project data stay on the workstation. The tools are packaged as desktop utilities so checks can run beside daily authoring work.">
+            대용량 사운드 라이브러리와 프로젝트 데이터는 작업 PC에 둔 채 처리합니다. 매일 쓰는 제작 환경 옆에서 바로 돌릴 수 있도록 데스크톱 유틸리티로 패키징했습니다.
+          </p>
+        </article>
+        <article class="build-step rise">
+          <span>WWISE</span>
+          <h3 data-en="WAAPI-aware auditing">WAAPI 기반 검수</h3>
+          <p data-en="Where Wwise structure matters, the tools read hierarchy, Work Unit context, buses and object settings instead of relying on loose naming alone.">
+            Wwise 구조가 중요한 곳에서는 이름만 보지 않고 Hierarchy, Work Unit, 버스, 오브젝트 설정을 함께 읽어 판단합니다.
+          </p>
+        </article>
+        <article class="build-step rise">
+          <span>AUDIO</span>
+          <h3 data-en="Audio-specific views">오디오 전용 시각화</h3>
+          <p data-en="Waveforms, routing maps, heatmaps and spatial previews are designed around decisions sound designers actually make.">
+            파형, 라우팅 맵, 히트맵, 공간 프리뷰는 사운드 디자이너가 실제로 판단하는 단위에 맞춰 설계했습니다.
+          </p>
+        </article>
+        <article class="build-step rise">
+          <span>POC</span>
+          <h3 data-en="Built from production-side POCs">POC에서 실무 도구로</h3>
+          <p data-en="Each tool started from a narrow production pain point, then grew into a repeatable workflow with installers, product pages and focused UI.">
+            각 툴은 좁은 실무 문제에서 시작했고, 인스톨러와 제품 페이지, 전용 UI를 갖춘 반복 가능한 워크플로우로 다듬었습니다.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section id="tools" class="band">
     <div class="wrap">
       <div class="rise">
-        <span class="eyebrow" data-en="The tools">툴 목록</span>
-        <h2 class="h2" data-en="What each tool does">각 툴이 하는 일</h2>
+        <span class="eyebrow" data-en="The toolkit">툴킷 구성</span>
+        <h2 class="h2" data-en="Five tools, grouped around the work they remove">반복 작업을 줄이는 다섯 개의 도구</h2>
+        <div class="tool-summary">
+          <div class="summary-card rise"><strong>Search</strong><span data-en="Library discovery, audition and export are handled by SoundField.">라이브러리 탐색, 오디션, 익스포트는 SoundField가 맡습니다.</span></div>
+          <div class="summary-card rise"><strong>Render</strong><span data-en="Spatial decisions are previewed through the SpatialRenderer pipeline.">공간 판단은 SpatialRenderer 파이프라인에서 미리 확인합니다.</span></div>
+          <div class="summary-card rise"><strong>Audit</strong><span data-en="Stereo, routing and attenuation checks catch mistakes before review.">스테레오, 라우팅, 감쇠 검수는 리뷰 전에 조용한 실수를 잡아냅니다.</span></div>
+        </div>
       </div>
       <div class="tools">
       <article class="tool tool--featured rise" style="--product-bg:url('spatial-renderer/assets/v2/product-box.png'); --key:#6b3ce0; --key-2:#a83ad0; --key-grad:#8b34c8;
