@@ -98,6 +98,33 @@
   var y = document.getElementById('year');
   if(y){ y.textContent = '© ' + new Date().getFullYear() + ' YSG Audio Tools'; }
 
+  /* 상단바 개발자 소개 — 본문 섹션이 아니라 작은 창으로 띄운다. */
+  document.addEventListener('click', function(ev){
+    var btn = ev.target.closest('[data-dialog-open]');
+    if(!btn) return;
+    var dlg = document.getElementById(btn.getAttribute('data-dialog-open'));
+    if(!dlg) return;
+    ev.preventDefault();
+    if(!dlg.__ysgDialogReady){
+      dlg.__ysgDialogReady = true;
+      dlg.addEventListener('click', function(e){
+        if(e.target === dlg){ dlg.close(); }
+      });
+      dlg.querySelectorAll('[data-dialog-close]').forEach(function(close){
+        close.addEventListener('click', function(){ dlg.close(); btn.focus({preventScroll:true}); });
+      });
+    }
+    if(!dlg.open){
+      if(typeof dlg.showModal === 'function'){
+        dlg.showModal();
+      }else{
+        dlg.setAttribute('open', '');
+      }
+      var close = dlg.querySelector('[data-dialog-close]');
+      if(close){ close.focus({preventScroll:true}); }
+    }
+  });
+
   /* KO / EN — `data-en` 속성 하나로 끝낸다.
      이전 판은 선택자→영문 문자열 표를 86KB JS 로 들고 있어서, 마크업을 조금만
      고쳐도 번역이 조용히 어긋났다. */
