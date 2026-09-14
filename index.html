@@ -64,21 +64,36 @@
        흰 알약 배경을 준다 — 색을 바꾸는 대신 사진을 덮지 않기 위한 선택이다. */
   .tool::before{
     content:""; position:absolute; inset:-34px; z-index:0; pointer-events:none;
-    background:var(--product-bg) center / cover no-repeat;
+    background:
+      radial-gradient(circle at 16% 38%, color-mix(in srgb, var(--key) 20%, transparent), transparent 44%),
+      var(--product-bg) center / cover no-repeat;
     filter:blur(18px) saturate(1.25) brightness(1.18);
     opacity:1; transform:scale(1.06);
   }
+  /* 옅게 덮는 곳은 **글자·버튼이 실제로 놓인 사각형뿐**이다. 실측(카드 대비):
+     글자 블록은 x 41.2~88.6% · y 16.9~84.1% 안에 들어온다.
+
+     그 사각형만 덮으려면 가로·세로 두 그라데이션의 **교집합**이 필요하다.
+     흰 베일을 두 장 겹치면 합집합이라 오히려 더 밝아지므로, 베일은 한 장만
+     깔고 마스크 두 장을 mask-composite:intersect 로 교차시킨다.
+     그 바깥 — 제품 이미지 둘레, 카드 네 변 — 은 사진이 그대로 보인다
+     (2026-09-14 사용자 지시: 글자 있는 데만 옅게, 나머지는 훨씬 짙게).
+
+     ⚠ 타원 한 장으로는 안 된다. 글자 칸 왼쪽 경계가 세로 직선이라 타원을
+       그 선에 맞추면 제품 이미지 옆 여백까지 같이 밝아진다 (먼저 해 보고 뺐다).
+     ⚠ mask-composite 를 모르는 브라우저는 기본값이 합집합이라 베일이 십자로
+       넓게 깔린다 — 사진만 덜 보일 뿐 글자는 그대로 읽힌다. 안전한 쪽으로 깨진다. */
   .tool::after{
     content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:
-      radial-gradient(circle at 18% 40%, color-mix(in srgb, var(--key) 16%, transparent), transparent 42%),
-      linear-gradient(90deg,
-        rgba(255,255,255,.34) 0%,
-        rgba(255,255,255,.42) 16%,
-        rgba(255,255,255,.62) 28%,
-        rgba(255,255,255,.84) 37%,
-        rgba(255,255,255,.86) 44%,
-        rgba(255,255,255,.86) 100%);
+    background:rgba(255,255,255,.86);
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 20%, #000 38%, #000 90%, rgba(0,0,0,.4) 100%),
+      linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, rgba(0,0,0,.3) 100%);
+    mask-image:
+      linear-gradient(90deg, transparent 20%, #000 38%, #000 90%, rgba(0,0,0,.4) 100%),
+      linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, rgba(0,0,0,.3) 100%);
+    -webkit-mask-composite:source-in;
+    mask-composite:intersect;
   }
   .tool > *{position:relative; z-index:1}
   .tool:hover{transform:translateY(-3px);
@@ -142,18 +157,16 @@
     .tool--featured{grid-template-columns:1fr}
     .tool .pkg{max-width:200px}
     .tool__badge{max-width:220px}
-    /* 1열이 되면 글자가 이미지 **아래**로 내려온다 (실측: 세로 53% 지점부터).
-       가로 램프는 맞지 않으니 세로로 바꾼다 — 여기서도 흰색으로 끝내지 않는다. */
+    /* 1열이 되면 글자가 이미지 **아래**로 내려간다. 실측: 글자 블록이
+       x 5.5~93.3% · y 53.2~96%. 그래서 아래쪽 절반만 덮고 위쪽(제품 이미지와
+       그 둘레)은 사진이 그대로 보이게 둔다. */
     .tool::after{
-      background:
-        radial-gradient(circle at 50% 22%, color-mix(in srgb, var(--key) 16%, transparent), transparent 46%),
-        linear-gradient(180deg,
-          rgba(255,255,255,.34) 0%,
-          rgba(255,255,255,.42) 22%,
-          rgba(255,255,255,.64) 38%,
-          rgba(255,255,255,.84) 48%,
-          rgba(255,255,255,.86) 54%,
-          rgba(255,255,255,.86) 100%);
+      -webkit-mask-image:
+        linear-gradient(90deg, rgba(0,0,0,.55) 0%, #000 4%, #000 96%, rgba(0,0,0,.55) 100%),
+        linear-gradient(180deg, transparent 0%, transparent 40%, #000 51%, #000 98%, rgba(0,0,0,.7) 100%);
+      mask-image:
+        linear-gradient(90deg, rgba(0,0,0,.55) 0%, #000 4%, #000 96%, rgba(0,0,0,.55) 100%),
+        linear-gradient(180deg, transparent 0%, transparent 40%, #000 51%, #000 98%, rgba(0,0,0,.7) 100%);
     }
   }
 </style>
