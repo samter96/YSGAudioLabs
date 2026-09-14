@@ -41,21 +41,23 @@
   body.hub-page::before{
     content:""; position:fixed; inset:-2vw; z-index:0; pointer-events:none;
     background:
-      linear-gradient(180deg, rgba(247,247,252,.42), rgba(247,247,252,.62) 44%, rgba(247,247,252,.74)),
-      url("assets/hub-fixed-studio-bg.png") center / cover no-repeat;
-    filter:saturate(1.04) contrast(1.02);
+      linear-gradient(180deg, rgba(247,247,252,.3), rgba(247,247,252,.44) 44%, rgba(247,247,252,.62)),
+      url("assets/hub-fixed-audio-lab-bg.png") center / cover no-repeat;
+    filter:saturate(1.08) contrast(1.06);
     transform:scale(1.02);
   }
   body.hub-page::after{
     content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
     background:
       radial-gradient(circle at 16% 18%, rgba(58,69,194,.12), transparent 34%),
-      linear-gradient(90deg, rgba(247,247,252,.64), rgba(247,247,252,.22) 48%, rgba(247,247,252,.68));
+      linear-gradient(90deg, rgba(247,247,252,.48), rgba(247,247,252,.12) 48%, rgba(247,247,252,.5));
   }
   body.hub-page > *{position:relative; z-index:1}
   body.hub-page .topbar{
-    background:rgba(255,255,255,.68);
-    backdrop-filter:blur(18px) saturate(150%);
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.56), rgba(255,255,255,.82)),
+      url("assets/hub-topbar-audio-lab.png") center / cover no-repeat;
+    backdrop-filter:blur(8px) saturate(145%);
   }
   body.hub-page .hero{
     min-height:clamp(560px, 68vh, 760px);
@@ -66,16 +68,16 @@
   body.hub-page .hero::before{
     content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
     background:
-      radial-gradient(circle at 50% 38%, rgba(255,255,255,.88), rgba(255,255,255,.58) 30%, rgba(255,255,255,.2) 52%, transparent 72%),
-      linear-gradient(90deg, rgba(247,247,252,.72), rgba(247,247,252,.32) 44%, rgba(247,247,252,.74)),
-      linear-gradient(180deg, rgba(247,247,252,.42), rgba(247,247,252,.82) 88%),
-      url("assets/hub-hero-studio.png") center / cover no-repeat;
-    filter:saturate(.96) contrast(1.02);
+      radial-gradient(circle at 50% 38%, rgba(255,255,255,.82), rgba(255,255,255,.5) 30%, rgba(255,255,255,.12) 54%, transparent 74%),
+      linear-gradient(90deg, rgba(247,247,252,.58), rgba(247,247,252,.2) 44%, rgba(247,247,252,.56)),
+      linear-gradient(180deg, rgba(247,247,252,.24), rgba(247,247,252,.68) 88%),
+      url("assets/hub-hero-audio-lab.png") center / cover no-repeat;
+    filter:saturate(1.04) contrast(1.04);
     transform:scale(1.01);
   }
   body.hub-page .hero::after{
     content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:linear-gradient(180deg, rgba(247,247,252,.18), rgba(247,247,252,.84) 94%);
+    background:linear-gradient(180deg, rgba(247,247,252,.08), rgba(247,247,252,.68) 94%);
   }
   body.hub-page .hero .wrap{position:relative; z-index:1}
   body.hub-page .hero .aura{display:none}
@@ -89,8 +91,8 @@
     box-shadow:0 10px 26px -20px rgba(27,34,51,.34);
   }
   body.hub-page .band{
-    background:rgba(247,247,252,.58);
-    backdrop-filter:blur(4px) saturate(120%);
+    background:rgba(247,247,252,.48);
+    backdrop-filter:blur(2px) saturate(118%);
   }
 
   .tools{
