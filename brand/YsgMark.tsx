@@ -1,4 +1,4 @@
-/* YSG Audio Tools 마크 — brand/build_brand.py 가 계산한 기하를 그대로 옮긴 것.
+/* YSG Audio Labs 마크 — brand/build_brand.py 가 계산한 기하를 그대로 옮긴 것.
    ⚠ 좌표를 손으로 고치지 말 것. brand/build_brand.py 를 고쳐 다시 생성한다
      (흑백·컬러·아이콘·모션이 모두 같은 기하를 공유한다).
 
