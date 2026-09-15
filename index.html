@@ -62,10 +62,15 @@
       url("assets/hub-topbar-audio-lab.png") center / cover no-repeat;
     backdrop-filter:blur(8px) saturate(145%);
   }
+  /* 위아래 여백을 줄였다 (2026-09-15). 락업이 들어오면서 내용이 226px 늘어
+     히어로가 830px 이 됐고, 900px 높이 화면에서 아래 섹션이 접힘선 밖으로
+     완전히 밀렸다. 락업 캔버스의 위아래는 매듭 둘레라 그 자체가 여백처럼
+     읽히므로, 여백을 되돌리면 히어로만 길어지고 숨은 더 트이지 않는다.
+     실측(1440x900): 150px → 104px 로 히어로 830px → 732px. */
   body.hub-page .hero{
     min-height:clamp(560px, 68vh, 760px);
     display:flex; align-items:center;
-    padding-block:clamp(96px, 10vw, 150px);
+    padding-block:clamp(64px, 6.6vw, 104px);
     border-bottom:1px solid rgba(155,161,226,.36);
   }
   /* 히어로 스크림. 뒷벽의 YSG 매듭은 사진(hub-hero-audio-lab.png)에 이미 그려져
@@ -97,8 +102,51 @@
   body.hub-page .hero .aura{display:none}
   /* 스크림을 걷으면서 지면이 어두워져 --ink-3 눈썹이 1.71:1 까지 떨어졌다.
      히어로 안에서만 제목과 같은 색으로 내린다 — 실측 5.36:1. 다른 섹션의
-     눈썹은 흰 카드 위에 앉으므로 그대로 둔다. */
+     눈썹은 흰 카드 위에 앉으므로 그대로 둔다.
+     ⚠ 지금 히어로에는 눈썹이 없다 (2026-09-15, 아래 락업이 그 자리를 받았다).
+       되돌릴 때 이 규칙이 없으면 대비가 다시 1.71:1 로 떨어지므로 지우지
+       말고 둔다. */
   body.hub-page .hero .eyebrow{color:var(--ink)}
+
+  /* ── 히어로 락업 ───────────────────────────────────────────────
+     상단바 락업은 30px 다 — "지금 어느 사이트냐"만 말한다. 허브 히어로에서는
+     지면의 주인을 제목 크기로 먼저 세운다 (사용자 지시 2026-09-15:
+     "크게 우리 로고와 텍스트").
+
+     ⚠ 워드마크를 Pretendard 로 조판해 갈아끼우지 말 것. 먼저 그렇게 만들어
+       뺐다 — brand/README.md 에 남은 대로 이 프로젝트는 마크를 "간략한 버전
+       말고 실제 풀버전" 으로 쓴다 (2026-09-09). YSG 의 G 그라디언트와
+       AUDIO LABS 자간은 락업 원본에만 있고 폰트로는 재현되지 않는다.
+
+     assets/ysg-lockup.png(366x96)은 상단바·푸터 크기에 맞춰 줄인 사본이라
+     여기서는 흐려진다. 그래서 원본 brand/ysg-lockup-transparent-2026.png
+     (1273x334) 을 줄이지 않고 그대로 assets/ysg-lockup-hero.png 로 뒀다.
+     표시 최대 860px 의 2배(1720px)는 못 채우지만 원본이 이게 전부다.
+     126KB 이고, 같은 히어로가 2.2MB 배경을 이미 받는다.
+
+     ⚠ 폭을 .wrap 안쪽(688px)에 맞추지 말 것. 이 락업은 캔버스 대비 워드마크가
+       작다 — YSG 글자높이가 표시폭의 7.45% 다. 688px 에서는 YSG 가 51px 이
+       되어 제목 74px 에 눌리고, 로고가 태그라인보다 작아 보인다. 860px 에서
+       64px 로 제목과 같은 급이 된다.
+     ⚠ .wrap 이 좁아 보이지만 --maxw 는 1200px 이다. 허브 히어로는
+       `display:flex` 라 .wrap 이 내용폭을 따르므로(실측 776px), 락업을
+       넓히면 .wrap 이 따라 늘어나고 가운데 정렬도 그대로 유지된다.
+       left/transform 으로 빼내려 하지 말 것. */
+  /* 폭은 "지면이 주는 만큼, 860px 까지". 60vw 로 뒀다가 뺐다 — 375px 에서
+     225px(→ 최소값 260px)까지 줄어 YSG 가 19px 이 되고, 제목 34px 보다 작아
+     위계가 뒤집혔다. 좁은 화면에서는 폭을 다 쓰는 게 맞다 (실측 375px 에서
+     339px · YSG 25px). 세로 조합으로 갈아탈 수는 없다 —
+     brand/ysg-lockup-vertical-2026.png 은 어두운 배경이 박힌 일러스트다. */
+  body.hub-page .hero__lockup{
+    display:block; height:auto;
+    width:min(calc(100vw - 2 * var(--pad)), 860px);
+    /* 락업 캔버스의 위아래는 매듭의 둘레 궤도다 — 잉크는 꽉 찼지만 눈에는
+       여백으로 읽힌다. 그래서 제목까지의 간격을 거의 주지 않는다. */
+    margin:0 auto clamp(2px, .8vw, 12px);
+    /* 매듭은 어두운 지면에서 빛나도록 그린 그림이다. 이 밝은 스크림 위에서는
+       둘레가 풀려 사진의 기물과 섞인다 — 옅은 그림자 한 겹으로만 떼어낸다. */
+    filter:drop-shadow(0 8px 22px rgba(27,34,51,.20));
+  }
   body.hub-page .hero__sub{
     color:#555f74;
     text-shadow:0 1px 12px rgba(255,255,255,.7);
@@ -443,7 +491,16 @@
     <div class="aura" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap">
       <div class="hero__head">
-        <span class="eyebrow" data-en="Tool library">툴 모음</span>
+        <!-- 눈썹 `툴 모음` 이 있던 자리다. 락업이 들어오면서 뺐다 — 큰 로고 위에
+             12px 대문자 한 줄을 더 얹으면 블록이 넷이 되고, 어떤 툴들인지는 바로
+             아래 칩 다섯 개가 이미 말한다 (2026-09-15).
+             ⚠ alt 를 빈 문자열로 두지 말 것. 상단바 락업은 옆에 링크 이름이
+               있어서 alt="" 가 맞지만, 여기는 사이트 이름을 말하는 유일한
+               요소다 — 비우면 읽어주는 기기에서 이름이 사라진다.
+             ⚠ 여기를 h1 으로 올리지 말 것. h1 은 아래 태그라인이 쥔다 — 로고를
+               제목으로 만들면 한 페이지에 h1 이 둘이 된다. -->
+        <img class="hero__lockup" src="assets/ysg-lockup-hero.png"
+             alt="YSG Audio Labs" width="1273" height="334" fetchpriority="high">
         <h1 class="display" data-en='Game sound production toolkit<br><span class="grad">for sound designers</span>'>사운드 디자이너를 위한<br><span class="grad">게임 사운드 실무 툴킷</span></h1>
       </div>
       <p class="hero__sub" data-en="Tools for real game sound production. Search libraries, audition spatial audio, and catch Wwise settings that quietly drift out of line.">
