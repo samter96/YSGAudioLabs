@@ -349,6 +349,24 @@
       linear-gradient(180deg, color-mix(in srgb, var(--paper) 12%, transparent), color-mix(in srgb, var(--paper) 68%, transparent) 92%),
       var(--product-bg) center / cover no-repeat;
   }
+  /* 히어로 뒤 제품 아이콘. 허브 히어로가 YSG 엠블럼을 사진에 구워 넣은 것과
+     같은 역할이다. ::before 는 이미 제품 박스 블러 배경이 쓰고 있어서 ::after
+     로 얹는다 — 경로는 페이지가 --hero-mark 로 준다.
+     아이콘이 어두운 배경용 글로우라 밝은 지면에서 더 묻힌다. 그래서 라이트가
+     기본값이 더 높다.
+     ⚠ 세로 위치는 히어로 높이 기준 %다. 제품 사진이 히어로 안에 들어가는
+       페이지는 히어로가 1100px 을 넘어서, 가운데에 두면 아이콘이 사진 뒤로
+       내려간다. 헤드라인 뒤에 오도록 위쪽에 둔다. 페이지마다 다르면
+       --hero-mark-pos / --hero-mark-size 로 덮는다. */
+  body.product-atmosphere .hero::after{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:var(--hero-mark) var(--hero-mark-pos, center 22%) / var(--hero-mark-size, auto 46%) no-repeat;
+    opacity:var(--hero-mark-opacity, .40);
+  }
+  body.theme-dark.product-atmosphere .hero::after{
+    opacity:var(--hero-mark-opacity, .30);
+  }
+
   /* 히어로에 사진이 깔리면 --ink-3(가장 흐린 글자색)이 4.5:1 을 못 넘는다.
      실측(2026-09-14, 각 페이지 실제 배치에서 합성 휘도를 계산):
        눈썹 — SoundField 2.75 · Bus Routing 3.69 · Stereo 4.49 (전부 미달/경계)
