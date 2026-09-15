@@ -68,22 +68,37 @@
     padding-block:clamp(96px, 10vw, 150px);
     border-bottom:1px solid rgba(155,161,226,.36);
   }
+  /* 히어로 스크림. 뒷벽의 YSG 매듭은 사진(hub-hero-audio-lab.png)에 이미 그려져
+     있고, 이 흰 겹들이 그 위를 덮어 지면 톤을 만든다. 겹을 걷을수록 매듭의 색과
+     둘레 궤도가 살아난다 — 그래서 옅게 잡았다 (2026-09-15, 지시 반영).
+     ⚠ 첫 radial 의 중심(50% 38%)이 매듭 한가운데다. 제목 블록(히어로 기준
+       y 157~314)도 같은 자리에 앉는다 — 매듭 y 110~330 과 겹친다. 이 값들을
+       올리면 매듭이 다시 하얗게 뜨고, 내리면 제목 대비가 같이 떨어진다.
+       둘을 따로 조절할 방법은 없다. 1265x584 기준 실측 대비:
+         .72/.42/.14/.52 (이전) → 제목 5.67:1 · 부제 3.45:1
+         .34/.30/.10/.46 (지금) → 제목 3.74:1 · 부제 2.47:1
+       부제는 이전에도 4.5 미달이었고 text-shadow 로 버틴다. 제목에는 글로우를
+       두지 않기로 했다. 대비를 되찾아야 하면 이 숫자들을 올리면 된다. */
   body.hub-page .hero::before{
     content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
     background:
-      radial-gradient(circle at 50% 38%, rgba(255,255,255,.72), rgba(255,255,255,.38) 30%, rgba(255,255,255,.06) 54%, transparent 74%),
-      linear-gradient(90deg, rgba(247,247,252,.42), rgba(247,247,252,.12) 44%, rgba(247,247,252,.42)),
-      linear-gradient(180deg, rgba(247,247,252,.14), rgba(247,247,252,.52) 88%),
+      radial-gradient(circle at 50% 38%, rgba(255,255,255,.34), rgba(255,255,255,.17) 30%, rgba(255,255,255,.03) 54%, transparent 74%),
+      linear-gradient(90deg, rgba(247,247,252,.30), rgba(247,247,252,.07) 44%, rgba(247,247,252,.30)),
+      linear-gradient(180deg, rgba(247,247,252,.10), rgba(247,247,252,.46) 88%),
       url("assets/hub-hero-audio-lab.png") center / cover no-repeat;
     filter:saturate(1.04) contrast(1.04);
     transform:scale(1.01);
   }
   body.hub-page .hero::after{
     content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:linear-gradient(180deg, rgba(247,247,252,.04), rgba(247,247,252,.52) 94%);
+    background:linear-gradient(180deg, rgba(247,247,252,.03), rgba(247,247,252,.46) 94%);
   }
   body.hub-page .hero .wrap{position:relative; z-index:1}
   body.hub-page .hero .aura{display:none}
+  /* 스크림을 걷으면서 지면이 어두워져 --ink-3 눈썹이 1.71:1 까지 떨어졌다.
+     히어로 안에서만 제목과 같은 색으로 내린다 — 실측 5.36:1. 다른 섹션의
+     눈썹은 흰 카드 위에 앉으므로 그대로 둔다. */
+  body.hub-page .hero .eyebrow{color:var(--ink)}
   body.hub-page .hero__sub{
     color:#555f74;
     text-shadow:0 1px 12px rgba(255,255,255,.7);
