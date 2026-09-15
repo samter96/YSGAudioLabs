@@ -52,7 +52,9 @@
       radial-gradient(circle at 16% 18%, rgba(58,69,194,.12), transparent 34%),
       linear-gradient(90deg, rgba(247,247,252,.32), rgba(247,247,252,.06) 48%, rgba(247,247,252,.36));
   }
-  body.hub-page > *{position:relative; z-index:1}
+  /* ⚠ 개발자 다이얼로그는 빼둔다. `> *` 가 잡으면 오버레이의 position:fixed 를
+     눌러(특이도 0-2-1 대 0-1-0) 본문 맨 아래에 깔린다. */
+  body.hub-page > *:not(.developer-dialog){position:relative; z-index:1}
   body.hub-page .topbar{
     background:
       linear-gradient(90deg, rgba(255,255,255,.72), rgba(255,255,255,.48), rgba(255,255,255,.76)),
@@ -295,102 +297,8 @@
   }
   .summary-card strong{display:block; font-size:22px; line-height:1; letter-spacing:-.03em}
   .summary-card span{display:block; margin-top:9px; color:var(--ink-2); font-size:14px; line-height:1.55}
-  .developer-topbtn{
-    appearance:none; border:0; background:transparent; font:inherit; cursor:pointer;
-    font-size:14px; font-weight:600; color:var(--ink-3); text-decoration:none;
-    padding:7px 12px; border-radius:9px; transition:color .18s, background .18s;
-    flex:0 0 auto;
-  }
-  .developer-topbtn:hover,
-  .developer-topbtn:focus-visible{color:var(--ink); background:var(--tint-2)}
-  /* 상단바에서 개발자 버튼을 감추는 폭에서는 푸터 링크가 유일한 진입점이 된다.
-     다이얼로그를 여는 건 `data-dialog-open` 위임 핸들러라 버튼이 어디 있든 된다. */
-  .footer-devlink{
-    appearance:none; border:0; background:transparent; padding:0; cursor:pointer;
-    font:inherit; font-size:13.5px; color:var(--ink-2); text-decoration:underline;
-    text-underline-offset:2px;
-  }
-  .footer-devlink:hover, .footer-devlink:focus-visible{color:var(--ink)}
-  body.hub-page > .developer-dialog{
-    position:fixed; inset:0; z-index:120; margin:0;
-    width:100vw; max-width:none; height:100vh; max-height:none;
-    padding:17px; border:0; background:rgba(20,24,43,.34);
-    backdrop-filter:blur(10px) saturate(125%);
-    overflow:auto; place-items:center;
-  }
-  body.hub-page > .developer-dialog[hidden]{display:none}
-  body.hub-page > .developer-dialog:not([hidden]){display:grid}
-  body.hub-page > .developer-dialog::backdrop{
-    background:transparent;
-  }
-  .developer-card{
-    position:relative;
-    display:grid; grid-template-columns:minmax(220px, 310px) minmax(0,1fr);
-    gap:clamp(26px,4vw,58px); align-items:center;
-    width:min(780px, 100%); max-height:calc(100vh - 34px); overflow:auto;
-    padding:clamp(22px,3.2vw,38px);
-    border:1px solid rgba(155,161,226,.42); border-radius:var(--r);
-    background:
-      linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.54)),
-      radial-gradient(circle at 20% 28%, rgba(58,69,194,.18), transparent 42%);
-    backdrop-filter:blur(11px) saturate(140%);
-    box-shadow:var(--shadow); overflow:hidden;
-  }
-  .developer-close{
-    position:absolute; top:14px; right:14px; z-index:3;
-    width:34px; height:34px; display:grid; place-items:center;
-    border-radius:999px; border:1px solid rgba(155,161,226,.48);
-    background:rgba(255,255,255,.72); color:var(--ink-2);
-    font:inherit; font-size:20px; line-height:1; cursor:pointer;
-    box-shadow:0 12px 28px -20px rgba(27,34,51,.42);
-  }
-  .developer-close:hover,
-  .developer-close:focus-visible{color:var(--ink); border-color:var(--line-2)}
-  .developer-photo{
-    position:relative; aspect-ratio:1; border-radius:24px; overflow:hidden;
-    border:1px solid rgba(255,255,255,.62);
-    box-shadow:0 26px 52px -26px rgba(27,34,51,.42), 0 0 0 1px rgba(20,28,45,.08);
-    background:#101521;
-  }
-  .developer-photo img{display:block; width:100%; height:100%; object-fit:cover}
-  .developer-photo::after{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(135deg, rgba(255,255,255,.26), transparent 38%, rgba(9,13,27,.18));
-  }
-  .developer-copy{max-width:720px}
-  .developer-copy .eyebrow{display:block}
-  .developer-copy h2{
-    margin-top:10px; font-size:clamp(28px,3.4vw,42px);
-    line-height:1.05; letter-spacing:-.045em;
-  }
-  .developer-role{
-    margin-top:12px; color:color-mix(in srgb, var(--key) 72%, #111827);
-    font-size:clamp(15px,1.6vw,19px); font-weight:800; line-height:1.45;
-    word-break:keep-all;
-  }
-  .developer-copy p{
-    margin-top:18px; color:var(--ink-2); font-size:16px;
-    line-height:1.75; word-break:keep-all;
-  }
-  .developer-meta{
-    display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;
-  }
-  .developer-meta span{
-    display:inline-flex; align-items:center; min-height:34px; padding:0 13px;
-    border-radius:999px; border:1px solid rgba(155,161,226,.46);
-    background:rgba(255,255,255,.66); color:var(--ink-2);
-    font-size:13px; font-weight:800;
-  }
-  .developer-mail{
-    display:inline-flex; align-items:center; gap:9px; margin-top:16px;
-    color:var(--ink-2); font-size:14px; font-weight:700; text-decoration:none;
-  }
-  .developer-mail:hover,
-  .developer-mail:focus-visible{color:color-mix(in srgb, var(--key) 72%, #111827)}
-  .developer-mail svg{
-    width:17px; height:17px; flex:0 0 17px; color:var(--key);
-    stroke:currentColor; fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;
-  }
+  /* 개발자 소개 컴포넌트(상단바 버튼·다이얼로그·푸터 링크)는 제품 페이지
+     5개로 넓히면서 assets/ysg.css 로 옮겼다. 여기에 다시 적지 말 것. */
   @media (max-width:1000px){
     .story-grid{grid-template-columns:1fr}
     .build-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -398,20 +306,10 @@
     .tool{grid-template-columns:minmax(132px, 190px) minmax(0,1fr)}
     .tool--featured{grid-template-columns:minmax(180px, 240px) minmax(0,1fr)}
     .tool__body p{max-width:48ch}
-    .developer-card{grid-template-columns:minmax(190px,260px) minmax(0,1fr)}
   }
   @media (max-width:860px){
     .tools{grid-template-columns:1fr}
     .tool--featured{grid-column:span 1}
-    .developer-card{grid-template-columns:1fr}
-    .developer-photo{max-width:280px}
-    .developer-topbtn{padding-inline:10px; font-size:13px}
-  }
-  /* 락업(176px)·KO/EN·GitHub 를 놓고 나면 개발자 버튼 자리가 없다 — 390px 에서
-     필요폭이 KO 369 / EN 399 인데 쓸 수 있는 폭은 354 다. 상단바에서 내리고
-     푸터 링크로 넘긴다. 락업 크기는 어느 폭에서도 건드리지 않는다. */
-  @media (max-width:520px){
-    .developer-topbtn{display:none}
   }
   @media (max-width:560px){
     .tool{grid-template-columns:1fr}

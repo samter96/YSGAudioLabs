@@ -105,6 +105,7 @@
       <a href="#heatmap" data-en="Heatmap">히트맵</a>
       <a href="#install" data-en="Install">설치</a>
     </nav>
+    <button class="developer-topbtn" type="button" data-dialog-open="developer-dialog" data-en="Developer">개발자</button>
     <button class="langswitch" type="button" aria-label="언어 전환" aria-pressed="false"><span class="ko">KO</span><span class="en">EN</span></button>
     <a class="ghicon" href="https://github.com/samter96/Wwise-Bus-Routing-Auditor" target="_blank" rel="noreferrer" aria-label="GitHub repository">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.42-4.04-1.42-.55-1.38-1.34-1.75-1.34-1.75-1.09-.75.08-.73.08-.73 1.21.08 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5z"/></svg>
@@ -430,9 +431,38 @@
       <img class="ysglock__d" src="../assets/ysg-lockup-compact-dark.png" alt="">
     </span>
     <p data-en="Made by YSG Audio Labs (You Seung Gyun) · contact: Samter96@naver.com">Made by YSG Audio Labs (You Seung Gyun) · 문의 : Samter96@naver.com</p>
+    <p><button class="footer-devlink" type="button" data-dialog-open="developer-dialog" data-en="About the developer">개발자 소개</button></p>
     <p id="year"></p>
   </div>
 </footer>
+
+<div id="developer-dialog" class="developer-dialog" role="dialog" aria-modal="true" aria-labelledby="developer-dialog-title" hidden>
+  <article class="developer-card">
+    <button class="developer-close" type="button" data-dialog-close aria-label="닫기">×</button>
+    <figure class="developer-photo">
+      <img src="../assets/developer-you-seung-gyun.png" alt="유승균 프로필 일러스트">
+    </figure>
+    <div class="developer-copy">
+      <span class="eyebrow" data-en="YSG Audio Labs Developer">YSG Audio Labs 개발자</span>
+      <h2 id="developer-dialog-title" data-en="You Seung Gyun">유승균</h2>
+      <div class="developer-role" data-en="Game Sound Designer / Audio Engineer / Recording Engineer">
+        게임 사운드 디자이너 / 오디오 엔지니어 / 레코딩 엔지니어
+      </div>
+      <p data-en="YSG Audio Labs is made from the point of view of someone who has worked across recording studios and game development studios. The tools are shaped around the checks, handoffs and audio decisions that come up in real production, so they stay close to the way sound teams actually work.">
+        YSG Audio Labs는 다수의 레코딩 스튜디오와 게임 개발 스튜디오에서 경력을 이어가고 있는 현업자의 관점으로 만듭니다. 실제 프로덕션에서 자주 마주치는 점검, 전달, 사운드 판단의 순간을 기준으로 설계해 사운드 팀의 협업 흐름 가까이에 두는 것을 목표로 합니다.
+      </p>
+      <div class="developer-meta" aria-label="개발자 전문 영역">
+        <span data-en="Game audio production">게임 오디오 제작</span>
+        <span data-en="Recording studio workflow">레코딩 스튜디오 워크플로우</span>
+        <span data-en="Wwise pipeline tools">Wwise 파이프라인 도구</span>
+      </div>
+      <a class="developer-mail" href="mailto:samter96@naver.com" aria-label="이메일 samter96@naver.com">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        <span>samter96@naver.com</span>
+      </a>
+    </div>
+  </article>
+</div>
 
 <script src="../assets/ysg.js"></script>
 </body>
