@@ -303,6 +303,14 @@
   }
   .developer-topbtn:hover,
   .developer-topbtn:focus-visible{color:var(--ink); background:var(--tint-2)}
+  /* 상단바에서 개발자 버튼을 감추는 폭에서는 푸터 링크가 유일한 진입점이 된다.
+     다이얼로그를 여는 건 `data-dialog-open` 위임 핸들러라 버튼이 어디 있든 된다. */
+  .footer-devlink{
+    appearance:none; border:0; background:transparent; padding:0; cursor:pointer;
+    font:inherit; font-size:13.5px; color:var(--ink-2); text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .footer-devlink:hover, .footer-devlink:focus-visible{color:var(--ink)}
   body.hub-page > .developer-dialog{
     position:fixed; inset:0; z-index:120; margin:0;
     width:100vw; max-width:none; height:100vh; max-height:none;
@@ -398,6 +406,12 @@
     .developer-card{grid-template-columns:1fr}
     .developer-photo{max-width:280px}
     .developer-topbtn{padding-inline:10px; font-size:13px}
+  }
+  /* 락업(176px)·KO/EN·GitHub 를 놓고 나면 개발자 버튼 자리가 없다 — 390px 에서
+     필요폭이 KO 369 / EN 399 인데 쓸 수 있는 폭은 354 다. 상단바에서 내리고
+     푸터 링크로 넘긴다. 락업 크기는 어느 폭에서도 건드리지 않는다. */
+  @media (max-width:520px){
+    .developer-topbtn{display:none}
   }
   @media (max-width:560px){
     .tool{grid-template-columns:1fr}
@@ -738,6 +752,7 @@
       <img class="ysglock__d" src="assets/ysg-lockup-compact-dark.png" alt="">
     </span>
     <p data-en="Made by YSG Audio Tools (You Seung Gyun) · contact: Samter96@naver.com">Made by YSG Audio Tools (You Seung Gyun) · 문의 : Samter96@naver.com</p>
+    <p><button class="footer-devlink" type="button" data-dialog-open="developer-dialog" data-en="About the developer">개발자 소개</button></p>
     <p id="year"></p>
   </div>
 </footer>

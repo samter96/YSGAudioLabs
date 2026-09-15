@@ -224,14 +224,24 @@
     background:rgba(255,255,255,.82); backdrop-filter:blur(14px) saturate(160%);
     border-bottom:1px solid var(--line);
   }
+  /* ⚠ 높이를 고정해 둘 것. 예전에는 내용이 높이를 정했는데, 섹션 링크가
+     있을 때 63px · 링크가 작아지면 59px · 링크가 숨으면 56px 로 갈렸다.
+     그러면 가운데 정렬된 락업의 y 가 페이지마다 최대 1.9px 씩 달라져서,
+     다른 페이지로 넘어갈 때 로고가 들썩인다. 링크 유무·크기와 무관하게
+     같은 자리에 있어야 한다. 63px 은 링크가 보일 때의 기존 높이다. */
   .topbar__in{
     max-width:var(--maxw); margin:0 auto; padding:12px var(--pad);
-    display:flex; align-items:center; gap:16px;
+    display:flex; align-items:center; gap:16px; min-height:63px;
   }
   /* 브랜드 락업 — 헤더용 원본에서 회색 판만 뺀 이미지를 그대로 쓴다.
-     워드마크가 짙은 남색이라 다크 지면에서는 묻힌다. 그래서 세로 락업 원본의
-     흰 워드마크로 다시 조합한 다크판을 따로 두고 테마에 따라 바꿔 단다.
-     두 장 다 받긴 하지만 각 20KB 안쪽이다.
+     워드마크가 짙은 남색이라 다크 지면에서는 묻힌다. 그래서 다크판을 따로 두고
+     테마에 따라 바꿔 단다. 두 장 다 받긴 하지만 각 20KB 안쪽이다.
+     ⚠ 다크판은 반드시 라이트 원본에서 워드마크만 다시 칠해 만든다
+       (brand/ysg-lockup-compact-2026.png → 매듭은 그대로, YSG 는 흰색,
+       AUDIO LABS 는 #D0D5E7). 예전에는 세로 락업에서 흰 워드마크를 떼어
+       따로 조합했는데, 매듭이 0.74배·글자가 0.87배·간격이 0.67배로 비율이
+       달라져 테마가 바뀔 때 락업이 움직여 보였다. 지금 두 장은 캔버스
+       423x72 와 알파 채널이 완전히 같다 — 위치 오차 0px.
      ⚠ 원본 비율(매듭이 워드마크의 4.45배)로는 YSG 글자가 13px 이 되려면 로고
        높이가 58px 이라 상단바가 두꺼워진다. 매듭만 글자 2.4배로 줄인 compact
        판을 쓴다 — 매듭과 글자 픽셀 자체는 원본 그대로다. */
@@ -247,12 +257,72 @@
   .ysglock--footer{display:flex; margin:0 0 14px}
   .ysglock--footer img{height:38px}
 
-  .navlinks{display:flex; gap:2px; margin-left:10px; flex:1 1 auto}
+  /* 상단바의 제품명. 2966677 에서 .ysglogo → .ysglock 으로 갈아끼울 때 같은
+     자리에 있던 이 규칙들까지 함께 지워져 밑줄 친 기본 링크로 떨어졌다. 복구본.
+     제품명 옆에 붙던 버전 표기(.brand__v)는 상단바에서 뺐다 — 허브 툴 카드와
+     각 페이지의 내려받기 문구·사양표에 이미 있다.
+     예전 주석은 `flex:0 0 auto` 를 금지했다. 제품명이 줄어들지 못해 상단바가
+     넘쳤기 때문인데, 이제 아래 축소·숨김 규칙이 섹션 링크를 먼저 내주고 끝내
+     감추므로 제품명은 고정해도 된다. 제품명은 어느 폭에서도 자르지 않는다. */
+  .brand{
+    display:flex; align-items:baseline; text-decoration:none;
+    flex:0 0 auto; min-width:0;
+  }
+  .brand__name{
+    font-size:15px; font-weight:800; letter-spacing:-.02em;
+    white-space:nowrap;
+  }
+
+  .navlinks{display:flex; gap:2px; margin-left:10px; flex:0 1 auto; min-width:0; overflow:hidden}
   .navlinks a{
     font-size:14px; font-weight:600; color:var(--ink-3); text-decoration:none;
     padding:7px 12px; border-radius:9px; transition:color .18s, background .18s;
+    white-space:nowrap;
   }
   .navlinks a:hover{color:var(--ink); background:var(--tint-2)}
+
+  /* ── 상단바 축소·숨김 규칙 (전 페이지 공통) ─────────────────────
+     우선순위는 락업 > 제품명 > 언어·깃허브 > 섹션 링크다. 폭이 모자라면
+     내주는 쪽은 언제나 섹션 링크이고, 링크는 절대 두 줄로 접지 않는다
+     (접히면 상단바가 두 줄이 되면서 제품명까지 말줄임으로 뭉갰다).
+
+     ⚠ `--maxw:1200px` 때문에 상단바 내용폭은 화면이 아무리 넓어도
+       1200 - 44*2 = 1112px 에서 멈춘다. 그래서 "큰 화면에서는 다 들어간다"
+       가 성립하지 않는다 — 링크 7개인 SpatialRenderer 의 EN 표기는 자연폭이
+       1198px 라 4K 에서도 넘쳤다. 링크가 많은 페이지는 폭과 무관하게 항상
+       한 단계 조인 치수로 둔다.
+
+     기준점을 페이지마다 손으로 박지 않고 `:has()` 로 링크 개수를 세서
+     정한다. 링크를 더하거나 빼도 규칙이 알아서 따라온다.
+       링크 3개 이하(허브)      : 680px 아래에서 숨김
+       링크 4~5개(제품 4종)     : 1000/920px 에서 2단 축소, 860px 아래 숨김
+       링크 6개 이상(Spatial)   : 항상 축소, 1120px 아래 숨김 */
+
+  /* 내비가 사라져도 언어·깃허브 묶음은 오른쪽 끝에 붙어 있어야 한다.
+     예전에는 `.navlinks{flex:1 1 auto}` 가 밀어주고 있었다. */
+  .topbar__in > .developer-topbtn,
+  .topbar__in > .langswitch{margin-left:auto}
+  .topbar__in > .developer-topbtn ~ .langswitch{margin-left:0}
+
+  /* 링크 6개 이상 — 폭과 무관하게 항상 2단계 치수 */
+  .navlinks:has(a:nth-child(6)){gap:0}
+  .navlinks:has(a:nth-child(6)) a{padding:6px 7px; font-size:13px}
+
+  /* 1단계 축소 */
+  @media (max-width: 1000px){
+    .topbar__in{gap:14px}
+    .navlinks{gap:0}
+    .navlinks a{padding:7px 9px}
+  }
+  /* 2단계 축소 */
+  @media (max-width: 920px){
+    .topbar__in{gap:12px}
+    .navlinks a{padding:6px 7px; font-size:13px}
+  }
+  /* 숨김 — 링크 개수별로 버티는 한계가 다르다 */
+  @media (max-width: 1120px){ .navlinks:has(a:nth-child(6)){display:none} }
+  @media (max-width: 860px){ .navlinks:has(a:nth-child(4)){display:none} }
+  @media (max-width: 680px){ .navlinks{display:none} }
   .langswitch{
     width:70px; height:32px; flex:0 0 auto; position:relative; padding:0;
     border:1px solid var(--line-2); border-radius:999px; background:#fff;
@@ -1079,7 +1149,8 @@
     .tiles, .rules{grid-template-columns:repeat(2,1fr)}
     .keys__grid{grid-template-columns:repeat(2,1fr)}
     .stat{grid-template-columns:1fr}
-    .navlinks{display:none}
+    /* 섹션 링크를 여기서 일괄로 감추던 규칙은 상단바 축소·숨김 규칙으로
+       옮겼다 (`.navlinks:has(...)`). 링크 개수에 따라 기준이 다르다. */
   }
   @media (max-width: 640px){
     .tiles, .rules{grid-template-columns:1fr}
@@ -1092,22 +1163,16 @@
     .anim-dot{display:none}
     .animshot--hero .animshot__stage{min-height:420px}
   }
-  @media (max-width: 720px){
-    .brand__v{display:none}
-  }
   /* 좁은 화면에서는 상단바가 넘치거나 제품명이 말줄임으로 뭉개진다.
      배지의 `YSG.AUDIO` 글자를 감추고 마크만 남기면 72px 이 남는다.
      ⚠ 기준을 380px 로 뒀더니 390px 에서 제품명이 58px 로 잘렸다
        (`YSGSpatialRenderer` 처럼 긴 이름). 520px 로 올렸다 (480px 에서도 5px 모자랐다). */
   @media (max-width: 520px){
-    /* 락업을 통째로 두면 제품명이 말줄임으로 뭉개진다 (390px 에서 문서폭 450 이
-       나왔던 그 문제). 매듭만 남겨 72px 을 돌려준다. 배경으로 넣는 이유는
-       display:none 인 <img> 도 내려받기 때문이다 — 미디어쿼리가 맞을 때만 받는다. */
-    .ysglock:not(.ysglock--footer) img{display:none}
-    .ysglock:not(.ysglock--footer){
-      width:28px; height:28px;
-      background:url("ysg-mark-2026.png") center / contain no-repeat;
-    }
-    .ysglock--footer img{height:32px}
+    /* 락업은 어느 폭에서도 줄이지 않는다 — 매듭만 남기던 예전 규칙은 걷어냈다.
+       대신 제품명을 감춘다. 390px 기준으로 락업 176 + 제품명 142 + KO/EN 70 +
+       GitHub 32 + 간격·여백 66 = 486px 이라 셋을 다 놓을 자리가 없다. 제품명을
+       더 줄여서 될 일도 아니다 (5px 까지 내려가야 한다). 락업·언어·깃허브만
+       남기면 334px 로 들어간다. 어느 제품 페이지인지는 제목과 지면이 말해준다. */
+    .brand{display:none}
     .topbar__in{gap:10px}
   }
