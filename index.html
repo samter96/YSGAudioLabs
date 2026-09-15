@@ -34,22 +34,6 @@
   /* 폰트 경로가 한 단계 얕다 (허브는 루트에 있다) — @font-face 는 스타일시트
      기준이라 그대로 동작한다. 여기서 다시 선언하지 말 것. */
 
-  /* 상단바·푸터 로고 — 헤더용 락업에서 회색 판만 빼고 그대로 쓴다. 매듭과
-     워드마크가 한 이미지라 예전 알약 배지 + 제품명 텍스트를 함께 대신한다.
-     ⚠ 밝은 배경을 전제로 만든 락업이다(워드마크가 짙은 남색). 허브가 다크로
-       가게 되면 이 이미지는 못 쓴다.
-     ⚠ 원본 비율(매듭이 워드마크의 4.45배)로는 YSG 글자가 13px 이 되려면 로고
-       높이가 58px 이라 상단바가 두꺼워진다. 그래서 매듭만 글자 2.4배로 줄인
-       ysg-lockup-compact.png 를 쓴다 — 매듭과 글자 픽셀 자체는 원본 그대로다.
-       비율을 그대로 쓰려면 assets/ysg-lockup.png 로 바꾸고 높이를 58px 로. */
-  .hublogo{display:inline-flex; align-items:center; flex:0 0 auto; text-decoration:none}
-  .hublogo img{height:34px; width:auto}
-  .footer__lockup{height:38px; width:auto; margin:0 0 14px}
-  @media (max-width: 720px){
-    .hublogo img{height:28px}
-    .footer__lockup{height:32px}
-  }
-
   body.hub-page{
     background:#f1f2f7;
     isolation:isolate;
@@ -440,8 +424,9 @@
 
 <header class="topbar">
   <div class="topbar__in">
-    <a class="hublogo" href="./index.html" aria-label="YSG Audio Labs">
-      <img src="assets/ysg-lockup-compact.png" alt="YSG Audio Labs">
+    <a class="ysglock" href="./index.html" aria-label="YSG Audio Labs">
+      <img class="ysglock__l" src="assets/ysg-lockup-compact.png" alt="">
+      <img class="ysglock__d" src="assets/ysg-lockup-compact-dark.png" alt="">
     </a>
     <nav class="navlinks" aria-label="페이지 섹션">
       <a href="#practice" data-en="Practice">실무</a>
@@ -748,7 +733,10 @@
 
 <footer class="footer">
   <div class="wrap">
-    <img class="footer__lockup" src="assets/ysg-lockup-compact.png" alt="YSG Audio Labs">
+    <span class="ysglock ysglock--footer" role="img" aria-label="YSG Audio Labs">
+      <img class="ysglock__l" src="assets/ysg-lockup-compact.png" alt="">
+      <img class="ysglock__d" src="assets/ysg-lockup-compact-dark.png" alt="">
+    </span>
     <p data-en="Made by YSG Audio Tools (You Seung Gyun) · contact: Samter96@naver.com">Made by YSG Audio Tools (You Seung Gyun) · 문의 : Samter96@naver.com</p>
     <p id="year"></p>
   </div>

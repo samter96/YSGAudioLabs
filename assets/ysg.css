@@ -123,7 +123,6 @@
   }
   /* 흰색을 하드코딩한 부품들 — 다크 테마에서만 지면 위 카드 색(--tint-2)으로 */
   body.theme-dark .topbar{background:rgba(11,14,24,.78)}
-  body.theme-dark .ysglogo,
   body.theme-dark .langswitch,
   body.theme-dark .ghicon,
   body.theme-dark .btn,
@@ -229,29 +228,25 @@
     max-width:var(--maxw); margin:0 auto; padding:12px var(--pad);
     display:flex; align-items:center; gap:16px;
   }
-  .ysglogo{
-    display:inline-flex; align-items:center; gap:8px; height:32px;
-    padding:0 12px 0 7px; border:1px solid var(--line-2); border-radius:999px;
-    font-size:12px; font-weight:800; letter-spacing:.1em;
-    color:var(--ink-2); text-decoration:none; flex:0 0 auto; background:#fff;
-    transition:border-color .18s, color .18s;
-  }
-  .ysglogo:hover{color:var(--ink); border-color:var(--ink-3)}
-  .ysglogo__mark{width:24px; height:24px; flex:0 0 24px; display:inline-flex}
-  .ysglogo__mark img{width:100%; height:100%}
-  /* ⚠ `flex:0 0 auto` 로 두지 말 것. 제품명이 긴 페이지
-     (YSGSpatialRenderer · Wwise Attenuation Auditor 등)에서 상단바가 가로로
-     넘친다 — 390px 에서 문서폭 450 이 나왔다. 줄어들 수 있게 두고 넘치면
-     말줄임으로 자른다. */
-  .brand{
-    display:flex; align-items:baseline; gap:10px; text-decoration:none;
-    flex:0 1 auto; min-width:0; overflow:hidden;
-  }
-  .brand__name{
-    font-size:16px; font-weight:800; letter-spacing:-.02em;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .brand__v{font-size:11.5px; font-weight:600; color:var(--ink-3); letter-spacing:.04em; white-space:nowrap}
+  /* 브랜드 락업 — 헤더용 원본에서 회색 판만 뺀 이미지를 그대로 쓴다.
+     워드마크가 짙은 남색이라 다크 지면에서는 묻힌다. 그래서 세로 락업 원본의
+     흰 워드마크로 다시 조합한 다크판을 따로 두고 테마에 따라 바꿔 단다.
+     두 장 다 받긴 하지만 각 20KB 안쪽이다.
+     ⚠ 원본 비율(매듭이 워드마크의 4.45배)로는 YSG 글자가 13px 이 되려면 로고
+       높이가 58px 이라 상단바가 두꺼워진다. 매듭만 글자 2.4배로 줄인 compact
+       판을 쓴다 — 매듭과 글자 픽셀 자체는 원본 그대로다. */
+  .ysglock{display:inline-flex; align-items:center; flex:0 0 auto; text-decoration:none}
+  /* ⚠ display 를 `.ysglock img`(특이도 0-1-1)에 두면 `.ysglock__d`(0-1-0) 의
+     display:none 을 이겨서 라이트 지면에 두 장이 겹쳐 나온다. 보이고 숨기는
+     건 반드시 두 클래스 쪽에서만 정한다. */
+  .ysglock img{height:30px; width:auto}
+  .ysglock__l{display:block}
+  .ysglock__d{display:none}
+  body.theme-dark .ysglock__l{display:none}
+  body.theme-dark .ysglock__d{display:block}
+  .ysglock--footer{display:flex; margin:0 0 14px}
+  .ysglock--footer img{height:38px}
+
   .navlinks{display:flex; gap:2px; margin-left:10px; flex:1 1 auto}
   .navlinks a{
     font-size:14px; font-weight:600; color:var(--ink-3); text-decoration:none;
@@ -1105,7 +1100,14 @@
      ⚠ 기준을 380px 로 뒀더니 390px 에서 제품명이 58px 로 잘렸다
        (`YSGSpatialRenderer` 처럼 긴 이름). 520px 로 올렸다 (480px 에서도 5px 모자랐다). */
   @media (max-width: 520px){
-    .ysglogo span{display:none}
-    .ysglogo{padding:0 6px}
+    /* 락업을 통째로 두면 제품명이 말줄임으로 뭉개진다 (390px 에서 문서폭 450 이
+       나왔던 그 문제). 매듭만 남겨 72px 을 돌려준다. 배경으로 넣는 이유는
+       display:none 인 <img> 도 내려받기 때문이다 — 미디어쿼리가 맞을 때만 받는다. */
+    .ysglock:not(.ysglock--footer) img{display:none}
+    .ysglock:not(.ysglock--footer){
+      width:28px; height:28px;
+      background:url("ysg-mark-2026.png") center / contain no-repeat;
+    }
+    .ysglock--footer img{height:32px}
     .topbar__in{gap:10px}
   }
