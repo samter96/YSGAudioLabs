@@ -51,7 +51,10 @@
   }
 
   :root{
-    --topbar-h: 57px;
+    /* 상단바가 실제로 차지하는 높이. body 의 padding-top 과 앵커 스크롤
+       보정이 이 값을 쓰므로, 아래 `.topbar__in` 의 min-height 도 여기서 끌어다
+       쓴다. 따로 적으면 둘이 어긋나 본문 위쪽이 상단바에 가린다. */
+    --topbar-h: 64px;
     /* 제품 키컬러 기본값 = SoundField. 다른 페이지는 자기 값으로 덮어쓴다. */
     --key:      #2c6be0;
     --key-2:    #0b7a89;
@@ -148,10 +151,12 @@
   body.product-atmosphere{
     isolation:isolate;
   }
-  /* ⚠ `> *` 가 개발자 다이얼로그까지 잡으면 position:fixed 를 눌러(특이도 0-2-1
-     대 0-1-0) 오버레이가 본문 맨 아래에 깔린다. 실제로 그렇게 나왔다.
-     오버레이는 지면 레이어가 아니므로 빼둔다. */
-  body.product-atmosphere > *:not(.developer-dialog){
+  /* ⚠ 이 선택자에 `:not(...)` 을 붙이지 말 것. 특이도가 0-1-1 에서 0-2-1 로
+     올라가면서 `.topbar.topbar`(0-2-0) 의 position:fixed 를 거꾸로 눌러 상단바가
+     흐름 속으로 떨어진다. body 의 padding-top 은 남아 있어서 상단바 위에 57px
+     빈 자리가 생겼다 — 실제로 그렇게 나왔다. 여기서 빼야 하는 요소가 있으면
+     그쪽 특이도를 올려라 (`.topbar.topbar` 처럼 클래스를 두 번 쓴다). */
+  body.product-atmosphere > *{
     position:relative; z-index:1;
   }
   body.product-atmosphere::before{
@@ -234,7 +239,8 @@
      같은 자리에 있어야 한다. 63px 은 링크가 보일 때의 기존 높이다. */
   .topbar__in{
     max-width:var(--maxw); margin:0 auto; padding:12px var(--pad);
-    display:flex; align-items:center; gap:16px; min-height:63px;
+    display:flex; align-items:center; gap:16px;
+    min-height:calc(var(--topbar-h) - 1px); /* 1px 은 .topbar 의 border-bottom */
   }
   /* 브랜드 락업 — 헤더용 원본에서 회색 판만 뺀 이미지를 그대로 쓴다.
      워드마크가 짙은 남색이라 다크 지면에서는 묻힌다. 그래서 다크판을 따로 두고
@@ -1163,7 +1169,10 @@
   }
   .developer-topbtn:hover,
   .developer-topbtn:focus-visible{color:var(--ink); background:var(--tint-2)}
-  .developer-dialog{
+  /* ⚠ 클래스를 두 번 쓴 건 오타가 아니다. `body.product-atmosphere > *` 와
+     `body.hub-page > *`(둘 다 0-1-1)의 position:relative 를 이겨야 오버레이가
+     지면 위로 뜬다. `.topbar.topbar` 와 같은 이유·같은 방식이다. */
+  .developer-dialog.developer-dialog{
     position:fixed; inset:0; z-index:120; margin:0;
     width:100vw; max-width:none; height:100vh; max-height:none;
     padding:17px; border:0; background:rgba(20,24,43,.34);

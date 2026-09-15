@@ -52,9 +52,10 @@
       radial-gradient(circle at 16% 18%, rgba(58,69,194,.12), transparent 34%),
       linear-gradient(90deg, rgba(247,247,252,.32), rgba(247,247,252,.06) 48%, rgba(247,247,252,.36));
   }
-  /* ⚠ 개발자 다이얼로그는 빼둔다. `> *` 가 잡으면 오버레이의 position:fixed 를
-     눌러(특이도 0-2-1 대 0-1-0) 본문 맨 아래에 깔린다. */
-  body.hub-page > *:not(.developer-dialog){position:relative; z-index:1}
+  /* ⚠ 여기에 `:not(...)` 을 붙이지 말 것. 특이도가 올라가면서 `.topbar.topbar`
+     의 position:fixed 를 눌러 상단바 위에 57px 빈 자리가 생긴다. 빼야 할 요소는
+     그쪽 특이도를 올린다 (assets/ysg.css 의 .developer-dialog.developer-dialog). */
+  body.hub-page > *{position:relative; z-index:1}
   body.hub-page .topbar{
     background:
       linear-gradient(90deg, rgba(255,255,255,.72), rgba(255,255,255,.48), rgba(255,255,255,.76)),
