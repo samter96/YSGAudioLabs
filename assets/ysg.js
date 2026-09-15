@@ -1,5 +1,5 @@
 /* ============================================================
-   YSG Audio Tools — 공용 스크립트
+   YSG Audio Labs — 공용 스크립트
 
    6페이지(허브 + 툴 5개)가 함께 쓴다. 페이지마다 복사하지 말 것.
 
@@ -96,7 +96,7 @@
   });
 
   var y = document.getElementById('year');
-  if(y){ y.textContent = '© ' + new Date().getFullYear() + ' YSG Audio Tools'; }
+  if(y){ y.textContent = '© ' + new Date().getFullYear() + ' YSG Audio Labs'; }
 
   /* 상단바 개발자 소개 — 본문 섹션이 아니라 작은 창으로 띄운다. */
   document.addEventListener('click', function(ev){

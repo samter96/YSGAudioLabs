@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""YSG Audio Tools 브랜드 산출물 생성기 — 확정 기하 하나에서 전부 만든다.
+"""YSG Audio Labs 브랜드 산출물 생성기 — 확정 기하 하나에서 전부 만든다.
 
 ═══ 확정안 : SPLIT NODE ══════════════════════════════════════════════════════
 중심에서 세 방향으로 뻗으며 끝으로 갈수록 얇아지는 획.
@@ -107,7 +107,7 @@ def mono_body(indent="  "):
 
 def write_mono():
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"'
-           ' role="img" aria-label="YSG Audio Tools">\n%s\n</svg>\n' % mono_body())
+           ' role="img" aria-label="YSG Audio Labs">\n%s\n</svg>\n' % mono_body())
     io.open(os.path.join(OUT, "ysg-mark-mono.svg"), "w", encoding="utf-8").write(svg)
     return svg
 
@@ -119,7 +119,7 @@ def write_tsx():
         '            fill="currentColor" stroke="currentColor"\n'
         '            strokeWidth={%.2f} strokeLinejoin="round" />' % (PATHS[n], SOFTEN)
         for n, _, _ in STROKES)
-    tsx = '''/* YSG Audio Tools 마크 — brand/build_brand.py 가 계산한 기하를 그대로 옮긴 것.
+    tsx = '''/* YSG Audio Labs 마크 — brand/build_brand.py 가 계산한 기하를 그대로 옮긴 것.
    ⚠ 좌표를 손으로 고치지 말 것. brand/build_brand.py 를 고쳐 다시 생성한다
      (흑백·컬러·아이콘·모션이 모두 같은 기하를 공유한다).
 
@@ -209,7 +209,7 @@ def color_body(prefix, ticks=True, glow=True):
 def write_color():
     prefix = "ysgc"
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"'
-           ' role="img" aria-label="YSG Audio Tools">\n'
+           ' role="img" aria-label="YSG Audio Labs">\n'
            '  <defs>\n%s\n  </defs>\n%s\n</svg>\n'
            % (color_defs(prefix), color_body(prefix)))
     io.open(os.path.join(OUT, "ysg-mark-color.svg"), "w", encoding="utf-8").write(svg)
@@ -238,7 +238,7 @@ def write_icon():
              % (12.0 * (1 - scale), 12.0 * (1 - scale), scale,
                 color_body(prefix, ticks=False, glow=True)))
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"'
-           ' role="img" aria-label="YSG Audio Tools">\n'
+           ' role="img" aria-label="YSG Audio Labs">\n'
            '  <defs>\n%s\n'
            '    <linearGradient id="%s-bg" x1="0" y1="0" x2="0" y2="1">'
            '<stop offset="0" stop-color="#101827"/><stop offset="1" stop-color="%s"/>'
@@ -257,7 +257,7 @@ def write_icon():
 def write_logotype():
     prefix = "ysgl"
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 44"'
-           ' role="img" aria-label="YSG Audio Tools">\n'
+           ' role="img" aria-label="YSG Audio Labs">\n'
            '  <defs>\n%s\n  </defs>\n'
            '  <g transform="translate(2 10) scale(1.0)">\n%s\n  </g>\n'
            '  <text x="34" y="21" font-family="Inter, \'Segoe UI\', system-ui, sans-serif"'
@@ -299,7 +299,7 @@ def write_motion():
         for i, (name, _, _) in enumerate(STROKES))
 
     svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-     role="img" aria-label="YSG Audio Tools">
+     role="img" aria-label="YSG Audio Labs">
   <defs>
 %s
     <clipPath id="%s-grow"><circle cx="12" cy="12" r="12" class="grow"/></clipPath>
@@ -391,7 +391,7 @@ def write_web():
     inner = ('<g transform="scale(%.4f)">\n%s\n  </g>'
              % (scale, color_body(prefix, ticks=False, glow=True)))
     favicon = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"'
-               ' role="img" aria-label="YSG Audio Tools">\n'
+               ' role="img" aria-label="YSG Audio Labs">\n'
                '  <defs>\n%s\n'
                '    <linearGradient id="%s-bg" x1="0" y1="0" x2="0" y2="1">'
                '<stop offset="0" stop-color="#141C2B"/>'
@@ -403,7 +403,7 @@ def write_web():
     io.open(os.path.join(OUT, "ysg-favicon.svg"), "w", encoding="utf-8").write(favicon)
 
     web = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"'
-           ' role="img" aria-label="YSG Audio Tools">\n%s\n</svg>\n' % mono_body())
+           ' role="img" aria-label="YSG Audio Labs">\n%s\n</svg>\n' % mono_body())
     io.open(os.path.join(OUT, "ysg-mark-web.svg"), "w", encoding="utf-8").write(web)
 
 

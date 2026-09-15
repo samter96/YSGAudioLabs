@@ -1,4 +1,4 @@
-# YSG Audio Tools — 브랜드
+# YSG Audio Labs — 브랜드
 
 ## 마크: Split Node
 
