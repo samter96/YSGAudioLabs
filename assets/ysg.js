@@ -129,9 +129,24 @@
 
   /* KO / EN — `data-en` 속성 하나로 끝낸다.
      이전 판은 선택자→영문 문자열 표를 86KB JS 로 들고 있어서, 마크업을 조금만
-     고쳐도 번역이 조용히 어긋났다. */
+     고쳐도 번역이 조용히 어긋났다.
+
+     고른 언어는 localStorage 에 남긴다. 허브와 제품 5개가 같은 출처라 한 번
+     고르면 페이지를 옮겨도 따라온다 — 예전에는 페이지마다 KO 로 되돌아갔다.
+     ⚠ 저장값이 없으면 KO 다. 브라우저 언어를 보고 자동으로 정하지 않는다.
+       한국어 지면이 기본이고, 영어는 고른 사람에게만 따라다닌다. */
+  var LANG_KEY = 'ysg-lang';
+  function readLang(){
+    /* 사생활 보호 모드나 저장소 차단 환경에서는 접근 자체가 던진다.
+       그때는 그냥 KO 로 두고 넘어간다 — 언어 토글은 계속 동작한다. */
+    try{ return localStorage.getItem(LANG_KEY) === 'en'; }catch(e){ return false; }
+  }
+  function saveLang(en){
+    try{ localStorage.setItem(LANG_KEY, en ? 'en' : 'ko'); }catch(e){}
+  }
+
   var langBtn = document.querySelector('.langswitch');
-  var isEN = false;
+  var isEN = readLang();
   var originalHTML = new WeakMap();
   function applyLang(en){
     document.querySelectorAll('[data-en]').forEach(function(el){
@@ -142,7 +157,14 @@
     document.documentElement.setAttribute('lang', en ? 'en' : 'ko');
     if(langBtn){ langBtn.setAttribute('aria-pressed', en ? 'true' : 'false'); }
   }
+  /* 저장된 값이 EN 일 때만 손댄다. KO 면 마크업이 이미 KO 라 건드릴 게 없다.
+     ⚠ 이 호출이 originalHTML 캐시를 채우므로 어떤 치환보다 먼저 와야 한다. */
+  if(isEN){ applyLang(true); }
   if(langBtn){
-    langBtn.addEventListener('click', function(){ isEN = !isEN; applyLang(isEN); });
+    langBtn.addEventListener('click', function(){
+      isEN = !isEN;
+      saveLang(isEN);
+      applyLang(isEN);
+    });
   }
 })();

@@ -206,11 +206,18 @@
     display:grid; grid-template-columns:repeat(3,minmax(74px,1fr));
     gap:14px; margin-top:15px; max-width:460px;
   }
+  /* ⚠ text-align 을 빼지 말 것. 아이콘은 인라인이라 셀 왼쪽에 붙고 글자는 제
+     폭만큼 퍼져서, 라벨이 길수록 둘의 중심이 벌어진다 — 15개 중 11개가
+     어긋났고 "그 자리에서 오디션" 은 20.2px 였다 (실측, 2026-09-15). */
   .tool-point{
-    min-width:0; min-height:70px; padding:0;
+    min-width:0; min-height:70px; padding:0; text-align:center;
     background:transparent; border:0; box-shadow:none;
   }
+  /* ⚠ margin-inline:auto 를 빼지 말 것. assets/ysg.css 의 `img,svg{display:block}`
+     때문에 이 아이콘은 블록이라 위의 text-align:center 가 먹지 않는다.
+     글자만 가운데로 가고 아이콘은 왼쪽에 남는다. */
   .tool-point svg{
+    margin-inline:auto;
     width:42px; height:42px; color:var(--key); stroke:currentColor;
     fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
     filter:drop-shadow(0 10px 16px color-mix(in srgb, var(--key) 24%, transparent));
@@ -230,7 +237,10 @@
     background:rgba(255,255,255,.7);
   }
   .tool .btnrow{margin-top:0}
-  .tool .btn{height:40px; padding:0 18px; font-size:13.5px}
+  /* ⚠ 좌우 여백을 18px 로 되돌리지 말 것. EN 표기에서 칩 70 + 버튼 102+100 +
+     간격 22 = 294px 라 카드 가용폭 283px 를 넘겨 버튼 줄이 아래로 접힌다.
+     KO 는 274px 라 티가 안 나고 영어로 바꿔야 드러난다 (실측, 2026-09-15). */
+  .tool .btn{height:40px; padding:0 14px; font-size:13.5px}
   .tool__badge{
     position:relative; display:block; align-self:center;
     width:min(178px,100%); aspect-ratio:1; border-radius:20px;
@@ -603,7 +613,7 @@
           </div>
           <div class="tool__foot">
             <span class="tool__status" data-en="v1.0.3">v1.0.3</span>
-            <div class="btnrow"><a class="btn btn--primary" href="stereo-auditor/" data-en="View page">페이지 보기</a><a class="btn" href="https://github.com/samter96?tab=repositories" target="_blank" rel="noreferrer" data-en="Repositories">저장소 목록</a></div>
+            <div class="btnrow"><a class="btn btn--primary" href="stereo-auditor/" data-en="View page">페이지 보기</a><a class="btn" href="stereo-auditor/downloads/Stereo-Auditor-v1.0.3-Windows-x64-Setup.exe" data-en="Download">내려받기</a></div>
           </div>
         </div>
       </article>
