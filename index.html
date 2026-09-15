@@ -62,15 +62,18 @@
       url("assets/hub-topbar-audio-lab.png") center / cover no-repeat;
     backdrop-filter:blur(8px) saturate(145%);
   }
-  /* 위아래 여백을 줄였다 (2026-09-15). 락업이 들어오면서 내용이 226px 늘어
-     히어로가 830px 이 됐고, 900px 높이 화면에서 아래 섹션이 접힘선 밖으로
-     완전히 밀렸다. 락업 캔버스의 위아래는 매듭 둘레라 그 자체가 여백처럼
-     읽히므로, 여백을 되돌리면 히어로만 길어지고 숨은 더 트이지 않는다.
-     실측(1440x900): 150px → 104px 로 히어로 830px → 732px. */
+  /* 위아래 여백을 줄였다 (2026-09-15). 로고 블록이 200px 을 더하면서 900px
+     높이 화면에서 아래 섹션이 접힘선 밖으로 밀렸다. 마크 캔버스의 위아래는
+     매듭 둘레라 그 자체가 여백처럼 읽히므로, 여백을 되돌리면 히어로만
+     길어지고 숨은 더 트이지 않는다.
+     실측(1440x900): 132px → 112px 로 히어로 758px → 735px. 원래 값은 150px
+     이었다.
+     ⚠ 마크 높이를 키운다면 이 값부터 다시 재야 한다. 둘을 같이 올리면
+       히어로가 800px 을 넘고 아래 섹션이 보이지 않는다. */
   body.hub-page .hero{
     min-height:clamp(560px, 68vh, 760px);
     display:flex; align-items:center;
-    padding-block:clamp(64px, 6.6vw, 104px);
+    padding-block:clamp(72px, 7.6vw, 112px);
     border-bottom:1px solid rgba(155,161,226,.36);
   }
   /* 히어로 스크림. 뒷벽의 YSG 매듭은 사진(hub-hero-audio-lab.png)에 이미 그려져
@@ -113,39 +116,94 @@
      지면의 주인을 제목 크기로 먼저 세운다 (사용자 지시 2026-09-15:
      "크게 우리 로고와 텍스트").
 
-     ⚠ 워드마크를 Pretendard 로 조판해 갈아끼우지 말 것. 먼저 그렇게 만들어
-       뺐다 — brand/README.md 에 남은 대로 이 프로젝트는 마크를 "간략한 버전
-       말고 실제 풀버전" 으로 쓴다 (2026-09-09). YSG 의 G 그라디언트와
-       AUDIO LABS 자간은 락업 원본에만 있고 폰트로는 재현되지 않는다.
+     마크와 글자를 **각각 가장 큰 원본에서** 따로 가져와 붙인다. 완성된 락업
+     PNG 한 장으로 갈아끼우지 말 것 — 그 한 장의 최대 원본이 1273x334 라서
+     마크까지 같이 작아진다 (사용자 지적 2026-09-15: 고화질 아이콘을 찾았는데
+     글자를 되돌릴 때 마크까지 저해상도로 되돌아갔다).
 
-     assets/ysg-lockup.png(366x96)은 상단바·푸터 크기에 맞춰 줄인 사본이라
-     여기서는 흐려진다. 그래서 원본 brand/ysg-lockup-transparent-2026.png
-     (1273x334) 을 줄이지 않고 그대로 assets/ysg-lockup-hero.png 로 뒀다.
-     표시 최대 860px 의 2배(1720px)는 못 채우지만 원본이 이게 전부다.
-     126KB 이고, 같은 히어로가 2.2MB 배경을 이미 받는다.
+       assets/ysg-mark-hero.png      brand/ysg-mark-2026.png(1024x1024)을
+                                     512x512 로 줄인 사본. 표시 최대 200px 의
+                                     2배(400px)를 넘는다.
+       assets/ysg-wordmark-hero.png  락업 원본에서 글자만 떼어낸 825x85.
+                                     x 446~1273 · 잉크 y 136~208 을 실측해서
+                                     자른 것이다 (Y 는 x 450 에서 시작하고,
+                                     그 왼쪽 조각은 마크의 궤도 링이다).
 
-     ⚠ 폭을 .wrap 안쪽(688px)에 맞추지 말 것. 이 락업은 캔버스 대비 워드마크가
-       작다 — YSG 글자높이가 표시폭의 7.45% 다. 688px 에서는 YSG 가 51px 이
-       되어 제목 74px 에 눌리고, 로고가 태그라인보다 작아 보인다. 860px 에서
-       64px 로 제목과 같은 급이 된다.
-     ⚠ .wrap 이 좁아 보이지만 --maxw 는 1200px 이다. 허브 히어로는
-       `display:flex` 라 .wrap 이 내용폭을 따르므로(실측 776px), 락업을
-       넓히면 .wrap 이 따라 늘어나고 가운데 정렬도 그대로 유지된다.
-       left/transform 으로 빼내려 하지 말 것. */
-  /* 폭은 "지면이 주는 만큼, 860px 까지". 60vw 로 뒀다가 뺐다 — 375px 에서
-     225px(→ 최소값 260px)까지 줄어 YSG 가 19px 이 되고, 제목 34px 보다 작아
-     위계가 뒤집혔다. 좁은 화면에서는 폭을 다 쓰는 게 맞다 (실측 375px 에서
-     339px · YSG 25px). 세로 조합으로 갈아탈 수는 없다 —
-     brand/ysg-lockup-vertical-2026.png 은 어두운 배경이 박힌 일러스트다. */
-  body.hub-page .hero__lockup{
-    display:block; height:auto;
-    width:min(calc(100vw - 2 * var(--pad)), 860px);
-    /* 락업 캔버스의 위아래는 매듭의 둘레 궤도다 — 잉크는 꽉 찼지만 눈에는
-       여백으로 읽힌다. 그래서 제목까지의 간격을 거의 주지 않는다. */
+     ⚠ 글자를 폰트로 조판해 갈아끼우지 말 것. 두 번 그렇게 만들어 두 번 뺐다.
+       로고의 글자체는 락업 원본에만 있다 — Pretendard 로 짜면 YSG 의 G
+       그라디언트와 AUDIO LABS 자간이 사라지고 그냥 본문 폰트로 보인다
+       (사용자 지적: "폰트는 기존 폰트를 써야지").
+     ⚠ 글자 표시폭 412px 을 올리지 말 것. 원본 825px 의 절반이라 2배 화면에서
+       1:1 로 떨어진다. 더 큰 글자 원본은 없다 — brand/ 의 다른 가로 조합
+       (ysg-lockup-horizontal-2026.png 1370x362, 리뉴얼로고_헤더용.png
+       1916x821)은 흰 배경이 박힌 24bpp 라 사진 위에 못 올린다.
+       크게 쓰고 싶으면 마크만 키운다 — 그쪽은 원본이 1024px 이다.
+
+     광학 보정 (--brand-nudge). 기하 중심으로 두면 글자가 오른쪽으로 쏠려
+     보인다 — 눈이 로고를 한 덩어리로 보지 않고 진한 마크를 기준점으로 잡은 뒤
+     글자가 오른쪽으로 뻗은 것으로 읽기 때문이다 (사용자 지적 2026-09-15).
+     실측(락업 원본 1273px 기준, 열별 잉크량을 채도로 갈라서):
+       마크 구간 중심 404.5 · 워드마크 중심 770.0 · 캔버스 중심 636.5
+     워드마크가 폭의 10.5% 오른쪽이다. 0 / 6 / 10.5% 를 렌더해 비교하고 6% 로
+     정했다 (사용자 선택) — 10.5% 는 워드마크가 정중앙에 오는 대신 마크가
+     왼쪽으로 튀어나온다.
+     ⚠ 불투명도 x 어두움 으로 잰 무게중심은 기하 중심보다 184px **왼쪽**이라
+       (마크가 진해서) 반대 방향을 가리킨다. 그 값으로 보정하지 말 것 —
+       눈이 쓰는 기준점은 무게중심이 아니라 워드마크다.
+     ⚠ margin 으로 밀지 말 것. 가운데 정렬이 죽는다. transform 의 % 는 요소
+       자기 폭 기준이라 화면 폭이 바뀌어도 비율이 유지된다. */
+  body.hub-page .hero__brand{
+    --brand-nudge: 6%;
+    display:flex; flex-wrap:wrap;
+    align-items:center; justify-content:center;
+    gap:clamp(6px, 1vw, 16px);
+    /* ⚠ fit-content 를 빼지 말 것. 블록이 지면 폭(688px)을 다 먹으면 아래
+       transform 의 % 가 로고 폭이 아니라 지면 폭 기준이 되어, 로고 크기를
+       바꿀 때 보정량이 같이 안 따라온다. */
+    width:fit-content; max-width:100%;
     margin:0 auto clamp(2px, .8vw, 12px);
+    transform:translateX(calc(-1 * var(--brand-nudge)));
     /* 매듭은 어두운 지면에서 빛나도록 그린 그림이다. 이 밝은 스크림 위에서는
        둘레가 풀려 사진의 기물과 섞인다 — 옅은 그림자 한 겹으로만 떼어낸다. */
     filter:drop-shadow(0 8px 22px rgba(27,34,51,.20));
+  }
+  /* ⚠ 캔버스 높이로 재는 값이다. 잉크는 캔버스의 77.7% 뿐이라(실측 bbox
+     y 114~909 / 1024) 눈에 보이는 매듭은 200px 캔버스에서 155px 이다. */
+  body.hub-page .hero__brandmark{
+    height:clamp(124px, 14.4vw, 200px); width:auto; flex:0 0 auto;
+  }
+  /* 지면의 .52 다. .62 로 뒀다가 내렸다 — 한 줄 폭이 지면에 너무 꽉 차서
+     위 --brand-nudge 가 밀 자리가 없고 430px 근처에서 왼쪽이 잘렸다.
+     실측: .52 면 385px 폭까지 6% 보정이 잘리지 않는다 (그 아래는 아래
+     미디어쿼리가 세로로 쌓고 보정을 끈다). 1440px 에서는 412px 상한에
+     걸리므로 이 비율은 810px 아래에서만 작동한다. */
+  body.hub-page .hero__brandword{
+    width:min(calc((100vw - 2 * var(--pad)) * .52), 412px);
+    height:auto; flex:0 1 auto;
+  }
+  /* 좁은 화면은 세로로 쌓는다. 한 줄로는 385px 아래에서 왼쪽이 잘리고,
+     378px 아래에서는 어차피 flex-wrap 으로 접힌다 — 접히는 모양을 우연에
+     맡기지 않고 여기서 정한다.
+     ⚠ 쌓이면 --brand-nudge 를 0 으로 둘 것. 광학 보정은 마크가 글자 **왼쪽**에
+       있을 때의 쏠림을 잡는 값이다. 위아래로 놓이면 좌우 비대칭이 없어서
+       보정이 그냥 왼쪽으로 밀어버리는 오류가 된다. */
+  @media (max-width: 420px){
+    body.hub-page .hero__brand{
+      --brand-nudge: 0%;
+      flex-direction:column;
+      gap:clamp(2px, 1.2vw, 8px);
+      /* 가로로 놓일 때는 줄 높이가 마크(200px)라 글자가 그 가운데 떠서 아래에
+         저절로 여백이 생긴다. 쌓으면 글자가 블록 맨 아래에 오고, 글자 PNG 는
+         잉크가 꽉 찬 타이트 크롭이라 여백이 0 이 된다 — 제목에 붙는다.
+         그래서 쌓일 때만 아래 여백을 따로 준다. */
+      margin-bottom:clamp(14px, 4vw, 24px);
+    }
+    /* 쌓이면 마크가 글자 폭(300px)에 비해 작아 보인다 — 가로일 때는 글자 옆에
+       나란히 서서 키로 읽히지만, 위아래로 놓이면 폭으로 비교된다. */
+    body.hub-page .hero__brandmark{height:clamp(130px, 38vw, 180px)}
+    body.hub-page .hero__brandword{
+      width:min(calc(100vw - 2 * var(--pad)), 300px);
+    }
   }
   body.hub-page .hero__sub{
     color:#555f74;
@@ -494,13 +552,18 @@
         <!-- 눈썹 `툴 모음` 이 있던 자리다. 락업이 들어오면서 뺐다 — 큰 로고 위에
              12px 대문자 한 줄을 더 얹으면 블록이 넷이 되고, 어떤 툴들인지는 바로
              아래 칩 다섯 개가 이미 말한다 (2026-09-15).
-             ⚠ alt 를 빈 문자열로 두지 말 것. 상단바 락업은 옆에 링크 이름이
-               있어서 alt="" 가 맞지만, 여기는 사이트 이름을 말하는 유일한
-               요소다 — 비우면 읽어주는 기기에서 이름이 사라진다.
+             ⚠ 이름은 글자 쪽 img 의 alt 가 유일하게 말한다. 마크는 alt="" 로
+               비우고 글자는 채운다 — 둘 다 채우면 읽어주는 기기에서
+               `YSG Audio Labs` 가 두 번 들리고, 둘 다 비우면 사이트 이름이
+               사라진다.
              ⚠ 여기를 h1 으로 올리지 말 것. h1 은 아래 태그라인이 쥔다 — 로고를
                제목으로 만들면 한 페이지에 h1 이 둘이 된다. -->
-        <img class="hero__lockup" src="assets/ysg-lockup-hero.png"
-             alt="YSG Audio Labs" width="1273" height="334" fetchpriority="high">
+        <div class="hero__brand">
+          <img class="hero__brandmark" src="assets/ysg-mark-hero.png"
+               alt="" width="512" height="512" fetchpriority="high">
+          <img class="hero__brandword" src="assets/ysg-wordmark-hero.png"
+               alt="YSG Audio Labs" width="825" height="85" fetchpriority="high">
+        </div>
         <h1 class="display" data-en='Game sound production toolkit<br><span class="grad">for sound designers</span>'>사운드 디자이너를 위한<br><span class="grad">게임 사운드 실무 툴킷</span></h1>
       </div>
       <p class="hero__sub" data-en="Tools for real game sound production. Search libraries, audition spatial audio, and catch Wwise settings that quietly drift out of line.">
