@@ -74,9 +74,11 @@
 
      타이밍은 18s 루프 하나에 전부 얹는다. --case(0·1·2)가 6초 오프셋을,
      --row(0~4)가 줄 간격 0.3s 를 만든다. 18s 기준 1s = 5.556%. */
-  .sf-demo--chain{--demo-h:412px}
-  .sfc{position:relative; height:376px}
-  .sfc-case{position:absolute; inset:0; display:grid; grid-template-columns:1.14fr .86fr; gap:14px; opacity:0;
+  /* 공용 .tile--wide 는 2열 고정 — 3열 그리드에서 오른쪽 한 칸이 빈다.
+     판정 체인 타일은 열 수와 상관없이 한 줄을 다 쓴다. */
+  .tile--full{grid-column:1 / -1}
+  .sfc{display:grid}
+  .sfc-case{grid-area:1 / 1; display:grid; grid-template-columns:1.14fr .86fr; gap:14px; opacity:0;
             --case:0; animation:sfcCase 18s linear infinite; animation-delay:calc(var(--case) * 6s)}
   .sfc-case:nth-child(2){--case:1}
   .sfc-case:nth-child(3){--case:2}
@@ -199,8 +201,6 @@
   @keyframes sfMiniGlow{50%{box-shadow:0 0 26px rgba(115,216,255,.2)}}
   @keyframes sfTag{50%{transform:translateY(-1px); filter:brightness(1.4)}}
   @media (max-width:700px){
-    .sf-demo--chain{--demo-h:600px}
-    .sfc{height:620px}
     .sfc-case{grid-template-columns:1fr; gap:10px}
     .sfc-row{grid-template-columns:15px 1fr auto; row-gap:3px}
     .sfc-row i{grid-area:1 / 1}
@@ -461,7 +461,7 @@
           <h3 data-en="A/B when it is unclear">애매하면 A/B</h3>
           <p data-en="Nine channels could be 7.0.2 or second-order Ambisonics. Rather than guessing, both candidates play from the start and the choice is saved per file - resettable to automatic at any time.">9채널은 7.0.2일 수도, 2차 Ambisonics일 수도 있습니다. 임의로 확정하지 않고 두 후보를 처음부터 들려주며, 고른 값은 파일별로 저장됩니다. 언제든 자동 판정으로 되돌릴 수 있습니다.</p>
         </div>
-        <div class="tile tile--wide rise">
+        <div class="tile tile--full rise">
           <h3 data-en="Channel order">채널 순서 비교</h3>
           <p data-en="The same 5.1 travels in two orders - film (L C R Lb Rb LFE) and Windows (L R C LFE Lb Rb). Get it wrong and the centre pulls to one side while LFE lands in a speaker slot. Listen to both, then save for one file or for every file of that channel count in the folder.">같은 5.1이 영화 순서(L C R Lb Rb LFE)와 윈도우 순서(L R C LFE Lb Rb) 두 갈래로 돌아다닙니다. 잘못 잡으면 중앙이 한쪽으로 쏠리고 LFE가 스피커 자리에 들어갑니다. 번갈아 듣고 파일 하나 또는 폴더 전체에 적용합니다.</p>
           <figure class="shot loaded sf-demo sf-demo--chain">
