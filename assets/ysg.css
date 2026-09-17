@@ -1,7 +1,7 @@
 /* ============================================================
    YSG Audio Labs — 공용 스타일시트
 
-   6페이지(허브 + 툴 5개)가 함께 쓴다. SoundField 페이지에서 확정한 디자인을
+   허브와 제품 페이지가 함께 쓴다. SoundField 페이지에서 확정한 디자인을
    그대로 뽑아낸 것이고, 제품마다 다른 것은 CSS 변수로만 바꾼다.
 
    페이지가 정해야 하는 변수 (없으면 SoundField 값이 기본):
@@ -890,6 +890,16 @@
     display:block; font-size:12px; font-weight:800; letter-spacing:.18em;
     color:var(--key); margin-bottom:14px;
   }
+  /* 제목 다음, 본문 앞 한 줄. 제목이 "무엇"이라면 이 줄은 "그래서 뭐가 좋은가"를
+     한 문장으로 먼저 말하고, 아래 단락이 근거를 편다 (2026-09-18, sonible 제품
+     페이지의 항목 구성을 따랐다).
+     ⚠ 이 줄을 본문 설명으로 쓰지 말 것. 여기서 설명을 시작하면 아래 단락과
+       같은 말을 두 번 하게 된다. 한 문장, 결론만. */
+  .rule__tag{
+    margin:0 0 10px; font-size:13.5px; font-weight:800; line-height:1.6;
+    color:color-mix(in srgb, var(--key) 78%, #111827); word-break:keep-all;
+  }
+  .rule h3:has(+ .rule__tag){margin-bottom:6px}
 
   /* ── 기능 타일 ──────────────────────────────────────────────── */
   .tiles{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:48px}
@@ -1156,7 +1166,7 @@
   .footer-devlink:hover, .footer-devlink:focus-visible{color:var(--ink)}
 
   /* ── 개발자 소개 ──────────────────────────────────────────────
-     허브에만 있던 것을 제품 페이지 5개로 넓히면서 인라인 <style> 에서 이리로
+     허브에만 있던 것을 제품 페이지로 넓히면서 인라인 <style> 에서 이리로
      옮겼다. 페이지마다 100줄씩 복제하지 않기 위해서다. 마크업(다이얼로그)만
      각 페이지에 들어간다.
      ⚠ 카드가 흰색을 하드코딩한다. 다크 지면에서는 글자색(--ink 계열)이 밝아져

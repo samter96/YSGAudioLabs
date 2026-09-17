@@ -176,17 +176,20 @@
         <div class="rule rise">
           <span class="num">01</span>
           <h3 data-en="Drop the file">오디오 파일 드롭</h3>
-          <p data-en="Drop onto the start screen, or straight onto the current waveform to replace it.">시작 화면에 드롭하거나, 현재 웨이브폼 영역에 새 파일을 바로 드롭합니다.</p>
+          <p class="rule__tag" data-en="No session, no routing, no upload.">세션도 라우팅도 업로드도 없습니다.</p>
+          <p data-en="Drop onto the start screen, or straight onto the waveform that is already open to replace it in place. Seven formats go in as they are - WAV, AIFF, FLAC, MP3, M4A, AAC and OGG - and the analysis happens entirely on this machine. Nothing is ever written back, so the file you dropped is the file you keep.">시작 화면에 드롭하거나, 이미 열려 있는 웨이브폼 위에 새 파일을 바로 떨어뜨려 그 자리에서 교체합니다. WAV · AIFF · FLAC · MP3 · M4A · AAC · OGG 일곱 형식을 그대로 받고, 분석은 전부 이 컴퓨터 안에서 끝납니다. 원본에는 아무것도 쓰지 않으므로 드롭한 파일이 그대로 남습니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">02</span>
           <h3 data-en="Read the verdict">채널 판정 확인</h3>
-          <p data-en="Classification, stereo strength, active time, Side/Mid, correlation and channel balance.">분류, 스테레오 강도, 활성 시간, Side/Mid, 상관도, 채널 밸런스를 확인합니다.</p>
+          <p class="rule__tag" data-en="Two channels is not a reason to call something stereo.">2채널이라는 이유만으로 스테레오라고 부르지 않습니다.</p>
+          <p data-en="Classification, stereo strength, active time, Side/Mid, L/R correlation and channel balance all come out in one pass. A byte-identical dual mono, a near mono whose difference is negligible, a mono panned by level alone and a genuine stereo recording are four different problems, so they get four different verdicts.">분류, 스테레오 강도, 활성 시간, Side/Mid, L/R 상관도, 채널 밸런스가 한 번에 나옵니다. 샘플이 완전히 같은 듀얼 모노, 차이가 미미한 니어 모노, 레벨 차이뿐인 패닝된 모노, 진짜 공간 정보가 있는 스테레오는 서로 다른 문제이므로 판정도 다르게 나옵니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">03</span>
           <h3 data-en="Play and zoom">재생하며 확대</h3>
-          <p data-en="Navigate, play, zoom and pan the waveform. The source file stays untouched throughout.">파형을 탐색·재생·확대·이동하며 확인합니다. 원본 파일은 끝까지 변경되지 않습니다.</p>
+          <p class="rule__tag" data-en="The problem is usually a region, not the whole file.">문제는 보통 파일 전체가 아니라 한 구간에 있습니다.</p>
+          <p data-en="Navigate and play the waveform, and zoom up to 32x. Zooming uses the preserved envelope rather than stretching a low-resolution image, so detail peaks stay real. Hover a region and it tells you the time, stereo strength, Side/Mid, correlation and the reason behind that verdict.">파형을 탐색·재생하고 최대 32배까지 확대합니다. 확대할 때 저해상도 이미지를 늘리는 대신 보존된 엔벌로프를 쓰기 때문에 세부 피크가 실제 파형 그대로 보입니다. 구간에 마우스를 올리면 시간, 스테레오 강도, Side/Mid, 상관도와 그 판정의 근거가 함께 나옵니다.</p>
         </div>
       </div>
     </div>

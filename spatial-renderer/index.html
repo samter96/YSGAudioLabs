@@ -349,17 +349,20 @@
         <div class="rule rise">
           <span class="num">01</span>
           <h3 data-en="Set on the sound, not the game">게임이 아니라 사운드에 설정합니다</h3>
-          <p data-en="Each metadata plug-in attaches to its sound. A close whisper and a distant siren behave differently without touching a global preset.">메타데이터 플러그인은 각각 해당 사운드에 붙습니다. 그래서 가까운 속삭임과 멀리 있는 사이렌이 전역 프리셋을 건드리지 않고도 서로 다르게 동작할 수 있습니다.</p>
+          <p class="rule__tag" data-en="The whole game does not hang on one global preset.">게임 전체가 전역 프리셋 하나에 묶이지 않습니다.</p>
+          <p data-en="Each metadata plug-in attaches to its own sound in the Wwise property editor, and that value rides along on the audio object as metadata all the way to the bus, where the renderer picks it up and applies it per object. So a whisper right at your ear and a siren across the room can behave completely differently while sharing one renderer, and you author it in the place you are already working.">메타데이터 플러그인은 각각 해당 사운드에 붙습니다. Wwise 속성 편집기에서 설정하시면 그 값이 오디오 오브젝트에 메타데이터로 실려 버스까지 따라가고, 렌더러가 그걸 받아 오브젝트마다 적용합니다. 그래서 귀에 대고 하는 속삭임과 방 건너편의 사이렌이 같은 렌더러를 쓰면서도 서로 다르게 동작하고, 설정하는 자리는 이미 작업하고 계시던 그 자리입니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">02</span>
           <h3 data-en="Objects and channel beds">오브젝트와 채널 베드를 함께 씁니다</h3>
-          <p data-en="Object buses and fixed beds are handled by two renderers that share the same core, so a project can mix both.">오브젝트 버스와 고정 베드를 두 렌더러가 나눠 처리하는데, 둘은 같은 코어를 공유합니다. 그래서 한 프로젝트 안에서 섞어 쓰셔도 됩니다.</p>
+          <p class="rule__tag" data-en="Not two products - one pipeline with two ends.">두 개의 제품이 아니라 하나의 파이프라인입니다.</p>
+          <p data-en="Put the Object Renderer on audio object buses and the Renderer on ordinary ones, where it turns fixed beds like stereo, 5.1 or 7.1.4 into binaural. The two share the same binaural core and the same authoring panel, so mixing them inside one project does not split the sound into two characters.">오디오 오브젝트 버스에는 오브젝트 렌더러를, 일반 버스에는 채널 렌더러를 놓으시면 됩니다. 채널 렌더러는 스테레오·5.1·7.1.4 같은 고정 베드를 바이노럴로 바꿔 줍니다. 둘은 같은 바이노럴 코어와 같은 저작 패널을 공유하기 때문에, 한 프로젝트 안에서 섞어 쓰셔도 소리의 성격이 갈라지지 않습니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">03</span>
           <h3 data-en="Predictable without metadata">메타데이터가 없어도 예측할 수 있습니다</h3>
-          <p data-en="Sounds without metadata run on the renderer's own settings. Adding the plug-in to a project does not quietly change an existing mix.">메타데이터를 붙이지 않은 사운드는 렌더러 자체 설정으로 동작합니다. 플러그인을 넣었다는 이유만으로 기존 믹스가 조용히 달라지는 일은 없습니다.</p>
+          <p class="rule__tag" data-en="Adding the plug-in does not rewrite a mix you already finished.">플러그인을 넣었다는 이유만으로 믹스가 달라지지 않습니다.</p>
+          <p data-en="A sound with no metadata is not a special case: it runs on the renderer's own values. That means dropping the plug-in into a project does not quietly change a mix that already works, and you can attach metadata only where a sound actually needs to behave differently. Where several of the same kind arrive on one object, the last one wins.">메타데이터를 붙이지 않은 사운드는 특별한 경우가 아니라 렌더러 자체 값으로 동작합니다. 그래서 플러그인을 프로젝트에 넣었다는 이유만으로 이미 완성해 두신 믹스가 조용히 달라지지 않고, 메타데이터는 다르게 동작해야 하는 사운드에만 붙이시면 됩니다. 한 오브젝트에 같은 종류가 여러 개 도착하면 마지막에 온 것이 적용됩니다.</p>
         </div>
       </div>
     </div>

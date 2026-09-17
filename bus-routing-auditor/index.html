@@ -182,17 +182,20 @@
         <div class="rule rise">
           <span class="num">01</span>
           <h3 data-en="Reads, never writes">읽기만 한다</h3>
-          <p data-en="The audit runs over WAAPI against the open project and changes nothing. Fixing stays your decision in Wwise.">WAAPI로 열려 있는 프로젝트를 읽어 점검할 뿐 아무것도 바꾸지 않습니다. 수정은 Wwise에서 직접 판단합니다.</p>
+          <p class="rule__tag" data-en="An audit that edits the project leaves you nowhere to step back to.">점검 도구가 프로젝트를 고치면 되돌릴 자리가 없습니다.</p>
+          <p data-en="It attaches to the open project over WAAPI from the Wwise Tools menu and only reads. No object is moved, re-routed or renamed, so the scan can be run as many times as you like without changing the project state. What to fix, and whether to fix it at all, stays a decision you make in Wwise.">Wwise의 Tools 메뉴에서 WAAPI로 열려 있는 프로젝트에 붙어 읽기만 합니다. 어떤 오브젝트도 옮기거나 다시 라우팅하거나 이름을 바꾸지 않기 때문에, 몇 번을 돌려도 프로젝트 상태가 달라지지 않습니다. 무엇을 고칠지, 고칠지 말지는 Wwise에서 직접 판단하시면 됩니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">02</span>
           <h3 data-en="Whole project in one pass">프로젝트 전체를 한 번에</h3>
-          <p data-en="Every Sound object is scanned, not a selection, so a routing mistake in a corner of the project still surfaces.">선택 항목이 아니라 모든 Sound 오브젝트를 스캔합니다. 프로젝트 구석의 라우팅 실수도 드러납니다.</p>
+          <p class="rule__tag" data-en="What a manual sweep misses is always in the corners.">손으로 훑을 때 빠지는 건 늘 구석입니다.</p>
+          <p data-en="Every Sound object is scanned, not a selection. The bus a name points at (UI to UI, AMB to AMB, VO to VO) is narrowed further by where the sound sits in the Work Unit tree, and inherited routing is told apart from routing overridden on the sound itself. Those two go wrong in different ways, so the place to fix them is different too.">선택 항목이 아니라 프로젝트의 모든 Sound 오브젝트를 스캔합니다. 이름이 가리키는 버스(UI는 UI, AMB는 AMB, VO는 VO)를 Work Unit 경로가 한 번 더 좁히고, 부모에서 상속된 라우팅과 사운드에서 재정의한 라우팅을 구분해 판정합니다. 둘은 잘못되는 방식이 다르고, 그래서 고치는 자리도 다릅니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">03</span>
           <h3 data-en="Findings leave as CSV">결과는 CSV로</h3>
-          <p data-en="Export the findings and hand them over, or diff them against a later run.">판정 결과를 내보내 넘기거나, 나중 실행 결과와 비교할 수 있습니다.</p>
+          <p class="rule__tag" data-en="A one-off sweep drifts out of line again next week.">한 번 훑고 끝나는 검수는 다음 주에 다시 어긋납니다.</p>
+          <p data-en="Export the findings and hand them over, or diff them against a later run to see what actually got fixed. Alongside the list, the heatmap lays every bus out in hierarchy order and colours it by the share of violations routed directly to it, split at 15% and 35% - which is what tells you where to start.">판정 결과를 CSV로 내보내 담당자에게 넘기거나, 나중 실행 결과와 비교해 무엇이 실제로 고쳐졌는지 확인합니다. 목록 옆의 히트맵은 모든 버스를 계층 순서로 펼치고 직접 라우팅된 사운드 중 위반 비율을 15%·35% 기준으로 나눠 색으로 보여 줍니다. 어디부터 손대야 하는지는 이 화면이 알려 줍니다.</p>
         </div>
       </div>
     </div>

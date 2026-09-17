@@ -328,21 +328,27 @@
           똑똑해지는 쪽은 검색이고, 원본 폴더에는 아무것도 쓰지 않습니다.
         </p>
       </div>
+      <!-- 항목마다 한 줄 요약(.rule__tag) + 근거 단락. 2026-09-18 에 한 문장씩만
+           있던 것을 늘렸다 — 세 칸이 무엇을 말하는지는 읽혔지만 왜 그렇게
+           만들었는지가 없었다. -->
       <div class="rules">
         <div class="rule rise">
           <span class="num">01</span>
           <h3 data-en="Read-only library">읽기 전용</h3>
-          <p data-en="Original files and folders are never modified. Everything the app remembers goes into its own local storage.">원본 파일과 폴더를 수정하지 않습니다. 앱이 기억하는 것은 모두 로컬 저장소에 따로 들어갑니다.</p>
+          <p class="rule__tag" data-en="Your library stays exactly as you filed it.">정리해 둔 라이브러리는 건드리지 않습니다.</p>
+          <p data-en="Original files and folder structures are never modified. The index, playback history and column layout all live in the app's own local storage, outside the install folder, so they survive updates. Even excluding duplicates only hides them from search results - the file and its index entry both stay, and it can be undone at any time.">원본 파일과 폴더 구조를 수정하지 않습니다. 색인·재생 히스토리·컬럼 배치는 모두 앱의 로컬 저장소에 따로 들어가고, 설치 폴더 밖에 있어 업데이트해도 남습니다. 중복을 제외하더라도 검색 결과에서만 가릴 뿐 파일도 색인도 지우지 않고, 언제든 되돌릴 수 있습니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">02</span>
           <h3 data-en="Local index">로컬 색인</h3>
-          <p data-en="The index is a local SQLite database, so a network drive and an internal disk behave the same way.">색인은 로컬 SQLite 파일입니다. 네트워크 드라이브든 내장 디스크든 같게 동작합니다.</p>
+          <p class="rule__tag" data-en="Indexed once, then it answers at typing speed.">한 번 훑어 두면 그다음부터는 타이핑 속도로 답합니다.</p>
+          <p data-en="The index is a local SQLite database with a full-text index on top. A single query sweeps twelve fields - filename and path through title, description, keyword and category - and exact matches are ranked with bm25. A network drive and an internal disk behave the same way, and the whole thing is designed for terabyte-scale libraries of millions of files.">색인은 로컬 SQLite 파일이고 그 위에 전문 검색 색인이 얹혀 있습니다. 질의 하나가 파일명·경로부터 제목·설명·키워드·카테고리까지 12개 필드를 한 번에 훑고, 정확 검색은 bm25로 정렬합니다. 네트워크 드라이브든 내장 디스크든 같게 동작하며, 수 TB·수백만 파일 규모를 전제로 만들었습니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">03</span>
           <h3 data-en="Safe to interrupt">중단 안전</h3>
-          <p data-en="Cancel indexing at any point and what finished stays. The next run picks up where it stopped.">인덱싱은 언제든 취소할 수 있고 끝난 진행분은 남습니다. 다시 실행하면 멈춘 지점부터 이어집니다.</p>
+          <p class="rule__tag" data-en="Indexing never becomes a reason to stop working.">인덱싱 때문에 작업을 멈출 일은 없습니다.</p>
+          <p data-en="Indexing runs in two phases. The first sweeps file names and paths as fast as it can so search opens right away; the second fills in duration, sample rate, channels and tags in the background. Cancel at any point and what finished stays - the next run picks up where it stopped instead of starting over.">인덱싱은 두 단계로 돕니다. 1단계가 파일 목록과 경로만 최대한 빠르게 훑어 검색을 먼저 열어 주고, 2단계가 뒤에서 길이·샘플레이트·채널·태그를 채웁니다. 언제든 취소할 수 있고 끝난 진행분은 남아, 다시 실행하면 처음부터가 아니라 멈춘 지점부터 이어집니다.</p>
         </div>
       </div>
     </div>

@@ -308,6 +308,27 @@
     margin:9px 0 0; font-size:13.8px; color:var(--ink-2);
     line-height:1.6; max-width:52ch; word-break:keep-all;
   }
+  /* 이럴 때 씁니다 — 기능 설명 한 줄 위에 "어떤 상황에서 꺼내 쓰는 툴인지"를
+     먼저 말한다 (2026-09-18). 카드가 기능만 나열하면 무엇을 하는 툴인지는
+     읽히지만 나에게 필요한 툴인지는 읽히지 않는다.
+     ⚠ 라벨(`b`)과 문장(`span`)에 data-en 을 따로 건다. 바깥 p 에 한 번에
+       걸면 EN 치환이 안쪽 마크업까지 통째로 갈아치운다.
+     ⚠ flex 로 짜지 말 것. 일반 카드의 글자 칸은 1440 에서 283px 뿐이라
+       라벨이 제 줄을 차지하면 그것만으로 한 줄(21px)을 먹는다 — 실측으로
+       98px(5줄)까지 갔다. 인라인으로 문장 안에 흘려 두 줄에 맞춘다.
+     ⚠ 문장은 32자 안쪽으로 쓸 것. 그 폭에서 한 줄이 19자다. */
+  .tool__when{
+    margin:12px 0 0; max-width:52ch;
+    font-size:13.4px; font-weight:700; line-height:1.62;
+    color:var(--ink); word-break:keep-all;
+  }
+  .tool__when b{
+    display:inline-block; margin-right:7px; padding:3px 8px; border-radius:999px;
+    font-size:10.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+    white-space:nowrap; vertical-align:1px;
+    color:color-mix(in srgb, var(--key) 74%, #111827);
+    background:rgba(255,255,255,.72); border:1px solid rgba(155,161,226,.48);
+  }
   .tool-points{
     display:grid; grid-template-columns:repeat(3,minmax(74px,1fr));
     gap:14px; margin-top:15px; max-width:460px;
@@ -397,26 +418,50 @@
     margin:8px 0 0; color:var(--ink-2); font-size:14.5px; line-height:1.64;
     word-break:keep-all;
   }
-  .build-strip{
-    display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px;
-    margin-top:clamp(34px,4vw,56px); overflow:hidden; border-radius:var(--r);
+  /* ── 원칙 행 ────────────────────────────────────────────────────
+     4단 카드였던 `.build-strip` 을 행으로 바꿨다 (2026-09-18, 사용자 지적:
+     "어떻게 만들었나가 말이 안 된다"). 카드 넷에 한 단락씩 욱여넣으면 제목과
+     본문이 서로 다른 이야기를 한다 — 실제로 `로컬 처리 우선` 카드의 본문은
+     제품 형태를 말하고 있었고, `POC에서 실무 도구로` 는 만드는 방식이 아니라
+     연혁이었다.
+     행 하나 = 주장 하나. 왼쪽은 라벨·제목·한 줄 요약, 오른쪽은 근거 단락이다.
+     ⚠ 오른쪽 단락을 두세 문장 아래로 줄이지 말 것. 이 절의 목적이 "자세히"다.
+       짧게 만들 거면 카드로 되돌아가는 게 낫다. */
+  .principles{
+    display:grid; gap:1px; margin-top:clamp(34px,4vw,56px);
+    overflow:hidden; border-radius:var(--r);
     border:1px solid rgba(155,161,226,.44); background:rgba(155,161,226,.44);
     box-shadow:var(--shadow);
   }
-  .build-step{
-    min-height:210px; padding:24px 22px; background:rgba(255,255,255,.72);
-    backdrop-filter:blur(10px) saturate(140%);
+  .principle{
+    display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+    gap:clamp(18px,3vw,44px);
+    padding:clamp(24px,2.6vw,34px) clamp(22px,2.4vw,32px);
+    background:rgba(255,255,255,.72); backdrop-filter:blur(10px) saturate(140%);
   }
-  .build-step span{
+  .principle__label{
     display:inline-flex; align-items:center; height:27px; padding:0 10px;
     border-radius:999px; font-size:11px; font-weight:800; letter-spacing:.12em;
     color:color-mix(in srgb, var(--key) 76%, #111827);
     background:rgba(255,255,255,.72); border:1px solid rgba(155,161,226,.48);
   }
-  .build-step h3{margin-top:22px; font-size:18px; letter-spacing:-.02em}
-  .build-step p{
-    margin:10px 0 0; color:var(--ink-2); font-size:14.5px; line-height:1.68;
-    word-break:keep-all;
+  .principle h3{
+    margin-top:16px; font-size:clamp(18px,1.7vw,22px); line-height:1.36;
+    letter-spacing:-.03em; word-break:keep-all;
+  }
+  .principle__tag{
+    margin:10px 0 0; font-size:14px; font-weight:800; line-height:1.6;
+    color:color-mix(in srgb, var(--key) 78%, #111827); word-break:keep-all;
+  }
+  .principle__body{
+    margin:0; align-self:center; color:var(--ink-2);
+    font-size:15px; line-height:1.82; word-break:keep-all;
+  }
+  .principle__body code{
+    font-family:ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size:.9em; background:var(--tint-2); padding:1px 6px; border-radius:5px;
+    overflow-wrap:anywhere;
+  }
   }
   .tool-summary{
     display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
@@ -430,10 +475,10 @@
   .summary-card strong{display:block; font-size:22px; line-height:1; letter-spacing:-.03em}
   .summary-card span{display:block; margin-top:9px; color:var(--ink-2); font-size:14px; line-height:1.55}
   /* 개발자 소개 컴포넌트(상단바 버튼·다이얼로그·푸터 링크)는 제품 페이지
-     5개로 넓히면서 assets/ysg.css 로 옮겼다. 여기에 다시 적지 말 것. */
+     제품 페이지로 넓히면서 assets/ysg.css 로 옮겼다. 여기에 다시 적지 말 것. */
   @media (max-width:1000px){
     .story-grid{grid-template-columns:1fr}
-    .build-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .principle{grid-template-columns:1fr; gap:16px}
     .tool-summary{grid-template-columns:1fr}
     .tool{grid-template-columns:minmax(132px, 190px) minmax(0,1fr)}
     .tool--featured{grid-template-columns:minmax(180px, 240px) minmax(0,1fr)}
@@ -446,7 +491,7 @@
   @media (max-width:560px){
     .tool{grid-template-columns:1fr}
     .tool--featured{grid-template-columns:1fr}
-    .build-strip{grid-template-columns:1fr}
+    .principle{padding:22px 20px}
     .tool-points{grid-template-columns:repeat(3,minmax(0,1fr))}
     .tool .pkg{max-width:200px}
     .tool__badge{max-width:220px}
@@ -551,7 +596,7 @@
       <div class="hero__head">
         <!-- 눈썹 `툴 모음` 이 있던 자리다. 락업이 들어오면서 뺐다 — 큰 로고 위에
              12px 대문자 한 줄을 더 얹으면 블록이 넷이 되고, 어떤 툴들인지는 바로
-             아래 칩 다섯 개가 이미 말한다 (2026-09-15).
+             아래 칩들이 이미 말한다 (2026-09-15).
              ⚠ 이름은 글자 쪽 img 의 alt 가 유일하게 말한다. 마크는 alt="" 로
                비우고 글자는 채운다 — 둘 다 채우면 읽어주는 기기에서
                `YSG Audio Labs` 가 두 번 들리고, 둘 다 비우면 사이트 이름이
@@ -617,39 +662,96 @@
     </div>
   </section>
 
+  <!-- ── 어떻게 만들었나 ────────────────────────────────────────────
+       2026-09-18 전면 교체. 이전 판은 LOCAL · WWISE · AUDIO · POC 네 칩에
+       카드 하나씩이었는데, 제목과 본문이 서로 다른 이야기를 했다 (`로컬 처리
+       우선` 아래에 제품 형태가 적혀 있었고, `POC에서 실무 도구로` 는 만드는
+       방식이 아니라 연혁이었다). 지금은 행 하나가 주장 하나를 맡고, 오른쪽
+       단락이 각 툴에서 실제로 무엇이 그렇게 되어 있는지로 그 주장을 받는다.
+       ⚠ 툴의 개수를 글에 박지 말 것 (사용자 지시, 여러 번). 앞으로 툴이
+         늘어나면 본문이 조용히 틀린 말이 된다. `다섯 툴` 이 아니라 `여기 있는
+         어떤 툴도`, `두 오디터` 가 아니라 `오디터 계열` 처럼 쓴다. 개별 툴을
+         예로 드는 것은 괜찮다 — 총량을 단정하지 않으면 된다.
+       ⚠ 여기 적힌 근거는 전부 제품 페이지에 같은 내용이 있다. 문장을 고칠 때
+         제품 페이지와 어긋나지 않는지 먼저 확인할 것. -->
   <section id="build" class="band">
     <div class="wrap">
       <div class="rise">
         <span class="eyebrow" data-en="How it is built">어떻게 만들었나</span>
-        <h2 class="h2" data-en="Production tools that fit around Wwise, plug-ins and team workflows">Wwise와 플러그인, 팀 작업 흐름에 맞춰 붙는 실무 도구들</h2>
+        <h2 class="h2" data-en="The toolkit grows; the ground rules do not">툴이 늘어나도 기준은 같습니다</h2>
+        <p class="lead" data-en="Each tool does a different job, but they are built on the same ground rules: never write to your project, judge by the value that is actually applied, show the material instead of the conclusion, and sit where the work already happens. Anything added later starts from the same place.">
+          툴마다 하는 일은 다르지만 만드는 기준은 같습니다. 프로젝트에는 쓰지 않고,
+          실제로 적용되는 값으로 판정하고, 결론 대신 판단할 재료를 보여 주고,
+          작업이 벌어지는 자리에 붙입니다. 앞으로 새로 만드는 툴도 같은 자리에서
+          시작합니다.
+        </p>
       </div>
-      <div class="build-strip">
-        <article class="build-step rise">
-          <span>LOCAL</span>
-          <h3 data-en="Local processing first">로컬 처리 우선</h3>
-          <p data-en="Large sound libraries and project data stay where the team already works. Each tool chooses the right form for the job: desktop app, Wwise add-on, or plug-in.">
-            대용량 사운드 라이브러리와 프로젝트 데이터는 팀이 이미 쓰는 작업 환경 안에서 다룹니다. 형태는 작업에 맞춰 나눴습니다. 데스크톱 앱도 있고, Wwise Add-on도 있고, 플러그인도 있습니다.
+
+      <div class="principles">
+        <article class="principle rise">
+          <div>
+            <span class="principle__label">READ-ONLY</span>
+            <h3 data-en="Your project comes back exactly as it was">프로젝트는 있던 그대로 돌려드립니다</h3>
+            <p class="principle__tag" data-en="A check you can run again right before review.">리뷰 직전에도 한 번 더 돌릴 수 있어야 검수 도구입니다.</p>
+          </div>
+          <p class="principle__body" data-en="No tool here writes back. The Wwise auditors attach to the open project over WAAPI and only read it. SoundField keeps its index, history and column layout in local storage instead of your library folders, and hiding duplicates hides them from search results without deleting a file. Stereo Auditor hands the file you dropped back untouched. The only things that ever leave are a CSV of findings and the region you exported yourself, so no commit or submission is created on your behalf - what to fix stays a decision you make in Wwise.">
+            여기 있는 어떤 툴도 프로젝트나 원본을 고치지 않습니다. 오디터 계열은 열려 있는 Wwise
+            프로젝트에 WAAPI로 붙어 읽기만 하고, SoundField는 색인·재생 히스토리·컬럼 배치를
+            라이브러리 폴더가 아니라 로컬 저장소에 따로 두며 중복을 정리해도 검색 결과에서만
+            가릴 뿐 파일을 지우지 않습니다. Stereo Auditor는 드롭한 파일을 그대로 돌려줍니다.
+            밖으로 나가는 것은 CSV 결과와 내가 직접 고른 구간뿐이라 커밋이나 제출이 자동으로
+            만들어지지 않고, 고칠지 말지는 Wwise에서 직접 판단하시면 됩니다.
           </p>
         </article>
-        <article class="build-step rise">
-          <span>WWISE</span>
-          <h3 data-en="WAAPI-aware auditing">WAAPI 기반 검수</h3>
-          <p data-en="Where Wwise structure matters, the tools read hierarchy, Work Unit context, buses and object settings instead of relying on loose naming alone.">
-            Wwise 구조가 중요한 곳에서는 이름만 보지 않고 Hierarchy, Work Unit, 버스, 오브젝트 설정을 함께 읽어 판단합니다.
+
+        <article class="principle rise">
+          <div>
+            <span class="principle__label">APPLIED VALUE</span>
+            <h3 data-en="Judged by what actually applies, not by what is written on the object">적힌 값이 아니라 실제로 적용되는 값으로 판정합니다</h3>
+            <p class="principle__tag" data-en="An audit full of false positives stops being read.">오탐이 섞이기 시작하면 아무도 목록을 보지 않습니다.</p>
+          </div>
+          <p class="principle__body" data-en="In Wwise, the value written on an object and the value the runtime applies are often two different things. Attenuation Auditor walks up the hierarchy to the nearest ancestor with Override Positioning enabled and reads its four properties there - two from Listener Relative Routing, two from Attenuation - so a connected ShareSet with Attenuation Enable off counts as inactive, the way Wwise reads it. Bus Routing Auditor puts keyword rules, the Work Unit path and whether the routing is inherited or overridden together before deciding on an expected bus. The applied values behind a verdict travel with the row, so you can see why something was flagged without opening the project.">
+            Wwise에서 오브젝트에 적힌 값과 런타임에 실제로 적용되는 값은 자주 다릅니다.
+            Attenuation Auditor는 Override Positioning이 켜진 가장 가까운 조상까지 계층을 거슬러
+            올라가 그 노드에서 네 항목을 읽습니다. Listener Relative Routing에서 둘, Attenuation에서
+            둘입니다. 그래서 Attenuation Enable이 꺼져 있으면 ShareSet이 연결돼 있어도 Wwise가
+            해석하는 대로 비활성으로 셉니다. Bus Routing Auditor는 이름 키워드에 Work Unit 경로와
+            상속·재정의 여부를 함께 얹어 예상 버스를 정합니다. 판정 근거가 된 적용값은 결과 행에
+            같이 들어 있어, 프로젝트를 열지 않고도 왜 걸렸는지 읽을 수 있습니다.
           </p>
         </article>
-        <article class="build-step rise">
-          <span>AUDIO</span>
-          <h3 data-en="Audio-specific views">오디오 전용 시각화</h3>
-          <p data-en="Waveforms, routing maps, heatmaps and spatial previews are designed around decisions sound designers actually make.">
-            파형, 라우팅 맵, 히트맵, 공간 프리뷰는 사운드 디자이너가 실제로 판단하는 단위에 맞춰 설계했습니다.
+
+        <article class="principle rise">
+          <div>
+            <span class="principle__label">EVIDENCE</span>
+            <h3 data-en="The verdict is material to judge with, not the answer">판정은 답이 아니라 판단할 재료입니다</h3>
+            <p class="principle__tag" data-en="The last call belongs to the sound designer.">마지막 판단은 사운드 디자이너가 합니다.</p>
+          </div>
+          <p class="principle__body" data-en="A flag on its own tells you almost nothing, so each tool shows what it saw. Stereo Auditor draws left and right as separate envelopes, paints per-region stereo strength as colour, and marks only sustained phase risk - low-level tails and transients under 100ms are left out. Pick one violation in Bus Routing Auditor and the decision chain opens up, from sound to container to Work Unit to the current bus, which narrows the fix to one place; the heatmap then says which bus to start from. SoundField and SpatialRenderer go one step further and simply let you hear it: multichannel and Ambisonics binaurally where you found them, spatial settings before they reach a build.">
+            위반 표시 하나만으로는 판단할 수 없어서, 각 툴은 자기가 본 것을 함께 보여 줍니다.
+            Stereo Auditor는 좌우를 합치지 않고 각각의 엔벌로프로 그린 뒤 구간별 스테레오 강도를
+            색으로 칠하고, 저레벨 꼬리와 100ms 미만의 순간 신호를 걸러 지속되는 위상 위험만
+            표시합니다. Bus Routing Auditor에서 위반 한 줄을 고르면 사운드에서 컨테이너, Work Unit,
+            현재 버스로 이어지는 결정 사슬이 펼쳐져 고칠 자리가 한 곳으로 좁혀지고, 히트맵이 어느
+            버스부터 손대야 하는지 알려 줍니다. SoundField와 SpatialRenderer는 아예 들려 줍니다.
+            멀티채널과 Ambisonics는 찾은 자리에서 바이노럴로, 공간 설정은 빌드에 들어가기 전에.
           </p>
         </article>
-        <article class="build-step rise">
-          <span>POC</span>
-          <h3 data-en="Built from production-side POCs">POC에서 실무 도구로</h3>
-          <p data-en="Each tool started from a narrow production pain point, then grew into a repeatable workflow with installers, product pages and focused UI.">
-            각 툴은 좁은 실무 문제에서 시작했고, 인스톨러와 제품 페이지, 전용 UI를 갖춘 반복 가능한 워크플로우로 다듬었습니다.
+
+        <article class="principle rise">
+          <div>
+            <span class="principle__label">FORM</span>
+            <h3 data-en="Each tool takes the shape of the place the work happens">툴의 형태는 그 일이 벌어지는 자리가 정합니다</h3>
+            <p class="principle__tag" data-en="Which is why they were not forced into one app.">한 벌의 앱으로 묶지 않은 이유입니다.</p>
+          </div>
+          <p class="principle__body" data-en="Work that reads a Wwise project belongs inside Wwise, so the auditors install as command add-ons and open from the Tools menu - no second app to launch, no project to point at. Checking one file needs no session, no routing and no upload, so tools like SoundField and Stereo Auditor are standalone Windows desktop apps. Spatial audio has to sit where the signal actually passes, so SpatialRenderer is a plug-in on the bus, with per-sound settings authored as metadata on the sound itself rather than one global preset. Whichever shape a tool takes, the analysis finishes on your machine - none of them has an upload path.">
+            Wwise 프로젝트를 읽는 일은 Wwise 안에서 하는 게 맞아서, 오디터 계열은 커맨드 애드온으로
+            설치되어 Tools 메뉴에서 열립니다. 따로 앱을 띄우거나 프로젝트를 다시 지정할 필요가
+            없습니다. 파일 하나를 확인하는 일에는 세션도 라우팅도 업로드도 필요 없어서 SoundField나
+            Stereo Auditor 같은 툴은 독립 실행형 Windows 데스크톱 앱입니다. 공간 음향은 신호가 실제로
+            지나가는 자리에 있어야 하므로 SpatialRenderer는 버스에 올리는 플러그인이고, 사운드마다
+            달라져야 하는 값은 전역 프리셋이 아니라 사운드 자체에 메타데이터로 붙습니다. 어떤
+            형태든 분석은 이 컴퓨터 안에서 끝나고, 어디로도 올리지 않습니다.
           </p>
         </article>
       </div>
@@ -680,6 +782,7 @@
           <span class="tool__eyebrow">HRTF · REFLECTIONS · AMBISONIC</span>
           <h2 class="tool__name">YSGSpatialRenderer</h2>
           <p data-en="Wwise audio objects rendered binaurally through HRTFs, with near-field, directivity, early reflections and diffraction in one pipeline.">Wwise 오디오 오브젝트를 머리 전달 함수로 바이노럴 렌더링하고, 근접장·지향성·초기 반사·회절까지 한 파이프라인에서 처리합니다.</p>
+          <p class="tool__when"><b data-en="When">이럴 때</b><span data-en="You want to check front/back and height on headphones, before it reaches a build.">빌드에 들어가기 전에 앞뒤·위아래 배치를 헤드폰으로 확인하고 싶을 때.</span></p>
           <div class="tool-points" aria-label="YSGSpatialRenderer 주요 지원 기능">
             <div class="tool-point"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 17c4.2 0 7 3.2 7 7.6 0 4.6-2.8 8.4-7 8.4s-7-3.8-7-8.4c0-4.4 2.8-7.6 7-7.6z"/><path d="M17 25c-4-1.6-7.5-1.1-10.5 1.5"/><path d="M31 25c4-1.6 7.5-1.1 10.5 1.5"/><path d="M12 16c5-5 19-5 24 0"/><path d="M12 35c5 5 19 5 24 0"/><circle cx="24" cy="8" r="1.9" fill="currentColor" stroke="none"/><circle cx="39" cy="16" r="1.9" fill="currentColor" stroke="none"/><circle cx="40" cy="34" r="1.9" fill="currentColor" stroke="none"/><circle cx="9" cy="27" r="1.9" fill="currentColor" stroke="none"/></svg><span data-en="Front/back/elevation">앞뒤·상하 위치감</span></div>
             <div class="tool-point"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 14c4.8 0 8 3.7 8 8.8 0 5.5-3.2 10.2-8 10.2s-8-4.7-8-10.2c0-5.1 3.2-8.8 8-8.8z"/><path d="M14 24c-4.2 0-7.4-2-9-5.4"/><path d="M34 24c4.2 0 7.4-2 9-5.4"/><path d="M13 30c-3.4.2-5.9 1.6-7.6 4.2"/><path d="M35 30c3.4.2 5.9 1.6 7.6 4.2"/><path d="M18 11c3.4-4.2 8.6-4.2 12 0"/><path d="M20 37c2.5 1.4 5.5 1.4 8 0"/></svg><span data-en="HRTF cues">HRTF 단서</span></div>
@@ -703,6 +806,7 @@
           <span class="tool__eyebrow">SMART SEARCH · BINAURAL AUDITION</span>
           <h2 class="tool__name">SoundField</h2>
           <p data-en="The smartest way to search a sound library. Stack conditions to narrow millions of files at typing speed, let long takes split themselves into blocks, and hear 5.1 through higher-order Ambisonics binaurally where you found it.">가장 똑똑한 사운드 라이브러리 검색 툴. 조건을 쌓아 수백만 파일을 타이핑 속도로 좁히고, 긴 테이크는 덩어리로 쪼개 훑고, 5.1부터 고차 Ambisonics까지 찾은 자리에서 그대로 바이노럴로 듣습니다.</p>
+          <p class="tool__when"><b data-en="When">이럴 때</b><span data-en="Finding one sound in a multi-terabyte library eats the session.">수 TB 라이브러리에서 소리 하나 찾는 시간이 아까울 때.</span></p>
           <div class="tool-points" aria-label="SoundField 주요 지원 기능">
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="15" cy="15" r="8"/><path d="M21 21l8 8"/><path d="M9 15h12M15 9v12"/></svg><span data-en="Smart search">똑똑한 검색</span></div>
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 22c3-8 5 8 8 0s5 8 8 0 3 3 6 0"/><path d="M7 14c3-6 5 6 8 0s5 6 8 0 3 2 6 0"/></svg><span data-en="Segment audition">세그먼트 오디션</span></div>
@@ -726,6 +830,7 @@
           <span class="tool__eyebrow">STEREO · WAVEFORM · PHASE</span>
           <h2 class="tool__name">Stereo Auditor</h2>
           <p data-en="Drop one file to get a channel verdict, with per-region stereo strength and sustained phase risk over a high-resolution L/R waveform.">파일 하나를 드롭하면 채널 관계를 판정하고, 고해상도 L/R 웨이브폼 위에 구간별 스테레오 강도와 지속 위상 위험을 표시합니다.</p>
+          <p class="tool__when"><b data-en="When">이럴 때</b><span data-en="You cannot tell whether a file is genuinely stereo.">받은 파일이 진짜 스테레오인지 확신이 안 설 때.</span></p>
           <div class="tool-points" aria-label="Stereo Auditor 주요 지원 기능">
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 11h20v14H8z"/><path d="M13 18c2-6 4 6 6 0s4 6 6 0"/></svg><span data-en="L/R waveform">L/R 파형</span></div>
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="14" cy="18" r="7"/><circle cx="22" cy="18" r="7"/><path d="M18 11v14"/></svg><span data-en="Stereo strength">스테레오 강도</span></div>
@@ -749,6 +854,7 @@
           <span class="tool__eyebrow">WAAPI · ROUTING · HEATMAP</span>
           <h2 class="tool__name">Bus Routing Auditor</h2>
           <p data-en="Scans every Sound object, works out the expected bus from name and Work Unit, and connects violations, signal flow and the heatmap in one pass.">프로젝트 전체 Sound 오브젝트를 스캔해 이름과 Work Unit 기준으로 예상 버스를 판정하고, 위반·Signal Flow·Heatmap을 한 흐름으로 잇습니다.</p>
+          <p class="tool__when"><b data-en="When">이럴 때</b><span data-en="A wrong bus should not surface after the mix is already balanced.">믹스를 다 잡은 뒤에 엉뚱한 버스가 튀어나오는 게 싫을 때.</span></p>
           <div class="tool-points" aria-label="Bus Routing Auditor 주요 지원 기능">
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 9h7v6H8zM21 9h7v6h-7zM8 22h7v6H8zM21 22h7v6h-7z"/><path d="M15 12h6M15 25h6M18 15v7"/></svg><span data-en="Bus tree scan">버스 트리 스캔</span></div>
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 18h7l4-7 4 14 4-7h3"/><circle cx="22" cy="25" r="3"/></svg><span data-en="Signal flow">시그널 플로우</span></div>
@@ -772,6 +878,7 @@
           <span class="tool__eyebrow">WAAPI · 3D / 2D · ATTENUATION</span>
           <h2 class="tool__name">Attenuation Auditor</h2>
           <p data-en="Walks the Actor-Mixer Hierarchy and pulls out both mistakes at once - 3D with no attenuation, and 2D with attenuation attached.">Actor-Mixer Hierarchy를 훑어 3D인데 감쇠가 없는 오브젝트와 2D인데 감쇠가 걸린 오브젝트를 한 번에 뽑아냅니다.</p>
+          <p class="tool__when"><b data-en="When">이럴 때</b><span data-en="A sound that should carry only up close is heard everywhere.">가까이서만 들려야 할 소리가 어디서든 들릴 때.</span></p>
           <div class="tool-points" aria-label="Attenuation Auditor 주요 지원 기능">
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="18" cy="18" r="8"/><circle cx="18" cy="18" r="13"/><path d="M18 5v4M18 27v4M5 18h4M27 18h4"/></svg><span data-en="3D attenuation">3D 감쇠</span></div>
             <div class="tool-point"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 25h22"/><path d="M9 22c5-12 13-12 18 0"/><path d="M12 22h12"/><circle cx="18" cy="22" r="2"/></svg><span data-en="2D mismatch">2D 불일치</span></div>

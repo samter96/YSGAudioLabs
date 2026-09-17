@@ -215,17 +215,20 @@
         <div class="rule rise">
           <span class="num">01</span>
           <h3 data-en="Read-only">읽기 전용</h3>
-          <p data-en="The project is never modified. Fixing stays your decision in Wwise.">프로젝트를 수정하지 않습니다. 수정은 Wwise에서 직접 판단합니다.</p>
+          <p class="rule__tag" data-en="Finding it is the tool's job; fixing it is yours.">찾아 주는 데까지가 툴의 몫입니다.</p>
+          <p data-en="It reads the project over WAAPI and modifies nothing. What it gives you instead is the evidence: every row carries the applied values the verdict was based on, and a double-click selects that object in the Wwise Project Explorer, so the fix happens right where you would make it anyway.">WAAPI로 프로젝트를 읽기만 하고 수정하지 않습니다. 대신 판단할 근거를 같이 줍니다. 각 행에는 판정의 바탕이 된 적용값이 들어 있고, 행을 더블클릭하면 Wwise Project Explorer에서 그 오브젝트가 선택되므로 고치는 일은 원래 고칠 자리에서 바로 하시면 됩니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">02</span>
           <h3 data-en="Follows Wwise inheritance">상속을 따라간다</h3>
-          <p data-en="It evaluates the effective value, not the local one - the same value Wwise uses at runtime.">로컬 값이 아니라 실제 적용값으로 판정합니다. Wwise가 런타임에 쓰는 값과 같습니다.</p>
+          <p class="rule__tag" data-en="The value written on an object is not the value in use.">오브젝트에 적힌 값이 실제로 쓰이는 값은 아닙니다.</p>
+          <p data-en="Starting from the target it walks up to the nearest ancestor with Override Positioning enabled and reads four properties there - two from Listener Relative Routing, two from Attenuation. If no override is found all the way up, the object counts as the default 2D with no attenuation and is skipped rather than reported. So what reaches the list is a contradiction in the values Wwise actually applies at runtime.">대상에서 출발해 Override Positioning이 켜진 가장 가까운 조상까지 올라가, 그 노드에서 네 항목을 읽습니다. Listener Relative Routing에서 둘, Attenuation에서 둘입니다. 끝까지 올라가도 override가 없으면 기본 2D · 무 ATT로 간주하고 보고하지 않고 건너뜁니다. 그래서 목록에 올라오는 것은 Wwise가 런타임에 실제로 쓰는 값 사이의 모순뿐입니다.</p>
         </div>
         <div class="rule rise">
           <span class="num">03</span>
           <h3 data-en="Exceptions are durable">예외는 지속된다</h3>
-          <p data-en="An intended setting stays silenced until it changes - then it comes back on its own.">의도된 설정은 바뀔 때까지 조용히 있고, 바뀌면 스스로 다시 올라옵니다.</p>
+          <p class="rule__tag" data-en="What you approved is that setting, not the object.">승인한 것은 그 설정이지, 오브젝트가 아닙니다.</p>
+          <p data-en="A mismatch is sometimes intended. Register it as an exception and the row leaves the list, while the object path and a snapshot of its spatialization, attenuation and violation type are stored next to the tool. Every scan compares against that snapshot, and if any one of the three has changed the exception releases itself and the row comes back.">어긋난 설정이 의도된 것일 때가 있습니다. 예외로 등록하면 행이 목록에서 빠지고, 오브젝트 경로와 spatialization · attenuation · 위반 종류 스냅샷이 툴 옆에 저장됩니다. 스캔할 때마다 그 스냅샷과 비교해 셋 중 하나라도 달라지면 예외가 스스로 풀리고 행이 돌아옵니다.</p>
         </div>
       </div>
     </div>
