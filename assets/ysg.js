@@ -156,6 +156,10 @@
     document.body.classList.toggle('lang-en', en);
     document.documentElement.setAttribute('lang', en ? 'en' : 'ko');
     if(langBtn){ langBtn.setAttribute('aria-pressed', en ? 'true' : 'false'); }
+    /* 언어를 바꾸면 가려진 쪽 영상은 멈춘다 (소리는 없지만 뒤에서 계속 받지 않게) */
+    document.querySelectorAll('.shot__video').forEach(function(v){
+      if(v.offsetParent === null && !v.paused){ v.pause(); }
+    });
   }
   /* 저장된 값이 EN 일 때만 손댄다. KO 면 마크업이 이미 KO 라 건드릴 게 없다.
      ⚠ 이 호출이 originalHTML 캐시를 채우므로 어떤 치환보다 먼저 와야 한다. */

@@ -870,6 +870,8 @@
     font-weight:600; letter-spacing:.14em; text-transform:uppercase; opacity:.8}
   .shot img{width:100%; height:auto}
   .shot__video{display:block; width:100%; height:auto; background:#111}
+  /* 영상은 언어별로 하나만 — KO/EN 토글을 따른다 */
+  body.lang-en .shot__video--ko, body:not(.lang-en) .shot__video--en{display:none}
   .shot img:not(.loaded){display:none}
   .shot figcaption{
     padding:11px 15px; border-top:1px solid var(--line); background:#fff;

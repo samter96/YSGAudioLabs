@@ -304,10 +304,13 @@
         </div>
       </div>
 
-      <!-- 사용 흐름 영상 (2026-10-21) — 인덱싱부터 DAW 로 보내기까지. 웹용으로 줄인 사본(30fps) -->
+      <!-- 사용 흐름 영상 (2026-10-21) — 인덱싱부터 DAW 로 보내기까지. 웹용으로 줄인 사본(30fps).
+           한국어판·영어판 두 개를 두고 KO/EN 토글(body.lang-en)에 따라 하나만 보인다 (ysg.css · ysg.js) -->
       <figure class="shot shot--hero loaded">
-        <video class="shot__video" src="assets/v2/soundfield-usage.mp4" poster="assets/v2/soundfield-usage-poster.jpg"
+        <video class="shot__video shot__video--ko" src="assets/v2/soundfield-usage.mp4" poster="assets/v2/soundfield-usage-poster.jpg"
                controls preload="metadata" playsinline aria-label="SoundField 사용 흐름 영상"></video>
+        <video class="shot__video shot__video--en" src="assets/v2/soundfield-usage-en.mp4" poster="assets/v2/soundfield-usage-en-poster.jpg"
+               controls preload="metadata" playsinline aria-label="SoundField walkthrough video"></video>
         <figcaption data-en="SoundField v2.2.8">SoundField v2.2.8</figcaption>
       </figure>
     </div>
